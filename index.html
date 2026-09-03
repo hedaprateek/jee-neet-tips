@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JEE &amp; NEET Tips &amp; Tricks — Mnemonics, Shortcuts &amp; Formula Sheets</title>
+<meta name="description" content="A free, searchable collection of memory aids, fast calculation shortcuts and formula recall tables for JEE and NEET aspirants — Physics, Chemistry, Maths and Biology, Class 9 to 12.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-mark">JN</div>
+      <div>
+        JEE / NEET Tips &amp; Tricks
+        <small>Mnemonics · Shortcuts · Formula Sheets</small>
+      </div>
+    </div>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+  </div>
+</header>
+
+<section class="hero">
+  <h1>Every trick that actually saves you time in the exam hall</h1>
+  <p>A free, searchable library of memory aids, fast calculation shortcuts and formula recall tables — built for JEE and NEET aspirants, covering Class 9–12 Physics, Chemistry, Maths and Biology.</p>
+  <div class="stats">
+    <span class="stat"><b id="statTotal">0</b> tips indexed</span>
+    <span class="stat"><b id="statSubjects">0</b> subjects</span>
+    <span class="stat"><b>JEE</b> &amp; <b>NEET</b> tagged separately</span>
+  </div>
+</section>
+
+<div class="controls">
+  <div class="search-row">
+    <input type="search" id="searchInput" placeholder="Search a topic, e.g. &quot;Krebs cycle&quot;, &quot;Wheatstone&quot;, &quot;VSEPR&quot;…" aria-label="Search tips">
+  </div>
+  <div class="filter-group" id="examChips"></div>
+  <div class="filter-group" id="subjectChips"></div>
+  <div class="filter-group" id="classChips"></div>
+  <div class="filter-group" id="typeChips"></div>
+</div>
+
+<main>
+  <div class="result-count" id="resultCount"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer class="site-footer">
+  Built for JEE &amp; NEET aspirants. Spotted an error or have a trick to add? Open an issue or PR on
+  <a href="https://github.com/hedaprateek/jee-neet-tips" target="_blank" rel="noopener">GitHub</a>.
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
