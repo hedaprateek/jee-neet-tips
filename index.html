@@ -13,80 +13,112 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="header-inner">
-    <div class="brand">
-      <div class="brand-mark">JN</div>
-      <div>
-        JEE / NEET Tips &amp; Tricks
-        <small>Mnemonics · Shortcuts · Formula sheets</small>
-      </div>
-    </div>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">☾</button>
+<!-- ============================ top bar ============================ -->
+<header class="topbar">
+  <a class="brand" href="#" aria-label="JEE and NEET Tips and Tricks — home">
+    <span class="brand-mark">JN</span>
+    <span class="brand-text">
+      <strong>JEE / NEET Tricks</strong>
+      <small>Mnemonics · Shortcuts · Formulas</small>
+    </span>
+  </a>
+
+  <div class="topbar-search">
+    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+    <input type="search" id="searchInput" autocomplete="off"
+           placeholder="Search 155 tips — “Krebs”, “Markovnikov”, “LIATE”, “Wheatstone”…"
+           aria-label="Search tips">
+    <button class="search-clear" id="searchClear" hidden aria-label="Clear search">×</button>
+  </div>
+
+  <div class="topbar-actions">
+    <button class="btn-drawer" id="drawerOpen" aria-label="Open filters">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M6 12h12M10 18h4"/></svg>
+      <span class="label">Filters</span><span class="drawer-badge" id="drawerBadge" hidden>0</span>
+    </button>
+    <button class="btn-icon" id="themeToggle" aria-label="Toggle dark mode">☾</button>
   </div>
 </header>
 
-<section class="hero">
-  <h1>Every trick that actually saves you time in the exam hall</h1>
-  <p>A free, searchable library of memory aids, fast calculation shortcuts and formula recall tables — built for JEE and NEET aspirants, covering Class 9–12 Physics, Chemistry, Maths and Biology.</p>
-  <div class="stats">
-    <span class="stat"><b id="statTotal">0</b> tips</span>
-    <span class="stat"><b id="statMnemonics">0</b> mnemonics</span>
-    <span class="stat"><b id="statShortcuts">0</b> shortcuts</span>
-    <span class="stat"><b id="statTopics">0</b> topics</span>
-  </div>
-</section>
+<div class="shell">
 
-<div class="controls">
-  <div class="search-row">
-    <input type="search" id="searchInput" placeholder="Search tips — try “Krebs”, “Wheatstone”, “Markovnikov”, “LIATE”…" aria-label="Search tips">
-    <span class="active-count" id="activeCount"></span>
-    <button class="btn-clear" id="clearAll" hidden>Clear all</button>
-  </div>
+  <!-- ========================== sidebar ========================== -->
+  <aside class="sidebar" id="sidebar" aria-label="Filters">
+    <div class="sidebar-head">
+      <h2>Filters</h2>
+      <button class="btn-link" id="clearAll" hidden>Clear all</button>
+      <button class="btn-icon btn-drawer-close" id="drawerClose" aria-label="Close filters">×</button>
+    </div>
 
-  <div class="filter-row">
-    <span class="filter-label">Exam</span>
-    <div class="chip-set" id="examChips"></div>
-  </div>
-  <div class="filter-row">
-    <span class="filter-label">Subject</span>
-    <div class="chip-set" id="subjectChips"></div>
-  </div>
-  <div class="filter-row">
-    <span class="filter-label">Level</span>
-    <div class="chip-set" id="classChips"></div>
-  </div>
-  <div class="filter-row">
-    <span class="filter-label">Type</span>
-    <div class="chip-set" id="typeChips"></div>
-  </div>
+    <section class="fgroup">
+      <h3 class="fgroup-title">Exam</h3>
+      <div class="flist" id="examFilters"></div>
+    </section>
 
-  <div class="filter-row filter-row-topics">
-    <span class="filter-label">Topic</span>
-    <button class="topic-toggle" id="topicToggle" aria-expanded="false">
-      <span class="caret">▸</span> Filter by chapter
-    </button>
-  </div>
-  <div class="topic-panel" id="topicChips" hidden></div>
+    <section class="fgroup">
+      <h3 class="fgroup-title">Subject</h3>
+      <div class="flist" id="subjectFilters"></div>
+    </section>
 
-  <div class="view-row">
-    <span class="result-count" id="resultCount"></span>
-    <label class="switch">
-      <input type="checkbox" id="groupToggle" checked>
-      <span>Group by subject &amp; chapter</span>
-    </label>
-  </div>
+    <section class="fgroup">
+      <h3 class="fgroup-title">Class level</h3>
+      <div class="flist" id="classFilters"></div>
+    </section>
+
+    <section class="fgroup">
+      <h3 class="fgroup-title">Type of trick</h3>
+      <div class="flist" id="typeFilters"></div>
+    </section>
+
+    <section class="fgroup fgroup-chapters">
+      <h3 class="fgroup-title">
+        Chapter
+        <span class="fgroup-hint" id="chapterHint"></span>
+      </h3>
+      <div class="chapter-search">
+        <input type="search" id="topicSearch" placeholder="Find a chapter…" aria-label="Find a chapter">
+      </div>
+      <div class="chapter-tree" id="topicFilters"></div>
+    </section>
+  </aside>
+  <div class="drawer-scrim" id="drawerScrim" hidden></div>
+
+  <!-- =========================== results ========================== -->
+  <main class="content">
+    <section class="intro" id="intro">
+      <h1>Every trick that actually saves you time in the exam hall</h1>
+      <p>Memory aids, fast calculation shortcuts and formula recall tables for JEE and NEET — Class 9 to 12 Physics, Chemistry, Maths and Biology. Filter by exam, subject, level, type or chapter; the view you build is saved in the URL.</p>
+      <div class="stat-row">
+        <div class="stat-card"><b id="statTotal">0</b><span>tips</span></div>
+        <div class="stat-card"><b id="statMnemonics">0</b><span>mnemonics</span></div>
+        <div class="stat-card"><b id="statShortcuts">0</b><span>shortcuts</span></div>
+        <div class="stat-card"><b id="statFormulas">0</b><span>formula tables</span></div>
+        <div class="stat-card"><b id="statTopics">0</b><span>chapters</span></div>
+      </div>
+    </section>
+
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <span class="result-count" id="resultCount"></span>
+        <div class="active-pills" id="activePills"></div>
+      </div>
+      <div class="segmented" role="group" aria-label="View mode">
+        <button class="seg" id="viewGrouped" aria-pressed="true">Grouped</button>
+        <button class="seg" id="viewList" aria-pressed="false">List</button>
+      </div>
+    </div>
+
+    <div id="grid" class="grouped"></div>
+
+    <footer class="site-footer">
+      <p>Free and open source. Spotted an error, or have a trick worth adding?
+        Open an issue or a pull request on
+        <a href="https://github.com/hedaprateek/jee-neet-tips" target="_blank" rel="noopener">GitHub</a>.</p>
+    </footer>
+  </main>
 </div>
 
-<main>
-  <div id="grid" class="grouped"></div>
-</main>
-
-<footer class="site-footer">
-  <p>Multi-select any filter — combine exams, subjects, levels, types and chapters freely. Filter state lives in the URL, so you can bookmark or share a view.</p>
-  <p>Spotted an error or have a trick to add? Open an issue or PR on
-  <a href="https://github.com/hedaprateek/jee-neet-tips" target="_blank" rel="noopener">GitHub</a>.</p>
-</footer>
+<button class="to-top" id="toTop" hidden aria-label="Back to top">↑</button>
 
 <script src="data.js"></script>
 <script src="app.js"></script>

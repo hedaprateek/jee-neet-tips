@@ -1,8 +1,9 @@
 (function () {
   'use strict';
 
-  // ---------------------------------------------------------------- state
-  // Every dimension is multi-select. An empty set means "no restriction".
+  /* ------------------------------------------------------------------ state
+     Every dimension is multi-select: an empty set means "no restriction".
+     Values OR together within a dimension and AND across dimensions.        */
   const state = {
     exam: new Set(),
     subject: new Set(),
@@ -10,30 +11,20 @@
     type: new Set(),
     topic: new Set(),
     q: '',
-    group: true,
+    grouped: true,
   };
 
   const DIMENSIONS = ['exam', 'subject', 'cls', 'type', 'topic'];
 
-  const TYPE_LABEL = { mnemonic: 'Mnemonic', shortcut: 'Shortcut', formula: 'Formula table' };
+  const TYPE_LABEL = { mnemonic: 'Mnemonics', shortcut: 'Shortcuts', formula: 'Formula tables' };
+  const TYPE_TAG = { mnemonic: 'Mnemonic', shortcut: 'Shortcut', formula: 'Formula table' };
   const CLS_LABEL = { '9-10': 'Class 9-10', '11-12': 'Class 11-12' };
 
-  const el = {
-    grid: document.getElementById('grid'),
-    resultCount: document.getElementById('resultCount'),
-    search: document.getElementById('searchInput'),
-    clearAll: document.getElementById('clearAll'),
-    activeCount: document.getElementById('activeCount'),
-    topicPanel: document.getElementById('topicChips'),
-    topicToggle: document.getElementById('topicToggle'),
-    groupToggle: document.getElementById('groupToggle'),
-  };
-
-  // ------------------------------------------------------- option universe
-  // Topic names are not globally unique — Physics and Chemistry both have a
-  // "Thermodynamics" chapter — so topics are keyed as "Subject::Topic".
+  /* Topic names are not globally unique — Physics and Chemistry both have a
+     "Thermodynamics" chapter — so topics are keyed as "Subject::Topic".      */
   const topicKey = (item) => `${item.subject}::${item.topic}`;
   const topicName = (key) => key.split('::')[1];
+  const topicSubject = (key) => key.split('::')[0];
 
   const uniq = (arr) => [...new Set(arr)];
   const ALL = {
@@ -44,6 +35,18 @@
     topic: uniq(TRICKS.map(topicKey)).sort(),
   };
 
+  const el = {};
+  ['searchInput', 'searchClear', 'clearAll', 'grid', 'resultCount', 'activePills',
+   'examFilters', 'subjectFilters', 'classFilters', 'typeFilters', 'topicFilters',
+   'topicSearch', 'chapterHint', 'viewGrouped', 'viewList', 'themeToggle',
+   'drawerOpen', 'drawerClose', 'drawerScrim', 'drawerBadge', 'sidebar', 'toTop',
+   'statTotal', 'statMnemonics', 'statShortcuts', 'statFormulas', 'statTopics',
+  ].forEach((id) => { el[id] = document.getElementById(id); });
+
+  // Chapter groups the user has explicitly collapsed/expanded.
+  const openChapters = new Set();
+  let chapterQuery = '';
+
   function labelFor(dim, value) {
     if (dim === 'type') return TYPE_LABEL[value];
     if (dim === 'cls') return CLS_LABEL[value];
@@ -51,9 +54,22 @@
     return value;
   }
 
-  // ------------------------------------------------------------- matching
-  // `skip` lets us compute faceted counts: how many items a chip would yield
-  // given every OTHER active filter.
+  /* -------------------------------------------------------------- matching */
+  const haystackCache = new WeakMap();
+  function haystack(item) {
+    if (!haystackCache.has(item)) {
+      haystackCache.set(item, [item.title, item.topic, item.subject, item.type, item.body || '']
+        .concat(item.exam)
+        .concat((item.rows || []).flat())
+        .join(' ')
+        .replace(/<[^>]+>/g, ' ')
+        .toLowerCase());
+    }
+    return haystackCache.get(item);
+  }
+
+  // `skip` omits one dimension, which is how faceted counts are computed:
+  // "how many results would this chip give, honouring every other filter".
   function itemMatches(item, skip) {
     if (skip !== 'exam' && state.exam.size && ![...state.exam].some((e) => item.exam.includes(e))) return false;
     if (skip !== 'subject' && state.subject.size && !state.subject.has(item.subject)) return false;
@@ -64,101 +80,152 @@
     return true;
   }
 
-  const haystackCache = new WeakMap();
-  function haystack(item) {
-    if (!haystackCache.has(item)) {
-      const text = [item.title, item.topic, item.subject, item.type, item.body || '']
-        .concat(item.exam)
-        .concat((item.rows || []).flat())
-        .join(' ')
-        .replace(/<[^>]+>/g, ' ')
-        .toLowerCase();
-      haystackCache.set(item, text);
-    }
-    return haystackCache.get(item);
-  }
-
   function facetCount(dim, value) {
-    return TRICKS.filter((item) => {
-      if (!itemMatches(item, dim)) return false;
-      if (dim === 'exam') return item.exam.includes(value);
-      if (dim === 'topic') return topicKey(item) === value;
-      return item[dim] === value;
-    }).length;
+    let n = 0;
+    for (const item of TRICKS) {
+      if (!itemMatches(item, dim)) continue;
+      if (dim === 'exam' ? item.exam.includes(value)
+        : dim === 'topic' ? topicKey(item) === value
+        : item[dim] === value) n++;
+    }
+    return n;
   }
 
-  // ------------------------------------------------------------ rendering
-  function chip(dim, value, count) {
-    const btn = document.createElement('button');
-    const active = state[dim].has(value);
-    btn.className = 'chip' + (active ? ' active' : '') + (count === 0 && !active ? ' chip-empty' : '');
-    btn.setAttribute('aria-pressed', String(active));
-    btn.innerHTML = `${labelFor(dim, value)}<span class="chip-count">${count}</span>`;
-    btn.addEventListener('click', () => {
-      state[dim].has(value) ? state[dim].delete(value) : state[dim].add(value);
-      // Dropping a subject shouldn't leave its topics stranded in the filter.
-      if (dim === 'subject') pruneTopics();
-      render();
-    });
-    return btn;
+  function toggle(dim, value) {
+    state[dim].has(value) ? state[dim].delete(value) : state[dim].add(value);
+    if (dim === 'subject') pruneTopics();
+    render();
   }
 
   function pruneTopics() {
     if (!state.subject.size) return;
     [...state.topic].forEach((key) => {
-      if (!state.subject.has(key.split('::')[0])) state.topic.delete(key);
+      if (!state.subject.has(topicSubject(key))) state.topic.delete(key);
     });
   }
 
-  function renderChipGroup(containerId, dim, values) {
-    const wrap = document.getElementById(containerId);
-    wrap.innerHTML = '';
-    values.forEach((v) => wrap.appendChild(chip(dim, v, facetCount(dim, v))));
+  /* ------------------------------------------------------- sidebar filters */
+  function filterRow(dim, value, count, opts) {
+    const btn = document.createElement('button');
+    const active = state[dim].has(value);
+    btn.className = 'fitem' + (!count && !active ? ' is-empty' : '');
+    btn.setAttribute('aria-pressed', String(active));
+    btn.dataset.dim = dim;
+    btn.dataset.value = value;
+    const swatch = opts && opts.swatch ? `<span class="swatch swatch-${opts.swatch}"></span>` : '';
+    btn.innerHTML = `<span class="fbox"></span>${swatch}` +
+      `<span class="fname">${labelFor(dim, value)}</span>` +
+      `<span class="fcount">${count}</span>`;
+    btn.addEventListener('click', () => toggle(dim, value));
+    return btn;
   }
 
-  // Topics are scoped to the selected subjects so the list stays usable.
-  function visibleTopics() {
+  function renderList(container, dim, values, swatchFor) {
+    container.innerHTML = '';
+    values.forEach((v) => {
+      container.appendChild(filterRow(dim, v, facetCount(dim, v),
+        swatchFor ? { swatch: swatchFor(v) } : null));
+    });
+  }
+
+  /* Chapter tree: chapters grouped under their subject, collapsible.
+     Only subjects in play are listed, so selecting "Biology" trims the tree. */
+  function renderChapters() {
     const pool = state.subject.size ? TRICKS.filter((t) => state.subject.has(t.subject)) : TRICKS;
-    const bySubject = {};
+    const bySubject = new Map();
     pool.forEach((t) => {
-      (bySubject[t.subject] = bySubject[t.subject] || new Set()).add(topicKey(t));
+      if (!bySubject.has(t.subject)) bySubject.set(t.subject, new Set());
+      bySubject.get(t.subject).add(topicKey(t));
     });
-    return ALL.subject
-      .filter((s) => bySubject[s])
-      .map((s) => ({ subject: s, topics: [...bySubject[s]].sort((a, b) => topicName(a).localeCompare(topicName(b))) }));
+
+    const q = chapterQuery.toLowerCase();
+    el.topicFilters.innerHTML = '';
+    let visibleChapters = 0;
+
+    ALL.subject.forEach((subject) => {
+      if (!bySubject.has(subject)) return;
+      let keys = [...bySubject.get(subject)].sort((a, b) => topicName(a).localeCompare(topicName(b)));
+      if (q) keys = keys.filter((k) => topicName(k).toLowerCase().includes(q));
+      if (!keys.length) return;
+      visibleChapters += keys.length;
+
+      const selectedHere = keys.filter((k) => state.topic.has(k)).length;
+      // Auto-expand while searching, when a chapter here is selected, or when
+      // this is the only subject in play.
+      const expanded = openChapters.has(subject) || !!q || selectedHere > 0 || bySubject.size === 1;
+
+      const group = document.createElement('div');
+      group.className = 'chapter-group';
+
+      const head = document.createElement('button');
+      head.className = 'chapter-head';
+      head.setAttribute('aria-expanded', String(expanded));
+      head.innerHTML = `<span class="caret">▶</span><span class="fname">${subject}</span>` +
+        `<span class="fcount">${selectedHere ? selectedHere + '/' : ''}${keys.length}</span>`;
+      head.addEventListener('click', () => {
+        openChapters.has(subject) ? openChapters.delete(subject) : openChapters.add(subject);
+        renderChapters();
+      });
+      group.appendChild(head);
+
+      const list = document.createElement('div');
+      list.className = 'chapter-list';
+      list.hidden = !expanded;
+      keys.forEach((k) => list.appendChild(filterRow('topic', k, facetCount('topic', k))));
+      group.appendChild(list);
+
+      el.topicFilters.appendChild(group);
+    });
+
+    if (!visibleChapters) {
+      el.topicFilters.innerHTML = `<p class="fgroup-hint" style="padding:6px 9px">No chapter matches “${chapterQuery}”.</p>`;
+    }
+    el.chapterHint.textContent = state.topic.size ? `${state.topic.size} selected` : '';
   }
 
-  function renderTopics() {
-    el.topicPanel.innerHTML = '';
-    visibleTopics().forEach(({ subject, topics }) => {
-      const block = document.createElement('div');
-      block.className = 'topic-block';
-      const head = document.createElement('div');
-      head.className = 'topic-block-label';
-      head.textContent = subject;
-      block.appendChild(head);
-      const row = document.createElement('div');
-      row.className = 'topic-row';
-      topics.forEach((t) => row.appendChild(chip('topic', t, facetCount('topic', t))));
-      block.appendChild(row);
-      el.topicPanel.appendChild(block);
+  /* ------------------------------------------------------- active summary */
+  function renderPills() {
+    const entries = [];
+    DIMENSIONS.forEach((dim) => state[dim].forEach((v) => entries.push({ dim, value: v })));
+
+    el.activePills.innerHTML = '';
+    entries.forEach(({ dim, value }) => {
+      const pill = document.createElement('span');
+      pill.className = 'pill';
+      const text = dim === 'topic' ? `${topicSubject(value)}: ${topicName(value)}` : labelFor(dim, value);
+      pill.innerHTML = `<span class="pill-label">${text}</span>`;
+      const x = document.createElement('button');
+      x.setAttribute('aria-label', `Remove filter ${text}`);
+      x.textContent = '×';
+      x.addEventListener('click', () => toggle(dim, value));
+      pill.appendChild(x);
+      el.activePills.appendChild(pill);
     });
+
+    const active = entries.length + (state.q ? 1 : 0);
+    el.clearAll.hidden = active === 0;
+    el.drawerBadge.hidden = entries.length === 0;
+    el.drawerBadge.textContent = entries.length;
+    el.searchClear.hidden = !state.q;
   }
 
+  /* -------------------------------------------------------------- results */
   function cardHTML(item) {
-    const badges = [
-      `<span class="badge badge-type-${item.type}">${TYPE_LABEL[item.type]}</span>`,
-      ...item.exam.map((e) => `<span class="badge badge-exam badge-exam-${e.toLowerCase()}">${e}</span>`),
-      `<span class="badge badge-subject">${item.subject} · ${item.cls}</span>`,
-    ].join('');
+    const exams = item.exam
+      .map((e) => `<span class="tag-exam tag-exam-${e.toLowerCase()}">${e}</span>`).join('');
 
     const body = item.type === 'formula' && item.rows
-      ? `<table class="rows-table">${item.rows.map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>`
+      ? `<table class="rows-table">${item.rows
+          .map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>`
       : `<div class="body">${item.body}</div>`;
 
     return `<article class="card">
-      <div class="card-tags">${badges}</div>
-      <div class="topic">${item.topic}</div>
+      <div class="card-meta">
+        <span class="tag-type tag-type-${item.type}"><span class="dot"></span>${TYPE_TAG[item.type]}</span>
+        <span class="meta-sep">•</span>
+        ${exams}
+        <span class="meta-dim">${item.cls === '9-10' ? 'Class 9-10' : 'Class 11-12'}</span>
+      </div>
       ${item.title ? `<h3>${item.title}</h3>` : ''}
       ${body}
     </article>`;
@@ -169,59 +236,55 @@
     el.resultCount.textContent = `${found.length} tip${found.length === 1 ? '' : 's'}`;
 
     if (!found.length) {
+      el.grid.className = '';
       el.grid.innerHTML = `<div class="empty-state">
-        <p>Nothing matches this combination.</p>
-        <button class="btn-inline" id="emptyReset">Clear all filters</button>
+        <h3>No tips match this combination</h3>
+        <p>Try removing a filter, or search for something else.</p>
+        <button class="btn-primary" id="emptyReset">Clear all filters</button>
       </div>`;
       document.getElementById('emptyReset').addEventListener('click', resetAll);
       return;
     }
 
-    if (!state.group) {
+    if (!state.grouped) {
       el.grid.className = 'grid';
       el.grid.innerHTML = found.map(cardHTML).join('');
       return;
     }
 
-    // Grouped view: subject, then topic.
     el.grid.className = 'grouped';
     const bySubject = new Map();
     found.forEach((item) => {
       if (!bySubject.has(item.subject)) bySubject.set(item.subject, new Map());
-      const topics = bySubject.get(item.subject);
-      if (!topics.has(item.topic)) topics.set(item.topic, []);
-      topics.get(item.topic).push(item);
+      const chapters = bySubject.get(item.subject);
+      if (!chapters.has(item.topic)) chapters.set(item.topic, []);
+      chapters.get(item.topic).push(item);
     });
 
     let html = '';
     ALL.subject.forEach((subject) => {
       if (!bySubject.has(subject)) return;
-      const topics = bySubject.get(subject);
-      const total = [...topics.values()].reduce((n, a) => n + a.length, 0);
-      html += `<section class="subject-section">
-        <h2 class="subject-heading">${subject}<span class="heading-count">${total}</span></h2>`;
-      [...topics.keys()].sort().forEach((topic) => {
-        html += `<h3 class="topic-heading">${topic}</h3>
-          <div class="grid">${topics.get(topic).map(cardHTML).join('')}</div>`;
+      const chapters = bySubject.get(subject);
+      const total = [...chapters.values()].reduce((n, a) => n + a.length, 0);
+      html += `<section class="subject-block">
+        <div class="subject-bar"><h2>${subject}</h2><span class="tally">${total}</span></div>`;
+      [...chapters.keys()].sort().forEach((chapter) => {
+        html += `<div class="chapter-label">${chapter}</div>
+          <div class="grid">${chapters.get(chapter).map(cardHTML).join('')}</div>`;
       });
-      html += `</section>`;
+      html += '</section>';
     });
     el.grid.innerHTML = html;
   }
 
-  function renderActiveSummary() {
-    const n = DIMENSIONS.reduce((sum, d) => sum + state[d].size, 0) + (state.q ? 1 : 0);
-    el.activeCount.textContent = n ? `${n} active` : '';
-    el.clearAll.hidden = n === 0;
-  }
-
+  /* --------------------------------------------------------------- render */
   function render() {
-    renderChipGroup('examChips', 'exam', ALL.exam);
-    renderChipGroup('subjectChips', 'subject', ALL.subject);
-    renderChipGroup('classChips', 'cls', ALL.cls);
-    renderChipGroup('typeChips', 'type', ALL.type);
-    renderTopics();
-    renderActiveSummary();
+    renderList(el.examFilters, 'exam', ALL.exam, (v) => v.toLowerCase());
+    renderList(el.subjectFilters, 'subject', ALL.subject);
+    renderList(el.classFilters, 'cls', ALL.cls);
+    renderList(el.typeFilters, 'type', ALL.type, (v) => v);
+    renderChapters();
+    renderPills();
     renderResults();
     syncHash();
   }
@@ -229,14 +292,16 @@
   function resetAll() {
     DIMENSIONS.forEach((d) => state[d].clear());
     state.q = '';
-    el.search.value = '';
+    el.searchInput.value = '';
     render();
   }
 
-  // ------------------------------------------------------------ URL state
+  /* ------------------------------------------------------------ URL state */
   function syncHash() {
     const parts = [];
-    DIMENSIONS.forEach((d) => { if (state[d].size) parts.push(`${d}=${[...state[d]].map(encodeURIComponent).join(',')}`); });
+    DIMENSIONS.forEach((d) => {
+      if (state[d].size) parts.push(`${d}=${[...state[d]].map(encodeURIComponent).join(',')}`);
+    });
     if (state.q) parts.push(`q=${encodeURIComponent(state.q)}`);
     const hash = parts.join('&');
     history.replaceState(null, '', hash ? `#${hash}` : location.pathname);
@@ -246,9 +311,11 @@
     const hash = location.hash.replace(/^#/, '');
     if (!hash) return;
     hash.split('&').forEach((pair) => {
-      const [key, raw] = pair.split('=');
-      if (!raw) return;
-      if (key === 'q') { state.q = decodeURIComponent(raw); el.search.value = state.q; return; }
+      const idx = pair.indexOf('=');
+      if (idx < 0) return;
+      const key = pair.slice(0, idx);
+      const raw = pair.slice(idx + 1);
+      if (key === 'q') { state.q = decodeURIComponent(raw); el.searchInput.value = state.q; return; }
       if (!DIMENSIONS.includes(key)) return;
       raw.split(',').forEach((v) => {
         const value = decodeURIComponent(v);
@@ -257,39 +324,66 @@
     });
   }
 
-  // ------------------------------------------------------------- controls
+  /* ------------------------------------------------------------- controls */
   let searchTimer;
-  el.search.addEventListener('input', (e) => {
-    clearTimeout(searchTimer);
+  el.searchInput.addEventListener('input', (e) => {
     const value = e.target.value.trim();
-    searchTimer = setTimeout(() => { state.q = value; render(); }, 120);
+    clearTimeout(searchTimer);
+    searchTimer = setTimeout(() => { state.q = value; render(); }, 130);
+  });
+  el.searchClear.addEventListener('click', () => {
+    el.searchInput.value = ''; state.q = ''; render(); el.searchInput.focus();
+  });
+
+  el.topicSearch.addEventListener('input', (e) => {
+    chapterQuery = e.target.value.trim();
+    renderChapters();
   });
 
   el.clearAll.addEventListener('click', resetAll);
 
-  el.topicToggle.addEventListener('click', () => {
-    const open = el.topicPanel.hidden;
-    el.topicPanel.hidden = !open;
-    el.topicToggle.setAttribute('aria-expanded', String(open));
-    el.topicToggle.querySelector('.caret').textContent = open ? '▾' : '▸';
-  });
-
-  el.groupToggle.addEventListener('change', (e) => {
-    state.group = e.target.checked;
+  function setView(grouped) {
+    state.grouped = grouped;
+    el.viewGrouped.setAttribute('aria-pressed', String(grouped));
+    el.viewList.setAttribute('aria-pressed', String(!grouped));
     renderResults();
+  }
+  el.viewGrouped.addEventListener('click', () => setView(true));
+  el.viewList.addEventListener('click', () => setView(false));
+
+  /* Drawer (sidebar on small screens) */
+  function setDrawer(open) {
+    document.body.classList.toggle('drawer-open', open);
+    el.drawerScrim.hidden = !open;
+  }
+  el.drawerOpen.addEventListener('click', () => setDrawer(true));
+  el.drawerClose.addEventListener('click', () => setDrawer(false));
+  el.drawerScrim.addEventListener('click', () => setDrawer(false));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setDrawer(false);
+    // "/" focuses search, the way most doc sites behave.
+    if (e.key === '/' && document.activeElement !== el.searchInput
+        && document.activeElement !== el.topicSearch) {
+      e.preventDefault(); el.searchInput.focus();
+    }
   });
 
-  // ---------------------------------------------------------------- theme
+  /* Back-to-top */
+  window.addEventListener('scroll', () => {
+    el.toTop.hidden = window.scrollY < 600;
+  }, { passive: true });
+  el.toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  /* ---------------------------------------------------------------- theme */
   const root = document.documentElement;
-  const themeBtn = document.getElementById('themeToggle');
-  function setThemeIcon(theme) { themeBtn.textContent = theme === 'dark' ? '☀' : '☾'; }
+  const setThemeIcon = (t) => { el.themeToggle.textContent = t === 'dark' ? '☀' : '☾'; };
   try {
     const saved = localStorage.getItem('jnt-theme');
     if (saved === 'dark' || saved === 'light') { root.setAttribute('data-theme', saved); setThemeIcon(saved); }
     else setThemeIcon(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  } catch (e) { /* storage unavailable */ }
+  } catch (e) { /* storage blocked */ }
 
-  themeBtn.addEventListener('click', () => {
+  el.themeToggle.addEventListener('click', () => {
     const current = root.getAttribute('data-theme')
       || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     const next = current === 'dark' ? 'light' : 'dark';
@@ -298,13 +392,15 @@
     try { localStorage.setItem('jnt-theme', next); } catch (e) { /* ignore */ }
   });
 
-  // ----------------------------------------------------------------- boot
-  document.getElementById('statTotal').textContent = TRICKS.length;
-  document.getElementById('statMnemonics').textContent = TRICKS.filter((t) => t.type === 'mnemonic').length;
-  document.getElementById('statShortcuts').textContent = TRICKS.filter((t) => t.type === 'shortcut').length;
-  document.getElementById('statTopics').textContent = ALL.topic.length;
+  /* ----------------------------------------------------------------- boot */
+  const count = (type) => TRICKS.filter((t) => t.type === type).length;
+  el.statTotal.textContent = TRICKS.length;
+  el.statMnemonics.textContent = count('mnemonic');
+  el.statShortcuts.textContent = count('shortcut');
+  el.statFormulas.textContent = count('formula');
+  el.statTopics.textContent = ALL.topic.length;
+  el.searchInput.placeholder = `Search ${TRICKS.length} tips — “Krebs”, “Markovnikov”, “LIATE”…`;
 
   readHash();
-  el.groupToggle.checked = state.group;
   render();
 })();
