@@ -19,10 +19,10 @@
       <div class="brand-mark">JN</div>
       <div>
         JEE / NEET Tips &amp; Tricks
-        <small>Mnemonics · Shortcuts · Formula Sheets</small>
+        <small>Mnemonics · Shortcuts · Formula sheets</small>
       </div>
     </div>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">☾</button>
   </div>
 </header>
 
@@ -30,30 +30,62 @@
   <h1>Every trick that actually saves you time in the exam hall</h1>
   <p>A free, searchable library of memory aids, fast calculation shortcuts and formula recall tables — built for JEE and NEET aspirants, covering Class 9–12 Physics, Chemistry, Maths and Biology.</p>
   <div class="stats">
-    <span class="stat"><b id="statTotal">0</b> tips indexed</span>
-    <span class="stat"><b id="statSubjects">0</b> subjects</span>
-    <span class="stat"><b>JEE</b> &amp; <b>NEET</b> tagged separately</span>
+    <span class="stat"><b id="statTotal">0</b> tips</span>
+    <span class="stat"><b id="statMnemonics">0</b> mnemonics</span>
+    <span class="stat"><b id="statShortcuts">0</b> shortcuts</span>
+    <span class="stat"><b id="statTopics">0</b> topics</span>
   </div>
 </section>
 
 <div class="controls">
   <div class="search-row">
-    <input type="search" id="searchInput" placeholder="Search a topic, e.g. &quot;Krebs cycle&quot;, &quot;Wheatstone&quot;, &quot;VSEPR&quot;…" aria-label="Search tips">
+    <input type="search" id="searchInput" placeholder="Search tips — try “Krebs”, “Wheatstone”, “Markovnikov”, “LIATE”…" aria-label="Search tips">
+    <span class="active-count" id="activeCount"></span>
+    <button class="btn-clear" id="clearAll" hidden>Clear all</button>
   </div>
-  <div class="filter-group" id="examChips"></div>
-  <div class="filter-group" id="subjectChips"></div>
-  <div class="filter-group" id="classChips"></div>
-  <div class="filter-group" id="typeChips"></div>
+
+  <div class="filter-row">
+    <span class="filter-label">Exam</span>
+    <div class="chip-set" id="examChips"></div>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Subject</span>
+    <div class="chip-set" id="subjectChips"></div>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Level</span>
+    <div class="chip-set" id="classChips"></div>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Type</span>
+    <div class="chip-set" id="typeChips"></div>
+  </div>
+
+  <div class="filter-row filter-row-topics">
+    <span class="filter-label">Topic</span>
+    <button class="topic-toggle" id="topicToggle" aria-expanded="false">
+      <span class="caret">▸</span> Filter by chapter
+    </button>
+  </div>
+  <div class="topic-panel" id="topicChips" hidden></div>
+
+  <div class="view-row">
+    <span class="result-count" id="resultCount"></span>
+    <label class="switch">
+      <input type="checkbox" id="groupToggle" checked>
+      <span>Group by subject &amp; chapter</span>
+    </label>
+  </div>
 </div>
 
 <main>
-  <div class="result-count" id="resultCount"></div>
-  <div class="grid" id="grid"></div>
+  <div id="grid" class="grouped"></div>
 </main>
 
 <footer class="site-footer">
-  Built for JEE &amp; NEET aspirants. Spotted an error or have a trick to add? Open an issue or PR on
-  <a href="https://github.com/hedaprateek/jee-neet-tips" target="_blank" rel="noopener">GitHub</a>.
+  <p>Multi-select any filter — combine exams, subjects, levels, types and chapters freely. Filter state lives in the URL, so you can bookmark or share a view.</p>
+  <p>Spotted an error or have a trick to add? Open an issue or PR on
+  <a href="https://github.com/hedaprateek/jee-neet-tips" target="_blank" rel="noopener">GitHub</a>.</p>
 </footer>
 
 <script src="data.js"></script>
