@@ -264,6 +264,38 @@ const TRICKS = [
     ["Ohm's law","V = IR"],
   ] },
 
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Electrostatics",
+  title:"Reach for Gauss's law whenever there is symmetry",
+  body:"For a symmetric charge distribution, skip integrating Coulomb's law and pick a Gaussian surface that matches the symmetry: sphere for a point/spherical charge, cylinder for a long wire, pillbox for a sheet. Standard results fall straight out — E = λ/2πε₀r for a wire, σ/2ε₀ for a sheet, and <b>zero inside a conductor or a hollow shell</b>." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Thermodynamics",
+  title:"Work done is the area under the P-V curve",
+  body:"Read work straight off the graph instead of integrating: area under the curve = work done by the gas. Isochoric (vertical line) → <b>W = 0</b>. Isobaric (horizontal) → W = PΔV, a rectangle. In a cyclic process the enclosed area is the net work — clockwise means work done <i>by</i> the gas, anticlockwise means work done <i>on</i> it." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Modern Physics",
+  title:"Half-lives in powers of two",
+  body:"After n half-lives the surviving fraction is simply <b>N₀/2ⁿ</b> — so 1/2, 1/4, 1/8, 1/16… Convert the elapsed time into a number of half-lives first (n = t/t₁⁄₂) and most decay MCQs need no logarithms at all." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Units & Measurement",
+  title:"Eliminate options by order of magnitude",
+  body:"Before computing anything, check the dimensions of each option and estimate the answer's power of ten. Wrong options in JEE/NEET physics are often off by a factor of 10 or carry the wrong units, so this alone can settle a question — and it always catches an arithmetic slip in your own working." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Fluid Mechanics",
+  title:"Continuity first, then Bernoulli",
+  body:"For any flow problem, apply continuity (A₁v₁ = A₂v₂) to get the speeds — a narrower pipe means faster flow — then feed those into Bernoulli's equation for the pressures. Because the two are linked, the counter-intuitive result follows immediately: where a fluid speeds up, its <b>pressure drops</b>." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"formula", topic:"Fluid Mechanics",
+  title:"Mechanical properties of fluids",
+  rows:[
+    ["Pressure at depth h","P = P₀ + ρgh"],
+    ["Buoyant force (Archimedes)","F = ρ_fluid · V_displaced · g"],
+    ["Equation of continuity","A₁v₁ = A₂v₂"],
+    ["Bernoulli's equation","P + ½ρv² + ρgh = constant"],
+    ["Terminal velocity","v = 2r²(ρ − σ)g / 9η"],
+    ["Excess pressure — drop / bubble","2S/R  ;  4S/R (soap bubble, two surfaces)"],
+    ["Capillary rise","h = 2S cosθ / rρg"],
+  ] },
+
 /* ==================================================================
    CHEMISTRY — MNEMONICS
    ================================================================== */
@@ -363,6 +395,34 @@ const TRICKS = [
 { exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Named Reactions",
   title:"Name-reaction quick hooks",
   body:"<b>Cannizzaro</b> — aldehydes with no α-H disproportionate (needs conc. alkali). <b>Aldol</b> — needs α-H, gives β-hydroxy carbonyl. <b>Perkin</b> — aromatic aldehyde + anhydride → cinnamic acid. <b>Sandmeyer</b> — diazonium → aryl halide (Cu salts). <b>Hoffmann bromamide</b> — amide → amine with one carbon <i>less</i>. Hook: “no α-H → Cannizzaro; has α-H → Aldol.”" },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"s-Block & p-Block",
+  title:"p-block groups 13 to 16 in one go",
+  body:"<b>Group 13</b> — B, Al, Ga, In, Tl: “<b>B</b>ears <b>Al</b>ways <b>Ga</b>ve <b>In</b>dians <b>T</b>rouble.” <b>Group 14</b> — C, Si, Ge, Sn, Pb: “<b>C</b>hemistry <b>Si</b>r <b>Ge</b>ts <b>Sn</b>eaky <b>P</b>roblems.” <b>Group 15</b> — N, P, As, Sb, Bi: “<b>N</b>ana <b>P</b>atekar <b>As</b>ks <b>Sb</b>out <b>Bi</b>ology.” <b>Group 16</b> — O, S, Se, Te, Po: “<b>O</b>ld <b>S</b>tyle <b>Se</b>rves <b>Te</b>a <b>Po</b>ts.” Metallic character increases down every one of these groups." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Periodic Table",
+  title:"Electronegativity order — “F O Cl N Br I S C H P”",
+  body:"F &gt; O &gt; Cl &gt; N &gt; Br &gt; I &gt; S &gt; C &gt; H &gt; P on the Pauling scale. Fluorine is the most electronegative element, period. Knowing just the top four settles most bond-polarity, acidity and inductive-effect comparisons you will be asked." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Periodic Table",
+  title:"Abundance in the Earth's crust — “Only Silly Alchemists Fear Calcium, Sodium, Potassium, Magnesium”",
+  body:"O &gt; Si &gt; Al &gt; Fe &gt; Ca &gt; Na &gt; K &gt; Mg. Oxygen alone is about 46% and silicon about 28%, so the two together make up roughly three-quarters of the crust — and <b>aluminium is the most abundant metal</b>, a frequently asked one-liner." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Atomic Structure",
+  title:"Orbital letters — “Sober Physicists Don't Find Giraffes Hiding In Kitchens”",
+  body:"s, p, d, f, g, h, i, k — the subshell letters in order of azimuthal quantum number l = 0, 1, 2, 3… (only s, p, d and f matter for the syllabus). Each holds 2(2l+1) electrons: s → 2, p → 6, d → 10, f → 14." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"9-10", type:"mnemonic", topic:"Redox Reactions",
+  title:"Cations are “paw-sitive”",
+  body:"A <b>cat</b>ion is positive (cats have <i>paws</i> → “pawsitive”) and is formed by <i>losing</i> electrons; an <b>an</b>ion is negative (“<b>A n</b>egative ion”) and forms by <i>gaining</i> them. Pair it with electrode logic: cations travel to the cathode, anions to the anode." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Thermodynamics",
+  title:"“Good Honey Tastes Sweet” — the Gibbs equation",
+  body:"<b>G</b> = <b>H</b> − <b>T</b><b>S</b>, i.e. ΔG = ΔH − TΔS. Read the signs off it directly: exothermic (ΔH &lt; 0) with increasing disorder (ΔS &gt; 0) is spontaneous at <i>every</i> temperature, while the mixed cases flip over at T = ΔH/ΔS." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Named Reactions",
+  title:"LiAlH₄ is the strong reducer, NaBH₄ the gentle one",
+  body:"<b>LiAlH₄</b> is powerful enough to reduce esters, carboxylic acids, amides and nitriles as well as aldehydes and ketones. <b>NaBH₄</b> is mild — it touches only aldehydes and ketones. Hook: “<b>Li</b>on is strong, <b>Na</b>ughty boy is weak.” Choosing between them is a standard one-mark question." },
 
 /* ==================================================================
    CHEMISTRY — SHORTCUTS
@@ -632,6 +692,22 @@ const TRICKS = [
   title:"Approximation using differentials",
   body:"For a small change, f(x+Δx) ≈ f(x) + f'(x)·Δx. So √(101) ≈ 10 + 1/(2·10) = 10.05, and (1+x)ⁿ ≈ 1 + nx for small x. Handy for numerical MCQs where the options are far apart." },
 
+{ exam:["JEE"], subject:"Maths", cls:"9-10", type:"shortcut", topic:"Vedic Maths / Speed Arithmetic",
+  title:"Same tens digit, units adding to 10",
+  body:"When two two-digit numbers share a tens digit and their units digits sum to 10, multiply the tens digit by the next integer for the left half and the units digits together for the right half. So 63 × 67 → 6×7 = 42 and 3×7 = 21 → <b>4221</b>; 84 × 86 → 8×9 = 72, 4×6 = 24 → <b>7224</b>. (Squaring numbers ending in 5 is just this rule's special case.)" },
+
+{ exam:["JEE"], subject:"Maths", cls:"9-10", type:"shortcut", topic:"Vedic Maths / Speed Arithmetic",
+  title:"Urdhva Tiryagbhyam — vertical and crosswise",
+  body:"Multiply two-digit numbers in one line: units × units gives the last digit, the crosswise products added give the middle, and tens × tens gives the front — carrying as you go. For 12 × 13: 2×3 = 6, (1×3)+(2×1) = 5, 1×1 = 1 → <b>156</b>. It scales to three digits and to polynomial multiplication, which is where it really pays off." },
+
+{ exam:["JEE"], subject:"Maths", cls:"9-10", type:"shortcut", topic:"Vedic Maths / Speed Arithmetic",
+  title:"Subtract from a power of ten using complements",
+  body:"“All from 9 and the last from 10”: to compute 1000 − 487, take 9−4 = 5, 9−8 = 1, 10−7 = 3 → <b>513</b>. No borrowing anywhere. Handy whenever a problem leaves you subtracting from 100, 1000 or 10000." },
+
+{ exam:["JEE"], subject:"Maths", cls:"9-10", type:"shortcut", topic:"Vedic Maths / Speed Arithmetic",
+  title:"Multiplying and dividing by 5, 25 and 50",
+  body:"×5 → halve the number and multiply by 10 (48×5 = 24×10 = 480). ×25 → divide by 4, then ×100. ×50 → halve, then ×100. Division reverses it: ÷5 → double and divide by 10. Turns awkward multiplications into halving or doubling, which you can do mentally." },
+
 /* ==================================================================
    MATHS — FORMULA TABLES
    ================================================================== */
@@ -825,6 +901,50 @@ const TRICKS = [
 { exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Cell Biology",
   title:"Organelle jobs in one line each",
   body:"Mitochondrion — powerhouse (ATP). Ribosome — protein factory. Rough ER — protein transport; Smooth ER — lipid synthesis. Golgi — packaging and dispatch. Lysosome — “suicide bag” (digestion). Peroxisome — H₂O₂ breakdown. Chloroplast — photosynthesis. Vacuole — storage and turgor." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Biomolecules",
+  title:"Enzyme classes — “Over The HILL”",
+  body:"<b>O</b>xidoreductases (transfer electrons), <b>T</b>ransferases (move a functional group), <b>H</b>ydrolases (split using water), <b>I</b>somerases (rearrange within a molecule), <b>L</b>igases (join, using ATP), <b>L</b>yases (break bonds without water or oxidation). Six classes in the NCERT scheme — the name usually tells you the job." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Human Circulation",
+  title:"WBC abundance — “Never Let Monkeys Eat Bananas”",
+  body:"<b>N</b>eutrophils (60-65%) &gt; <b>L</b>ymphocytes (20-25%) &gt; <b>M</b>onocytes (6-8%) &gt; <b>E</b>osinophils (2-3%) &gt; <b>B</b>asophils (0.5-1%). Neutrophils are the most abundant and basophils the rarest — the two ends are what get asked." },
+
+{ exam:["NEET"], subject:"Biology", cls:"9-10", type:"mnemonic", topic:"Nutrition & Vitamins",
+  title:"B-vitamin chemical names — “The Rhythm Nearly Proved Contagious”",
+  body:"B₁ <b>T</b>hiamine, B₂ <b>R</b>iboflavin, B₃ <b>N</b>iacin, B₆ <b>P</b>yridoxine, B₁₂ <b>C</b>obalamin. Pair each with its deficiency: B₁ → beriberi, B₃ → pellagra, B₁₂ → pernicious anaemia." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Cell Cycle & Division",
+  title:"Full cell cycle — “IPMAT”",
+  body:"<b>I</b>nterphase, <b>P</b>rophase, <b>M</b>etaphase, <b>A</b>naphase, <b>T</b>elophase. Interphase itself splits into G₁ → S (DNA replicates) → G₂ and takes up about <b>95%</b> of the cycle — a favourite MCQ point, since the visually dramatic M phase is the short part." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Evolution",
+  title:"Human evolution sequence",
+  body:"<b>Dryopithecus → Ramapithecus → Australopithecus → Homo habilis → Homo erectus → Neanderthal → Cro-Magnon → Homo sapiens.</b> Anchor three facts to it: <i>Homo habilis</i> is the first toolmaker, <i>Homo erectus</i> the first to use fire, and Cro-Magnon the first with cave art." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Evolution",
+  title:"Horse evolution — “Energy Of Mass Means Potential Energy”",
+  body:"<b>E</b>ohippus → <b>M</b>esohippus → <b>M</b>erychippus → <b>P</b>liohippus → <b>E</b>quus. The trend across the series: body size increases, the number of functional toes reduces to one, and the teeth become suited to grazing." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Evolution",
+  title:"Hardy-Weinberg — the five conditions that must all hold",
+  body:"No <b>m</b>utation, no <b>g</b>ene flow (migration), no <b>g</b>enetic drift (population must be large), <b>r</b>andom mating, and no <b>n</b>atural selection. Allele frequencies stay constant only while all five hold — so any question describing a violation is telling you evolution <i>is</i> occurring." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Evolution",
+  title:"Evidence for evolution — “CHAMP”",
+  body:"<b>C</b>omparative anatomy, <b>H</b>omologous organs (same origin, different function — divergent evolution), <b>A</b>nalogous organs (different origin, same function — convergent evolution), <b>M</b>olecular evidence, <b>P</b>alaeontology (fossils). Homologous = divergent and analogous = convergent is the pairing that gets tested." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Reproduction",
+  title:"Menstrual cycle phases — “Men Prefer Ovulating Secretaries”",
+  body:"<b>M</b>enstrual (days 1-5) → <b>P</b>roliferative/follicular (6-13) → <b>O</b>vulatory (~day 14, triggered by the LH surge) → <b>S</b>ecretory/luteal (15-28, corpus luteum secretes progesterone). The LH surge at mid-cycle is the single most asked detail." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Reproduction",
+  title:"Spermatogenesis — “Some Grow Powerfully Since Spermiogenesis Starts”",
+  body:"<b>S</b>permatogonia (2n) → <b>G</b>rowth → <b>P</b>rimary spermatocyte (2n) → <b>S</b>econdary spermatocyte (n, after meiosis I) → <b>S</b>permatids (n) → spermatozoa. Track the ploidy alongside: it halves at meiosis I, which is where most confusion in this chapter comes from." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Ecology",
+  title:"India's biodiversity hotspots — “WISH”",
+  body:"<b>W</b>estern Ghats (with Sri Lanka), <b>I</b>ndo-Burma, <b>S</b>undaland (Nicobar Islands), <b>H</b>imalaya. Four of the world's ~34 hotspots reach into India — the number and the names are both commonly asked." },
 
 /* ==================================================================
    BIOLOGY — SHORTCUTS

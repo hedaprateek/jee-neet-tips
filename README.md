@@ -32,6 +32,22 @@ Static site, no build step:
 - `data.js` — the content database (a plain JS array of trick objects)
 - `app.js` — filtering, faceted counts, search, grouping and URL state
 
+## Sources
+
+Mnemonics of this kind are long-standing classroom tradition rather than anyone's
+original work, and many appear across published prep material. Entries were gathered
+and cross-checked against sources including
+[MyStudyCart](https://mystudycart.com/blog/mnemonics-for-neet/),
+[PhysicsWallah](https://www.pw.live/neet/exams/mnemonics-for-genetics-and-evolution-in-neet),
+[NEETQ](https://neetq.com/blog/neet-biology-mnemonics-guide),
+[SchoolMyKids](https://www.schoolmykids.com/education/periodic-table-tricks-mnemonics) and
+[IITian Guide](https://iitianguide.com/vedic-maths-for-jee-2026-tricks-and-shortcuts-for-fast-calculation/).
+
+Every entry is written here in our own words and fact-checked against the NCERT
+syllabus before being added — anything that did not survive that check was dropped
+(one widely circulated greenhouse-gas mnemonic, for instance, lists oxygen as a
+greenhouse gas, which is simply wrong).
+
 ## Contributing a trick
 
 Add an entry to the `TRICKS` array in `data.js` following the existing shape (`mnemonic`/`shortcut` entries use a `body` string; `formula` entries use a `rows` array of `[label, formula]` pairs), then open a PR.
