@@ -436,6 +436,79 @@ const TRICKS = [
   title:"Diode biasing and the universal gates",
   body:"<b>Forward bias</b> — p-side to the positive terminal, depletion layer narrows, current flows. <b>Reverse bias</b> — depletion layer widens, only a tiny leakage current. For logic: <b>NAND and NOR are the universal gates</b> — any other gate can be built from either alone." },
 
+/* --------- PHYSICS — unorthodox hooks, chapter by chapter (11-12) --------- */
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Mechanical Properties of Solids",
+  title:"Steel is <i>more</i> elastic than rubber — the definition is backwards from daily speech",
+  body:"In physics “elastic” means how strongly a body <b>snaps back</b>, not how far it stretches. Steel has a far larger Young's modulus, so it resists deformation and recovers harder — it is the more elastic material. Rubber stretches more, which is exactly why it is <i>less</i> elastic. Almost every exam question on this word is testing the everyday misunderstanding." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"formula", topic:"Mechanical Properties of Solids",
+  title:"Elasticity",
+  rows:[
+    ["Stress / strain","stress = F/A ; strain = Δl/l"],
+    ["Young's modulus","Y = (F·l)/(A·Δl)"],
+    ["Bulk modulus","B = −P/(ΔV/V)"],
+    ["Compressibility","1/B"],
+    ["Poisson's ratio","σ = lateral strain / longitudinal strain (0 to 0.5)"],
+    ["Elastic potential energy","U = ½ × stress × strain × volume"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Magnetism & Matter",
+  title:"Dia, para, ferro — just count unpaired electrons",
+  body:"<b>Dia</b>magnetic: <i>no</i> unpaired electrons, weakly <b>repelled</b> (“<b>Dia</b> = <b>D</b>enies the field”). <b>Para</b>magnetic: some unpaired electrons, weakly attracted. <b>Ferro</b>magnetic: many aligned unpaired electrons in domains, strongly attracted and it stays magnetised. Work out the electron configuration and the class follows without memorising lists." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Modern Physics",
+  title:"Bohr's orbit powers: 2, −1, −2, 3",
+  body:"Everything in the hydrogen atom is a power of n: radius <b>rₙ ∝ n²</b>, speed <b>vₙ ∝ 1/n</b>, energy <b>Eₙ ∝ −1/n²</b>, time period <b>Tₙ ∝ n³</b>. Memorise the sequence “<b>2, −1, −2, 3</b>” and you can answer any “what happens when the electron jumps to n = 3” question by ratio alone." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Modern Physics",
+  title:"Photoelectric effect — more bullets versus faster bullets",
+  body:"<b>Intensity</b> controls how <i>many</i> photons arrive, so it changes the <b>number</b> of photoelectrons (the current) — never their energy. <b>Frequency</b> controls how <i>hard</i> each photon hits, so it changes the <b>maximum kinetic energy</b> — never the count. Brighter light means more bullets; bluer light means faster bullets." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Gravitation",
+  title:"g is maximum at the surface — it falls off in <i>both</i> directions",
+  body:"Go up and g drops as 1/(R+h)²; go <i>down</i> and it drops too, linearly, reaching <b>zero at the centre</b> of the Earth. So the surface is the maximum, not the starting point of a one-way decline — the standard trap in this chapter. Also: a satellite is weightless because it is in free fall, not because gravity is absent." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Current Electricity",
+  title:"Sanity-check any parallel combination",
+  body:"The equivalent resistance of a parallel network is <b>always smaller than the smallest branch</b> — if your answer is larger, you have used the series formula. Conversely a series total is always larger than the largest resistor. Two equal resistors R in parallel give exactly R/2; n equal ones give R/n." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"SHM & Waves",
+  title:"Sound is fastest in solids — the opposite of light",
+  body:"Sound needs a medium and travels <b>solid &gt; liquid &gt; gas</b> (tighter bonds pass the disturbance faster), while light is <b>fastest in vacuum</b> and slows in denser media. The two behave in opposite directions, which is why questions pair them. Sound cannot travel through vacuum at all." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"SHM & Waves",
+  title:"Beats: you hear the difference, not the average",
+  body:"Two close frequencies produce beats at <b>|f₁ − f₂|</b> per second — the <i>difference</i>. Loading a tuning fork with wax <b>lowers</b> its frequency, and that is the standard way questions ask you to decide which fork was which: see whether the beat count rises or falls after loading." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Optics",
+  title:"Blue sky and red sunset are the same law, seen from two angles",
+  body:"Rayleigh scattering goes as <b>1/λ⁴</b>, so blue scatters roughly 16 times more than red. Looking <i>away</i> from the sun you see the scattered blue — a blue sky. Looking <i>through</i> a long slanted path at sunset, the blue has all been scattered out and only red survives. One formula, two everyday facts." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Optics",
+  title:"Rainbow angles: 42 and 51, with the colours flipped",
+  body:"The <b>primary</b> rainbow sits at about <b>42°</b> (one internal reflection) with <b>red on the outside</b>. The <b>secondary</b> sits at about <b>51°</b> (two internal reflections), is fainter, and has its colours <b>reversed</b> — red on the inside. Each extra reflection costs brightness and flips the order." },
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Electrostatics",
+  title:"Dielectric inserted: ask “battery connected or disconnected?” first",
+  body:"This one question decides everything. <b>Battery still connected</b> → V is fixed, so C rises by K, and Q and energy rise by K. <b>Battery disconnected</b> → Q is fixed, so C rises by K while V and energy <b>fall</b> by K. Students who skip this step get exactly half of these questions wrong." },
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Alternating Current",
+  title:"At resonance the voltage across L or C can exceed the supply",
+  body:"It looks impossible, but V_L and V_C are individually <b>Q times the source voltage</b> and merely cancel each other because they are 180° out of phase. So a 10 V supply can put hundreds of volts across the inductor. Kirchhoff is not violated — the two large voltages sum to zero." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Units & Measurement",
+  title:"Anything inside sin, log or an exponent must be dimensionless",
+  body:"You can never take the logarithm of a length or the sine of a time. So in any expression like e^(−kt) or sin(ωt), the whole argument must cancel to a pure number — which instantly gives you the dimensions of k or ω without any other reasoning. A fast way to find an unknown constant's units." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Work, Energy & Power",
+  title:"The “one-half club”",
+  body:"A ½ appears wherever energy is quadratic in its variable: KE = <b>½</b>mv², spring PE = <b>½</b>kx², capacitor energy = <b>½</b>CV², inductor energy = <b>½</b>LI², and SHM energy = <b>½</b>mω²A². If you write one of these without the ½, the pattern will catch you." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Fluid Mechanics",
+  title:"In a fluid, the heavier ball really does fall faster",
+  body:"In vacuum every body falls at the same rate, but terminal velocity goes as <b>r²(ρ − σ)</b>, so a denser or larger sphere settles faster in a liquid. This is why the vacuum result and the fluid result feel contradictory — they are different regimes, and questions deliberately blur them." },
+
 /* ==================================================================
    CHEMISTRY — MNEMONICS
    ================================================================== */
@@ -828,6 +901,88 @@ const TRICKS = [
     ["Ellingham diagram","tells which reducing agent works at what temperature"],
   ] },
 
+/* -------- CHEMISTRY — unorthodox hooks, chapter by chapter (11-12) -------- */
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Atomic Structure",
+  title:"The (n + l) rule is the real law behind the diagonal arrow",
+  body:"Orbitals fill in order of increasing <b>(n + l)</b>; when two tie, the one with the <b>lower n</b> fills first. Check 4s (4+0 = 4) against 3d (3+2 = 5) — 4s wins, which is the whole reason the d-block starts where it does. Learn the rule and you never need to redraw the diagonal chart." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Periodic Table",
+  title:"Two ionisation-energy anomalies: Be &gt; B and N &gt; O",
+  body:"Ionisation energy rises across a period, but it <i>dips</i> twice. <b>Be &gt; B</b> because boron's electron leaves a higher-energy p orbital. <b>N &gt; O</b> because nitrogen is exactly half-filled (2p³) and oxygen must pay to remove an electron from a <i>paired</i> orbital. Same two reasons repeat in period 3 (Mg &gt; Al, P &gt; S)." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Periodic Table",
+  title:"Chlorine beats fluorine on electron gain enthalpy",
+  body:"Fluorine <i>should</i> win by the trend, but it does not: <b>Cl (−349) is more negative than F (−328 kJ/mol)</b>. Fluorine's 2p shell is so small that the incoming electron meets heavy repulsion. The same small-size effect makes O less negative than S. Whenever a period-2 element breaks a trend, crowding is usually why." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Periodic Table",
+  title:"Gallium is <i>smaller</i> than aluminium",
+  body:"Going down group 13 the size should grow, but Ga (135 pm) is smaller than Al (143 pm) — ten poorly shielding 3d electrons sit in between and pull the outer shell in. The same effect makes <b>Zr and Hf almost identical in size</b> (lanthanoid contraction), which is why those two are so hard to separate chemically." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Periodic Table",
+  title:"Diagonal relationships — Li-Mg, Be-Al, B-Si",
+  body:"The first element of a group often resembles the <i>second</i> element of the next group more than its own family, because size and charge density happen to match on the diagonal. So <b>Li behaves like Mg</b>, <b>Be like Al</b>, and <b>B like Si</b>. Any “which pair shows a diagonal relationship” question is answered by this trio." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"s-Block & p-Block",
+  title:"Inert pair effect — heavy elements hoard their s electrons",
+  body:"Down groups 13-15, the outer <b>ns² pair becomes reluctant to bond</b>, so the <i>lower</i> oxidation state grows more stable: Tl⁺ &gt; Tl³⁺, <b>Pb²⁺ &gt; Pb⁴⁺</b>, Bi³⁺ &gt; Bi⁵⁺. That is why PbO₂ and BiF₅ are strong oxidising agents — they are desperate to drop back down." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Chemical Bonding",
+  title:"Bond angles shrink as lone pairs pile on: 109.5 → 107 → 104.5",
+  body:"All three are sp³, and each lone pair squeezes the bond angle further: <b>CH₄ 109.5°</b> (no lone pair), <b>NH₃ 107°</b> (one), <b>H₂O 104.5°</b> (two). Counting lone pairs predicts the whole sequence — you never need to memorise the individual numbers." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Chemical Bonding",
+  title:"Hydrogen bonding explains ice floating and NH₃ boiling high",
+  body:"Only <b>N, O and F</b> are small and electronegative enough to hydrogen bond. Two consequences worth carrying: <b>ice is less dense than water</b> (H-bonds hold an open cage, so it floats), and <b>NH₃ boils above PH₃</b> despite being lighter. Whenever a boiling point breaks the molecular-mass trend, suspect H-bonding." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Chemical Bonding",
+  title:"Ortho-nitrophenol is steam volatile, para is not",
+  body:"The <i>ortho</i> isomer folds its OH onto the neighbouring NO₂ and hydrogen bonds to <b>itself</b> (intramolecular), so its molecules barely stick together and it distils over in steam. The <i>para</i> isomer bonds to its <b>neighbours</b> (intermolecular), giving a much higher boiling point. Same formula, opposite behaviour — a favourite comparison." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Thermodynamics",
+  title:"Exothermic does not mean spontaneous",
+  body:"Only <b>ΔG</b> decides spontaneity, never ΔH alone — melting ice is endothermic yet spontaneous above 0 °C because TΔS wins. Read the sign pair: ΔH negative with ΔS positive is spontaneous at <i>all</i> temperatures, the reverse never, and the mixed cases flip at <b>T = ΔH/ΔS</b>." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Equilibrium",
+  title:"HF is the weak one — acid strength runs HI &gt; HBr &gt; HCl &gt; HF",
+  body:"Electronegativity suggests HF should be strongest, but acid strength is decided by <b>bond strength</b>, not polarity: the H-F bond is far too strong to break, so HF is a <i>weak</i> acid while the other three are strong. Down any group, weaker bonds mean stronger acids." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Reaction Mechanisms",
+  title:"Always check whether the carbocation can rearrange",
+  body:"If a 1° or 2° carbocation forms next to a carbon that could give it a <b>hydride or methyl shift</b> to a more stable 3° position, it will — and the product comes from the <i>rearranged</i> cation, not the obvious one. Examiners build entire questions on this. Any SN1/E1 answer that ignores a possible shift is usually the trap option." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Hydrocarbons",
+  title:"Benzene refuses to decolourise bromine water",
+  body:"Alkenes and alkynes decolourise bromine water instantly; <b>benzene does not</b>, because breaking its aromatic sextet costs more than the addition gains. That single test distinguishes unsaturation from aromaticity. Aromatic rings prefer <b>substitution</b>, which preserves the ring." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Hydrocarbons",
+  title:"Hückel's rule — count for 4n + 2",
+  body:"A ring is <b>aromatic</b> if it is planar, fully conjugated and holds <b>4n + 2</b> π electrons (2, 6, 10…). With 4n electrons (4, 8…) it is <b>anti</b>aromatic and unstable; if it cannot stay planar or conjugated it is merely non-aromatic. Benzene has 6, so n = 1 — count π electrons first and the classification is mechanical." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Chemistry in Everyday Life",
+  title:"Drug classes by what they end in and what they do",
+  body:"<b>Antacids</b> neutralise stomach acid (ranitidine blocks histamine receptors). <b>Antihistamines</b> treat allergy. <b>Analgesics</b> kill pain (aspirin is also an antiplatelet). <b>Antibiotics</b> kill bacteria — <i>never</i> viruses. <b>Antiseptics</b> go on living tissue, <b>disinfectants</b> on inanimate surfaces; the same phenol solution is one or the other purely by concentration." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"formula", topic:"Chemistry in Everyday Life",
+  title:"Everyday chemistry quick reference",
+  rows:[
+    ["Antacid","Mg(OH)₂, NaHCO₃, ranitidine (Zantac)"],
+    ["Antiseptic vs disinfectant","living tissue vs inanimate surfaces (dose differs)"],
+    ["Antifertility drug","norethindrone + ethynylestradiol"],
+    ["Artificial sweeteners","aspartame (unstable when cooked), saccharin, sucralose"],
+    ["Soap vs detergent","soap fails in hard water; detergent does not"],
+    ["Broad spectrum antibiotic","chloramphenicol, ampicillin"],
+    ["Tranquilizer","equanil, diazepam — treats stress and anxiety"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"d & f-Block",
+  title:"Why transition metals are coloured — and when they are not",
+  body:"Colour comes from <b>d-d transitions</b>, which need a <i>partially</i> filled d subshell. So Sc³⁺ (d⁰) and Zn²⁺ (d¹⁰) are <b>colourless</b>, while Cu²⁺ (d⁹) is blue. The same rule governs magnetism: no unpaired d electrons means diamagnetic. Count d electrons first and both properties follow." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Coordination Compounds",
+  title:"Strong field or weak field decides everything else",
+  body:"Place the ligand on the spectrochemical series — <b>CN⁻ &gt; NO₂⁻ &gt; en &gt; NH₃ &gt; H₂O &gt; OH⁻ &gt; F⁻ &gt; Cl⁻ &gt; Br⁻ &gt; I⁻</b>. Strong field ligands pair electrons up, giving <b>low spin, inner orbital, often diamagnetic</b> complexes; weak field ones leave them unpaired, giving high spin and paramagnetism. One lookup answers hybridisation, magnetism and colour together." },
+
 /* ==================================================================
    MATHS — MNEMONICS
    ================================================================== */
@@ -1152,6 +1307,64 @@ const TRICKS = [
 { exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Sequences & Series",
   title:"Pick terms symmetrically about the middle",
   body:"For three terms in AP take <b>a−d, a, a+d</b>; for four take a−3d, a−d, a+d, a+3d. In GP take <b>a/r, a, ar</b>. The symmetry makes the sum collapse to a single unknown, turning a two-equation problem into a one-line one." },
+
+/* ---------- MATHS — unorthodox hooks, chapter by chapter (11-12) ---------- */
+
+{ exam:["JEE"], subject:"Maths", cls:"9-10", type:"shortcut", topic:"Trigonometry",
+  title:"The five-finger trig table",
+  body:"Hold up one hand for 0°, 30°, 45°, 60°, 90°. Count the fingers <i>below</i> the one you want, call it n, and <b>sin = √n / 2</b>. So 30° has one finger below → √1/2 = ½; 60° has three → √3/2. For cosine, count from the other end. The whole table lives in your hand — no memorising." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Trigonometry",
+  title:"Allied angles — 90 and 270 flip the function, 180 and 360 do not",
+  body:"For sin(90° ± θ) or anything built on <b>90° and 270°</b>, the function <b>changes</b> (sin ↔ cos, tan ↔ cot). For <b>180° and 360°</b>, the function <b>stays</b>. Get the sign from ASTC by asking which quadrant the angle lands in. Two rules replace a page of formulas — and this is where most sign errors in trigonometry actually come from." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Quadratic Equations",
+  title:"If a + b + c = 0, then x = 1 is a root — free of charge",
+  body:"Substituting x = 1 into ax² + bx + c gives exactly a + b + c, so if the coefficients sum to zero, <b>1 is a root</b> and the other is <b>c/a</b>. Similarly if a − b + c = 0 then <b>x = −1</b> is a root. Always add the coefficients before reaching for the quadratic formula — it factorises a surprising number of exam quadratics instantly." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Complex Numbers",
+  title:"Multiplying by i is a 90° rotation",
+  body:"Stop reading i as “imaginary” and read it as “<b>turn left</b>”. Multiplying by i rotates a point 90° anticlockwise in the Argand plane, so i² = −1 is just two quarter-turns landing you on the negative axis. Powers of i therefore cycle with period 4: <b>i, −1, −i, 1</b> — divide the exponent by 4 and use the remainder." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Complex Numbers",
+  title:"The nth roots of unity always sum to zero",
+  body:"They sit equally spaced on the unit circle, so as vectors they cancel perfectly: <b>1 + ω + ω² + … + ωⁿ⁻¹ = 0</b>. For cube roots this gives the two facts every question uses — <b>1 + ω + ω² = 0</b> and <b>ω³ = 1</b> — which reduce almost any ω expression to a number in one line." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Probability",
+  title:"“At least one” means take the complement",
+  body:"Never add up the cases for “at least one”. Compute <b>P(at least one) = 1 − P(none)</b> — one calculation instead of many. The same move handles “at least two” by subtracting the none and exactly-one cases. If a probability question mentions “at least”, reach for the complement before anything else." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Sequences & Series",
+  title:"AM ≥ GM finds minima without calculus",
+  body:"To minimise something like x + 1/x for x &gt; 0, apply AM ≥ GM: (x + 1/x)/2 ≥ √(x·1/x) = 1, so the minimum is <b>2</b>, reached when the terms are equal (x = 1). This kills a whole class of maxima-minima problems with no differentiation at all — and equality-when-terms-are-equal tells you <i>where</i> it occurs." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Matrices & Determinants",
+  title:"Spot a zero determinant before expanding",
+  body:"|A| = 0 immediately if any row or column is <b>all zeros</b>, if two rows/columns are <b>identical</b>, or if one is a <b>multiple</b> of another. Also worth carrying: A·adj(A) = <b>|A|·I</b>, |adj A| = |A|ⁿ⁻¹, and a matrix is invertible only when |A| ≠ 0. Scan for these before doing any expansion." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Binomial Theorem",
+  title:"Middle term, and where the coefficients peak",
+  body:"(a + b)ⁿ has <b>n + 1</b> terms. If n is <b>even</b> there is one middle term, the (n/2 + 1)th; if <b>odd</b> there are two. The binomial coefficients are largest in the middle, so “greatest coefficient” questions are answered by locating the middle term rather than by computing anything." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Mathematical Reasoning",
+  title:"Negating “all” gives “some not” — and the contrapositive is the useful one",
+  body:"The negation of “<b>all</b> P are Q” is “<b>some</b> P are not Q” (not “no P are Q”), and the negation of “p and q” is “not p <b>or</b> not q”. For implications, remember the <b>contrapositive</b> (~q → ~p) is always equivalent to p → q, while the converse (q → p) is <i>not</i> — that single distinction carries most of this chapter." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Linear Programming",
+  title:"The optimum always sits at a corner",
+  body:"For a bounded feasible region, the maximum and minimum of a linear objective always occur at a <b>vertex</b>. So you never search the interior: find the corner points, evaluate the objective at each, and pick the best. If the region is unbounded, check whether the optimum actually exists before answering." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Integration",
+  title:"When stuck, add and subtract, or multiply and divide",
+  body:"Many integrals crack open by adding and subtracting the same term to force a known form, or by dividing numerator and denominator by x² to set up a (x ± 1/x) substitution. For rational functions, try <b>partial fractions</b>; for √(a² − x²) forms, substitute a trig function. Recognising the <i>form</i> matters far more than raw manipulation." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Permutations & Combinations",
+  title:"Tie together what must stay together",
+  body:"If certain objects must sit next to each other, <b>bundle them as one unit</b>, arrange the bundle with the rest, then multiply by the internal arrangements of the bundle. For “never together”, compute total minus always-together. Circular arrangements of n objects give <b>(n−1)!</b>, halved again if reflections count as identical (a necklace)." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Mathematical Induction",
+  title:"Induction is dominoes: one falls, and each knocks the next",
+  body:"Two steps only — show it is true for <b>n = 1</b> (push the first domino), then assume it for <b>n = k</b> and prove it for <b>n = k + 1</b> (each knocks the next). The proof is worthless without both. In the inductive step you must actually <i>use</i> the assumption; if you never invoke P(k), you have not done induction." },
 
 /* ==================================================================
    BIOLOGY — MNEMONICS
@@ -1518,6 +1731,87 @@ const TRICKS = [
 { exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Human Excretion",
   title:"Ammonotelic, ureotelic, uricotelic — how much water can you spare?",
   body:"<b>Ammonotelic</b> — bony fish and aquatic amphibians excrete ammonia (most toxic, needs the most water, but water is free). <b>Ureotelic</b> — mammals and adult amphibians excrete urea. <b>Uricotelic</b> — birds, reptiles and insects excrete uric acid (least toxic, almost no water lost, and lightest for flight)." },
+
+/* --------- BIOLOGY — unorthodox hooks, chapter by chapter (11-12) --------- */
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Biological Classification",
+  title:"Whittaker's five kingdoms — “My Pretty Face Points Ahead”",
+  body:"<b>M</b>onera, <b>P</b>rotista, <b>F</b>ungi, <b>P</b>lantae, <b>A</b>nimalia. He sorted them on five criteria: cell structure, body organisation, nutrition, reproduction and phylogeny. Monera alone is <b>prokaryotic</b>; everything else is eukaryotic — that single split is the most asked point in the chapter." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Biological Classification",
+  title:"Three cell walls, three different materials",
+  body:"<b>Bacteria</b> — peptidoglycan (murein). <b>Fungi</b> — chitin, the same stuff as an insect's shell. <b>Plants</b> — cellulose. And the exception worth memorising: <b>Mycoplasma has no cell wall at all</b> and is the smallest known living cell, which is exactly why penicillin (a cell-wall inhibitor) cannot touch it." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Biological Classification",
+  title:"A virus carries DNA <i>or</i> RNA — never both",
+  body:"That one rule answers most virus questions. Plant viruses are usually <b>RNA</b> (TMV), while bacteriophages are usually <b>DNA</b>. Viroids are naked RNA with no protein coat; prions are infectious <i>protein</i> with no nucleic acid at all. Outside a host a virus is inert crystal — the reason it sits on the border of living and non-living." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Molecular Basis of Inheritance",
+  title:"Stop codons — “U Are Annoying, U Are Gone, U Go Away”",
+  body:"<b>UAA, UAG, UGA</b> are the three stop codons; <b>AUG</b> is both the start codon and the code for methionine. Of the 64 codons, <b>61 code for amino acids</b> and 3 stop — which is why the code is called degenerate (several codons per amino acid) but never ambiguous (one codon never means two things)." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Genetics",
+  title:"Barr bodies = number of X chromosomes minus one",
+  body:"A normal female (XX) has <b>1</b> Barr body, a normal male (XY) has <b>0</b>, Klinefelter (XXY) has <b>1</b>, and Turner (XO) has <b>0</b>. Count the X's and subtract one. Pair it with the three classic disorders: <b>Down = trisomy 21</b>, <b>Klinefelter = XXY</b> (male, sterile), <b>Turner = XO</b> (female, sterile)." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Genetics",
+  title:"Why colour blindness and haemophilia hit men hardest",
+  body:"Both are <b>X-linked recessive</b>, and a male has only <i>one</i> X — so a single faulty allele shows up with nothing to mask it, while a female needs two. This is why such traits pass from carrier mother to son and skip the daughters, and why the father can never pass them to a son (he gives the Y)." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Sexual Reproduction in Plants",
+  title:"Double fertilisation, and why coconut water is endosperm",
+  body:"Two fusions happen: one male gamete fuses with the egg (<b>syngamy</b> → 2n zygote), the other with two polar nuclei (<b>triple fusion</b> → <b>3n endosperm</b>). It is unique to angiosperms. The memorable payoff: <b>coconut water is liquid endosperm</b> and the white kernel is its solid form — so you have eaten a triploid tissue." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"formula", topic:"Sexual Reproduction in Plants",
+  title:"Ploidy of parts in a flowering plant",
+  rows:[
+    ["Egg cell / zygote","n / 2n"],
+    ["Endosperm","3n (triple fusion)"],
+    ["Nucellus and integuments","2n (maternal)"],
+    ["Pollen grain / generative cell","n"],
+    ["Embryo sac","n (7 cells, 8 nuclei)"],
+    ["Perisperm","2n (residual nucellus)"],
+  ] },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Human Reproduction",
+  title:"The left kidney sits higher than the right",
+  body:"The liver occupies the upper right of the abdomen and pushes the <b>right kidney down</b>, so the left is higher — the kind of odd asymmetry NEET likes. Two companions of the same sort: the <b>left lung has 2 lobes</b> while the right has 3 (the heart takes the space), and the <b>left ventricle wall is thickest</b> because it pumps to the whole body." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Body Fluids & Circulation",
+  title:"Blood is 55% plasma, 45% cells — and plasma is 90% water",
+  body:"Of the plasma, about 90-92% is water and 6-8% proteins — <b>albumin</b> (osmotic balance), <b>globulin</b> (immunity) and <b>fibrinogen</b> (clotting). Remove the clotting factors and plasma becomes <b>serum</b>. That definition — serum = plasma minus fibrinogen — is asked far more often than it is taught." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"formula", topic:"Body Fluids & Circulation",
+  title:"Blood composition and clotting",
+  rows:[
+    ["Plasma / formed elements","55% / 45%"],
+    ["RBC count","5-5.5 million per mm³ (no nucleus in mammals)"],
+    ["RBC lifespan","120 days"],
+    ["WBC count","6000-8000 per mm³"],
+    ["Platelet count","1.5-3.5 lakh per mm³"],
+    ["Serum","plasma without clotting factors"],
+    ["Clotting cascade","thromboplastin → prothrombin to thrombin → fibrinogen to fibrin"],
+  ] },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Organisms & Populations",
+  title:"r-selected breed fast, K-selected breed well",
+  body:"<b>r-selected</b> species produce many small offspring with no parental care and show exponential, boom-and-bust growth (insects, weeds). <b>K-selected</b> species produce few large offspring with heavy care and sit near the carrying capacity K (elephants, humans). The letters are the growth-equation symbols: r for rate, K for carrying capacity." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Organisms & Populations",
+  title:"Naming interactions by who gains and who loses",
+  body:"Score each partner + , − or 0. <b>Mutualism</b> (+,+), <b>competition</b> (−,−), <b>predation</b> and <b>parasitism</b> (+,−), <b>commensalism</b> (+,0), <b>amensalism</b> (−,0). Predation kills quickly, parasitism does not — that is the only difference between the two (+,−) cases, and it is the usual discriminator." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Mineral Nutrition",
+  title:"Macronutrient or micronutrient is decided by quantity, not importance",
+  body:"<b>Macronutrients</b> (C, H, O, N, P, K, Ca, Mg, S) are needed above 10 mmol/kg dry weight; <b>micronutrients</b> (Fe, Mn, Zn, Cu, B, Mo, Cl, Ni) below it — but a plant dies without either. Nitrogen is the element required in the <b>greatest</b> amount, and <b>molybdenum</b> in the least." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Environmental Issues",
+  title:"BOD high means water is dirty",
+  body:"<b>Biochemical Oxygen Demand</b> measures how much oxygen microbes need to break down the organic matter in water — so a <b>high BOD means heavy pollution</b>. Pair it with eutrophication: nutrients feed algal blooms, the blooms die, decomposers consume the oxygen, and the fish suffocate. The chain is the answer to most water-pollution questions." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Structural Organisation in Animals",
+  title:"Four tissue types, one job each",
+  body:"<b>Epithelial</b> — covers and lines (protection, secretion). <b>Connective</b> — binds and supports, and is the only one with abundant matrix (blood counts as connective tissue, which surprises people). <b>Muscular</b> — contracts. <b>Neural</b> — conducts impulses. If a question asks which tissue blood belongs to, the answer is connective." },
 
 { exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Human Health & Disease",
   title:"Active vs passive, innate vs acquired immunity",
