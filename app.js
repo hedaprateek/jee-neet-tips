@@ -1,6 +1,15 @@
 (function () {
   'use strict';
 
+  /* =====================================================================
+     CONFIG — editable site strings. Change them here, not in the markup.
+     ===================================================================== */
+  const CONFIG = {
+    siteUrl: 'hedaprateek.github.io/jee-neet-tips',
+    sheetTitle: 'JEE / NEET Revision Sheet',
+    credit: 'Stunity Tech — by Prateek',
+  };
+
   /* ------------------------------------------------------------------ state
      Every dimension is multi-select: an empty set means "no restriction".
      Values OR together within a dimension and AND across dimensions.        */
@@ -387,32 +396,33 @@
     return sel.length ? sel : visibleTips();
   }
 
+  /* The sheet is meant to be carried and memorised, so it is built for density:
+     one compact header line, subject headings only (chapter headings cost a
+     line each and the titles already carry that context), and each tip's title
+     running inline with its text rather than sitting on its own line. */
   function buildPrintSheet() {
     const items = sheetTips();
     const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 
     let html = `<div class="ps-head">
-      <h1>JEE / NEET Revision Sheet</h1>
-      <p>${items.length} tip${items.length === 1 ? '' : 's'} · ${today} · hedaprateek.github.io/jee-neet-tips</p>
+      <b>${CONFIG.sheetTitle}</b> · ${items.length} tip${items.length === 1 ? '' : 's'} · ${today} · ${CONFIG.siteUrl}
     </div>`;
 
     groupForSheet(items).forEach(({ subject, chapters }) => {
       html += `<h2 class="ps-subject">${subject}</h2>`;
-      chapters.forEach(([chapter, tips]) => {
-        html += `<h3 class="ps-chapter">${chapter}</h3>`;
+      // Tips stay ordered by chapter, so related ones remain adjacent.
+      chapters.forEach(([, tips]) => {
         tips.forEach((t) => {
-          const body = t.type === 'formula' && t.rows
-            ? `<table class="ps-rows">${t.rows
-                .map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>`
-            : `<p class="ps-body">${t.body}</p>`;
-          html += `<div class="ps-tip">
-            <div class="ps-title"><span class="ps-tick"></span>${t.title}</div>
-            ${body}
-          </div>`;
+          html += t.type === 'formula' && t.rows
+            ? `<div class="ps-tip"><span class="ps-tick"></span><b class="ps-title">${t.title}</b>` +
+              `<table class="ps-rows">${t.rows
+                .map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table></div>`
+            : `<div class="ps-tip"><span class="ps-tick"></span><b class="ps-title">${t.title}</b> ${t.body}</div>`;
         });
       });
     });
 
+    html += `<div class="ps-foot">${CONFIG.credit}</div>`;
     el.printSheet.innerHTML = html;
   }
 
@@ -434,39 +444,38 @@
     const items = sheetTips();
     const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
     const lines = [
-      'JEE / NEET REVISION SHEET',
-      `${items.length} tip${items.length === 1 ? '' : 's'}  |  ${today}`,
-      'hedaprateek.github.io/jee-neet-tips',
+      `${CONFIG.sheetTitle.toUpperCase()} · ${items.length} tip${items.length === 1 ? '' : 's'} · ${today}`,
+      CONFIG.siteUrl,
       '',
     ];
 
     groupForSheet(items).forEach(({ subject, chapters }) => {
-      lines.push('='.repeat(58), subject.toUpperCase(), '='.repeat(58), '');
-      chapters.forEach(([chapter, tips]) => {
-        lines.push(`--- ${chapter} ---`, '');
+      lines.push(`${subject.toUpperCase()}`, '-'.repeat(subject.length), '');
+      chapters.forEach(([, tips]) => {
         tips.forEach((t) => {
-          // Titles can be long (a mnemonic sentence), so wrap them too.
-          wrap(`[${TYPE_TAG[t.type].toUpperCase()}] ${t.title}`, 76, '    ', '')
-            .forEach((l) => lines.push(l));
+          // Titles can be long (a mnemonic sentence), so wrap them too — with a
+          // hanging indent under the bullet, so the body below stays distinct.
+          wrap(t.title, 76, '    ', '  * ').forEach((l) => lines.push(l));
           if (t.type === 'formula' && t.rows) {
             const labels = t.rows.map((r) => toPlainText(r[0]));
             const pad = Math.min(Math.max(...labels.map((l) => l.length)), 34);
             t.rows.forEach((r, i) => {
               const value = toPlainText(r[1]);
-              const head = `   ${labels[i].padEnd(pad)}  =  `;
+              const head = `     ${labels[i].padEnd(pad)}  =  `;
               // Keep the label and value on one line when it fits; wrap long
               // values under a hanging indent rather than overrunning.
               if ((head + value).length <= 78) lines.push(head + value);
-              else wrap(value, 78, ' '.repeat(pad + 8), head).forEach((l) => lines.push(l));
+              else wrap(value, 78, ' '.repeat(pad + 10), head).forEach((l) => lines.push(l));
             });
           } else {
-            wrap(t.body, 76, '   ').forEach((l) => lines.push(l));
+            wrap(t.body, 76, '     ').forEach((l) => lines.push(l));
           }
           lines.push('');
         });
       });
     });
 
+    lines.push('', CONFIG.credit);
     return lines.join('\n');
   }
 
