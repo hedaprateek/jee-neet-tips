@@ -296,6 +296,146 @@ const TRICKS = [
     ["Capillary rise","h = 2S cosθ / rρg"],
   ] },
 
+/* ------------------- PHYSICS — chapters added later ------------------- */
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Alternating Current",
+  title:"“CIVIL” — who leads in an AC circuit",
+  body:"<b>C</b>: <b>I</b> leads <b>V</b> — in a <i>capacitor</i>, current leads voltage by 90°. <b>V</b> leads <b>I</b>: <b>L</b> — in an <i>inductor</i>, voltage leads current by 90°. Read the word as “CIV-IL” and both phase relationships fall out. In a pure resistor they stay in phase." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Alternating Current",
+  title:"Everything about resonance in one condition",
+  body:"At resonance X_L = X_C, and every other quantity follows: impedance is <b>minimum</b> (Z = R), current is <b>maximum</b>, the phase angle is zero and the power factor is <b>1</b>. Resonant frequency f = 1/(2π√(LC)). Spot “X_L = X_C” in a question and you can answer it without computing anything." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"formula", topic:"Alternating Current",
+  title:"AC circuits",
+  rows:[
+    ["RMS values","I_rms = I₀/√2 ; V_rms = V₀/√2"],
+    ["Inductive / capacitive reactance","X_L = ωL ; X_C = 1/ωC"],
+    ["Impedance of a series LCR","Z = √(R² + (X_L − X_C)²)"],
+    ["Phase angle","tanφ = (X_L − X_C)/R"],
+    ["Average power","P = V_rms·I_rms·cosφ"],
+    ["Resonant frequency","f₀ = 1/(2π√(LC))"],
+    ["Quality factor","Q = (1/R)√(L/C)"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Collisions & Momentum",
+  title:"Coefficient of restitution — the two ends of the scale",
+  body:"e = <b>1</b> is perfectly <i>elastic</i> (kinetic energy conserved); e = <b>0</b> is perfectly <i>inelastic</i> (bodies stick together, maximum KE lost). Everything real sits between. Momentum is conserved in <b>every</b> collision — only kinetic energy is negotiable, which is the distinction questions hinge on." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Collisions & Momentum",
+  title:"Equal masses in an elastic collision simply swap velocities",
+  body:"For a one-dimensional elastic collision between equal masses, the two bodies <b>exchange velocities</b> — so if one was at rest, it moves off with the other's speed while the first stops dead. Recognising this saves solving the momentum and energy equations together." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"formula", topic:"Collisions & Momentum",
+  title:"Momentum, impulse and collisions",
+  rows:[
+    ["Momentum","p = mv"],
+    ["Impulse","J = FΔt = Δp"],
+    ["Coefficient of restitution","e = (v₂ − v₁)/(u₁ − u₂)"],
+    ["Elastic collision (final velocities)","v₁ = ((m₁−m₂)u₁ + 2m₂u₂)/(m₁+m₂)"],
+    ["Perfectly inelastic (common velocity)","v = (m₁u₁ + m₂u₂)/(m₁+m₂)"],
+    ["Height after n bounces","hₙ = h·e^(2n)"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Wave Optics",
+  title:"Interference, diffraction, polarisation — what each one proves",
+  body:"<b>Interference</b> and <b>diffraction</b> prove light is a <i>wave</i>; <b>polarisation</b> proves it is a <b>transverse</b> wave (sound, being longitudinal, cannot be polarised). The photoelectric effect is the one that proves the particle nature — a standard “which phenomenon shows what” question." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Wave Optics",
+  title:"YDSE — read the fringe width as a ratio",
+  body:"Since β = λD/d, you rarely need to compute it: doubling D doubles β, halving d doubles β, and immersing the setup in a medium of refractive index n <i>divides</i> β by n (because λ shrinks). Handle these as proportions and the arithmetic disappears." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"formula", topic:"Wave Optics",
+  title:"Interference, diffraction and polarisation",
+  rows:[
+    ["Fringe width (YDSE)","β = λD/d"],
+    ["Path difference — bright / dark","Δ = nλ ; Δ = (2n−1)λ/2"],
+    ["Intensity of two sources","I = I₁ + I₂ + 2√(I₁I₂)cosφ"],
+    ["Single-slit first minimum","a sinθ = λ"],
+    ["Malus's law","I = I₀cos²θ"],
+    ["Brewster's angle","tan i_p = n"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Nuclei",
+  title:"Binding energy per nucleon peaks at iron",
+  body:"The curve rises to about <b>8.8 MeV at Fe-56</b> and falls away on both sides. That single fact explains both processes: light nuclei <i>below</i> the peak release energy by <b>fusion</b>, heavy nuclei <i>above</i> it release energy by <b>fission</b> — because both move toward the more tightly bound middle." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"formula", topic:"Nuclei",
+  title:"Nuclear physics",
+  rows:[
+    ["Nuclear radius","R = R₀A^(1/3), R₀ = 1.2 fm"],
+    ["Mass defect","Δm = [Zm_p + (A−Z)m_n] − M_nucleus"],
+    ["Binding energy","B.E. = Δm·c² (1 u = 931.5 MeV)"],
+    ["Decay law","N = N₀e^(−λt)"],
+    ["Half-life and mean life","t₁/₂ = 0.693/λ ; τ = 1/λ"],
+    ["Activity","A = λN"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"EM Waves",
+  title:"E, B and the direction of travel are mutually perpendicular",
+  body:"In an electromagnetic wave <b>E ⊥ B ⊥ direction of propagation</b>, and the wave travels along <b>E × B</b>. The two fields are in phase, and their magnitudes are locked by <b>E₀ = cB₀</b> — so the electric field is numerically far larger, which is why light interacts with matter mainly through E." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"formula", topic:"EM Waves",
+  title:"Electromagnetic waves",
+  rows:[
+    ["Speed of light","c = 1/√(μ₀ε₀) = 3×10⁸ m/s"],
+    ["Field ratio","E₀/B₀ = c"],
+    ["Speed in a medium","v = c/n"],
+    ["Intensity","I = ½ε₀E₀²c"],
+    ["Momentum delivered (absorbed)","p = U/c"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Thermal Properties",
+  title:"Three modes of heat transfer, and which needs what",
+  body:"<b>Conduction</b> needs a medium and no bulk movement (solids). <b>Convection</b> needs a medium <i>and</i> bulk movement (fluids). <b>Radiation</b> needs <b>no medium at all</b> — which is why sunlight crosses empty space. That last point is the one most often tested." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Thermal Properties",
+  title:"Calorimetry — heat lost equals heat gained",
+  body:"Set heat lost by the hot body = heat gained by the cold body and solve for the unknown. Use Q = mcΔT while the temperature changes, and Q = mL while a <i>phase</i> changes (temperature stays constant through melting or boiling) — mixing those two up is the usual error." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"formula", topic:"Thermal Properties",
+  title:"Heat, expansion and radiation",
+  rows:[
+    ["Heat for a temperature change","Q = mcΔT"],
+    ["Latent heat","Q = mL"],
+    ["Linear / areal / volume expansion","γ = 3α ; β = 2α"],
+    ["Conduction rate","dQ/dt = kA(T₁−T₂)/L"],
+    ["Stefan-Boltzmann law","E = σεAT⁴"],
+    ["Wien's displacement law","λ_max·T = 2.9×10⁻³ m·K"],
+    ["Newton's law of cooling","dT/dt ∝ (T − T_surroundings)"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Kinetic Theory & Gases",
+  title:"Degrees of freedom set γ — count them and you are done",
+  body:"Monatomic: 3 degrees of freedom, γ = <b>5/3</b> ≈ 1.67. Diatomic: 5, γ = <b>7/5</b> = 1.4. Polyatomic (non-linear): 6, γ = <b>4/3</b> ≈ 1.33. Each degree of freedom contributes ½kT per molecule, so Cv = (f/2)R and Cp = Cv + R — the whole chapter follows from f." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"formula", topic:"Kinetic Theory & Gases",
+  title:"Kinetic theory",
+  rows:[
+    ["Pressure of an ideal gas","P = (1/3)ρv²_rms"],
+    ["RMS / average / most probable speed","√(3RT/M) > √(8RT/πM) > √(2RT/M)"],
+    ["Average KE per molecule","(3/2)kT"],
+    ["Molar specific heats","Cv = (f/2)R ; Cp = Cv + R"],
+    ["Ratio of specific heats","γ = 1 + 2/f"],
+    ["Mean free path","λ = 1/(√2 nπd²)"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Laws of Motion",
+  title:"Friction — starting is harder than continuing",
+  body:"Limiting static friction is <i>greater</i> than kinetic friction (μ_s &gt; μ_k), which is exactly why a heavy box lurches once it finally starts sliding. Friction is independent of the contact <i>area</i> and of speed, and static friction is <b>self-adjusting</b> — it equals the applied force until it reaches its limit." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Work, Energy & Power",
+  title:"Springs combine the opposite way to resistors",
+  body:"Springs in <b>parallel</b> add stiffness (k = k₁ + k₂); springs in <b>series</b> add compliance (1/k = 1/k₁ + 1/k₂), so a series pair is <i>softer</i> than either. Cutting a spring into n equal pieces makes each one n times <b>stiffer</b> — a favourite one-liner." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Gravitation",
+  title:"Escape velocity is just √2 times orbital velocity",
+  body:"v_escape = √2 · v_orbital, so for a low Earth orbit 7.9 km/s becomes 11.2 km/s. Also useful: escape velocity does not depend on the mass or the direction of launch of the projectile, only on the planet." },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"mnemonic", topic:"Semiconductors",
+  title:"Diode biasing and the universal gates",
+  body:"<b>Forward bias</b> — p-side to the positive terminal, depletion layer narrows, current flows. <b>Reverse bias</b> — depletion layer widens, only a tiny leakage current. For logic: <b>NAND and NOR are the universal gates</b> — any other gate can be built from either alone." },
+
 /* ==================================================================
    CHEMISTRY — MNEMONICS
    ================================================================== */
@@ -576,6 +716,118 @@ const TRICKS = [
     ["Valency shortcut","group number gives valency for main-group elements"],
   ] },
 
+/* ------------------ CHEMISTRY — chapters added later ------------------ */
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Solid State",
+  title:"Packing efficiency — 52, 68, 74",
+  body:"Simple cubic <b>52.4%</b>, body-centred cubic <b>68%</b>, and face-centred cubic (ccp) and hcp both <b>74%</b> — the densest possible packing of equal spheres. Remember the trio “52-68-74” and note the last two are equal, which is the point students most often miss." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Solid State",
+  title:"Counting atoms in a unit cell by position",
+  body:"A <b>corner</b> atom counts 1/8, an <b>edge</b> atom 1/4, a <b>face</b> atom 1/2, and a <b>body-centre</b> atom 1. Add them up: simple cubic = <b>1</b>, bcc = <b>2</b>, fcc = <b>4</b> atoms per cell. Every “atoms per unit cell” and density question starts here." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Solid State",
+  title:"Schottky lowers density, Frenkel does not",
+  body:"<b>Schottky</b> — a cation <i>and</i> an anion are both missing, so mass is lost and <b>density falls</b>; it needs ions of similar size (NaCl, KCl, CsCl). <b>Frenkel</b> — an ion merely shifts into an interstitial site, so nothing leaves and <b>density is unchanged</b>; it needs a large size difference (ZnS, AgCl, AgBr)." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"formula", topic:"Solid State",
+  title:"Solid state",
+  rows:[
+    ["Atoms per unit cell","SC 1 ; BCC 2 ; FCC 4"],
+    ["Packing efficiency","SC 52.4% ; BCC 68% ; FCC/HCP 74%"],
+    ["Density of a unit cell","ρ = Z·M / (a³·N_A)"],
+    ["Radius relation — BCC","r = √3a/4"],
+    ["Radius relation — FCC","r = a/(2√2)"],
+    ["Coordination number","SC 6 ; BCC 8 ; FCC/HCP 12"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Surface Chemistry",
+  title:"Physisorption vs chemisorption",
+  body:"<b>Physisorption</b> — weak van der Waals forces, low enthalpy (20-40 kJ/mol), reversible, multilayer, <i>decreases</i> with temperature. <b>Chemisorption</b> — actual chemical bonds, high enthalpy (80-240 kJ/mol), irreversible, monolayer, <i>increases</i> with temperature then falls. Hook: “physical is feeble, chemical is committed.”" },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Surface Chemistry",
+  title:"Tyndall effect identifies a colloid",
+  body:"Only <b>colloids</b> scatter a beam of light into a visible path — true solutions do not (particles too small) and suspensions simply block it. Also worth pairing: <b>lyophilic</b> sols are solvent-loving and reversible, <b>lyophobic</b> sols are solvent-hating and need a stabiliser." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Metallurgy",
+  title:"Roasting vs calcination — sulphide or carbonate?",
+  body:"<b>Roasting</b> heats a <b>sulphide</b> ore in <i>excess air</i> (S is oxidised away as SO₂). <b>Calcination</b> heats a <b>carbonate</b> or hydrated ore in <i>limited or no air</i> (CO₂ or water driven off). Hook: “<b>R</b>oasting needs ai<b>R</b>; <b>C</b>alcination handles <b>C</b>arbonates.”" },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Amines",
+  title:"Amine basicity in water is 2° > 1° > 3° > NH₃",
+  body:"Two effects fight: alkyl groups push electrons in (+I, raising basicity) but also crowd the nitrogen and block solvation of the cation. The result for <b>methyl</b>amines in water is (CH₃)₂NH &gt; CH₃NH₂ &gt; (CH₃)₃N &gt; NH₃ — the 3° amine falls <i>below</i> the 1°. In the <i>gas phase</i>, with no solvation, the plain 3° &gt; 2° &gt; 1° order is restored." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Amines",
+  title:"Hinsberg's test separates 1°, 2° and 3° amines",
+  body:"With benzenesulphonyl chloride: a <b>1°</b> amine gives a product <i>soluble</i> in alkali (it still has an acidic N-H), a <b>2°</b> amine gives a product <i>insoluble</i> in alkali (no N-H left), and a <b>3°</b> amine <b>does not react</b> at all. Solubility in NaOH is the discriminator." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Alcohols, Phenols & Ethers",
+  title:"Acidity: carboxylic acid > phenol > water > alcohol",
+  body:"Phenol is acidic enough to dissolve in NaOH but <i>not</i> in NaHCO₃; a carboxylic acid dissolves in both — that pair of tests distinguishes them. The reason is resonance: a phenoxide spreads its charge into the ring, an alkoxide cannot, so alcohols are weaker acids than even water." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Alcohols, Phenols & Ethers",
+  title:"Dehydration and every other alcohol order runs 3° > 2° > 1°",
+  body:"Ease of dehydration to an alkene follows carbocation stability, so <b>3° &gt; 2° &gt; 1°</b> — the same order as the Lucas test and as SN1 reactivity. Oxidation runs the other way in kind, not speed: 1° → aldehyde → acid, 2° → ketone, 3° → <b>no oxidation</b> without breaking the chain." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Aldehydes, Ketones & Acids",
+  title:"Aldehydes beat ketones for nucleophilic addition",
+  body:"An aldehyde's carbonyl carbon is both <i>less crowded</i> (only one alkyl group) and <i>more positive</i> (less electron donation), so it is more reactive: HCHO &gt; CH₃CHO &gt; ketones. The same logic explains why only aldehydes reduce Tollens' and Fehling's reagents." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Haloalkanes & Haloarenes",
+  title:"C-X bond strength falls down the group, so reactivity rises",
+  body:"Bond strength C-F &gt; C-Cl &gt; C-Br &gt; C-I, therefore reactivity in substitution is the <b>reverse</b>: R-I &gt; R-Br &gt; R-Cl &gt; R-F. Haloarenes are far less reactive than haloalkanes because the C-X bond gains partial double-bond character through resonance with the ring." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Biomolecules",
+  title:"Sucrose is the non-reducing one",
+  body:"Glucose, fructose, maltose and lactose all <b>reduce</b> Tollens'/Fehling's; <b>sucrose does not</b>, because both anomeric carbons are locked in its glycosidic linkage. Also pair: glucose is an <b>aldo</b>hexose, fructose a <b>keto</b>hexose, and sucrose hydrolyses to glucose + fructose (invert sugar)." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Biomolecules",
+  title:"Four levels of protein structure",
+  body:"<b>Primary</b> — the amino-acid sequence (peptide bonds). <b>Secondary</b> — α-helix and β-pleated sheet (hydrogen bonds). <b>Tertiary</b> — the overall 3D fold. <b>Quaternary</b> — several chains together (haemoglobin's four). Denaturation destroys secondary and tertiary structure but leaves the <i>primary</i> sequence intact." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Polymers",
+  title:"Addition vs condensation, and the numbers in Nylon",
+  body:"<b>Addition</b> polymers just stack monomers with no by-product (polythene, PVC, Teflon); <b>condensation</b> polymers expel a small molecule such as water (nylon, terylene, bakelite). <b>Nylon-6,6</b> is named for its two 6-carbon monomers — hexamethylenediamine and adipic acid — while Nylon-6 comes from a single monomer, caprolactam." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Environmental Chemistry",
+  title:"The real greenhouse gases",
+  body:"<b>CO₂, CH₄, N₂O, CFCs, ozone and water vapour</b> trap heat. Note what is <i>not</i> on the list: <b>oxygen and nitrogen are not greenhouse gases</b> (symmetric diatomic molecules have no dipole to absorb infrared) — a widely repeated mnemonic gets this wrong. Ozone depletion is a separate problem, driven by CFCs releasing chlorine radicals." },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"formula", topic:"Biomolecules",
+  title:"Biomolecules quick reference",
+  rows:[
+    ["Reducing sugars","glucose, fructose, maltose, lactose (not sucrose)"],
+    ["Glucose / fructose","aldohexose / ketohexose"],
+    ["Sucrose on hydrolysis","glucose + fructose (invert sugar)"],
+    ["Starch / cellulose linkage","α-glycosidic / β-glycosidic"],
+    ["Protein bond","peptide (−CONH−)"],
+    ["DNA vs RNA sugar","deoxyribose / ribose"],
+    ["DNA vs RNA base","thymine / uracil"],
+    ["Vitamins — fat soluble","A, D, E, K"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"formula", topic:"Surface Chemistry",
+  title:"Adsorption and colloids",
+  rows:[
+    ["Freundlich isotherm","x/m = k·p^(1/n)"],
+    ["Physisorption enthalpy","20-40 kJ/mol (reversible, multilayer)"],
+    ["Chemisorption enthalpy","80-240 kJ/mol (irreversible, monolayer)"],
+    ["Tyndall effect","light scattering — identifies a colloid"],
+    ["Hardy-Schulze rule","higher ion charge → stronger coagulation"],
+    ["Emulsion types","o/w (milk) and w/o (butter)"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"formula", topic:"Metallurgy",
+  title:"Principles of metal extraction",
+  rows:[
+    ["Concentration of ore","froth flotation (sulphides), magnetic, leaching"],
+    ["Roasting","sulphide ore + excess air → oxide + SO₂"],
+    ["Calcination","carbonate/hydrated ore heated in limited air → oxide"],
+    ["Reduction","oxide + C or CO → metal (smelting)"],
+    ["Refining","electrolytic, zone refining (Si, Ge), van Arkel (Ti, Zr)"],
+    ["Ellingham diagram","tells which reducing agent works at what temperature"],
+  ] },
+
 /* ==================================================================
    MATHS — MNEMONICS
    ================================================================== */
@@ -813,6 +1065,93 @@ const TRICKS = [
     ["Heron's formula","√[s(s−a)(s−b)(s−c)], s = (a+b+c)/2"],
     ["Sphere / cylinder volume","(4/3)πr³ ; πr²h"],
   ] },
+
+/* -------------------- MATHS — chapters added later -------------------- */
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Inverse Trigonometry",
+  title:"Principal value branches — the ranges you must not guess",
+  body:"sin⁻¹ and tan⁻¹ and cosec⁻¹ live in <b>[−π/2, π/2]</b> (tan⁻¹ open, cosec⁻¹ excluding 0). cos⁻¹, cot⁻¹ and sec⁻¹ live in <b>[0, π]</b> (cot⁻¹ open, sec⁻¹ excluding π/2). Hook: “<b>sin-tan-cosec swing either side of zero; cos-cot-sec stay above it.</b>” Getting the branch wrong is the single most common error in this chapter." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"formula", topic:"Inverse Trigonometry",
+  title:"Inverse trigonometric identities",
+  rows:[
+    ["Complementary pairs","sin⁻¹x + cos⁻¹x = π/2 (also tan/cot, sec/cosec)"],
+    ["Sum of arctangents","tan⁻¹x + tan⁻¹y = tan⁻¹((x+y)/(1−xy)), xy < 1"],
+    ["Double angle","2tan⁻¹x = tan⁻¹(2x/(1−x²))"],
+    ["Negative argument","sin⁻¹(−x) = −sin⁻¹x ; cos⁻¹(−x) = π − cos⁻¹x"],
+    ["Derivatives","d/dx(sin⁻¹x) = 1/√(1−x²) ; d/dx(tan⁻¹x) = 1/(1+x²)"],
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Application of Derivatives",
+  title:"Second derivative test — smile and frown",
+  body:"f″ &gt; 0 means the curve holds water like a <b>smile</b> → <b>minimum</b>. f″ &lt; 0 means it spills like a <b>frown</b> → <b>maximum</b>. If f″ = 0 the test fails and you fall back on the sign change of f′. Always check endpoints too — on a closed interval the extremum is often there rather than at a stationary point." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Application of Derivatives",
+  title:"Increasing, decreasing, tangents and normals from one derivative",
+  body:"f′ &gt; 0 → increasing, f′ &lt; 0 → decreasing, f′ = 0 → stationary. The slope of the <b>tangent</b> at a point is f′, and the <b>normal</b> is its negative reciprocal −1/f′. For related rates, differentiate the relation with respect to <i>t</i> and substitute — do not solve for the variable first." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"formula", topic:"Application of Derivatives",
+  title:"Applications of differentiation",
+  rows:[
+    ["Tangent at (x₁,y₁)","y − y₁ = f′(x₁)(x − x₁)"],
+    ["Normal at (x₁,y₁)","y − y₁ = −(1/f′(x₁))(x − x₁)"],
+    ["Rolle's theorem","f(a)=f(b) ⇒ ∃c with f′(c)=0"],
+    ["Lagrange MVT","f′(c) = (f(b)−f(a))/(b−a)"],
+    ["Approximation","f(x+Δx) ≈ f(x) + f′(x)Δx"],
+    ["Maxima / minima test","f″ < 0 max ; f″ > 0 min"],
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Differential Equations",
+  title:"Name the type before you try to solve it",
+  body:"Check in this order: (1) can the variables be <b>separated</b>? (2) is every term the same degree — <b>homogeneous</b>, so substitute y = vx? (3) is it <b>linear</b>, dy/dx + Py = Q, needing the integrating factor <b>IF = e^∫P dx</b>? Nearly every JEE differential equation is one of these three, and naming it does most of the work." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"formula", topic:"Differential Equations",
+  title:"Differential equations",
+  rows:[
+    ["Order / degree","order = highest derivative ; degree = its power"],
+    ["Variable separable","f(y)dy = g(x)dx, then integrate both sides"],
+    ["Homogeneous","put y = vx, giving v + x·dv/dx"],
+    ["Linear in y","dy/dx + Py = Q ; IF = e^∫P dx"],
+    ["Solution of a linear DE","y·(IF) = ∫Q·(IF)dx + C"],
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Area Under Curves",
+  title:"Sketch first, then integrate",
+  body:"Area between a curve and the x-axis is ∫|y|dx — the modulus matters, because a region below the axis returns a <i>negative</i> integral that would cancel the part above. Area <b>between two curves</b> is ∫(y_upper − y_lower)dx between their intersection points, so always find the intersections before integrating." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Sets, Relations & Functions",
+  title:"De Morgan — the bar flips the sign",
+  body:"(A ∪ B)′ = A′ ∩ B′ and (A ∩ B)′ = A′ ∪ B′ — pushing a complement inside <b>swaps union and intersection</b>. Pair it with the counting result n(A∪B) = n(A) + n(B) − n(A∩B), which is the inclusion-exclusion principle in its simplest form." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Sets, Relations & Functions",
+  title:"Counting functions and relations by powers",
+  body:"From a set A to a set B there are <b>n(B)^n(A)</b> functions and <b>2^(n(A)·n(B))</b> relations. Injective (one-one) functions need n(A) ≤ n(B); surjective (onto) needs n(A) ≥ n(B); a bijection needs them equal. A set with n elements has <b>2ⁿ</b> subsets." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Sets, Relations & Functions",
+  title:"Reflexive, symmetric, transitive — test each separately",
+  body:"<b>Reflexive</b>: every element relates to itself, (a,a) ∈ R. <b>Symmetric</b>: (a,b) ⇒ (b,a). <b>Transitive</b>: (a,b) and (b,c) ⇒ (a,c). All three together make an <b>equivalence relation</b>. One counter-example is enough to kill any of the three, so hunt for a counter-example before attempting a proof." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Statistics",
+  title:"Variance without computing every deviation",
+  body:"σ² = <b>Σx²/n − (x̄)²</b> — the mean of the squares minus the square of the mean. Far faster than summing (x − x̄)² term by term. Also remember: adding a constant to every value leaves the variance <b>unchanged</b>, while multiplying every value by k multiplies the variance by <b>k²</b>." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"formula", topic:"Statistics",
+  title:"Statistics",
+  rows:[
+    ["Mean","x̄ = Σxᵢ/n"],
+    ["Variance","σ² = Σx²/n − (x̄)²"],
+    ["Standard deviation","σ = √(variance)"],
+    ["Empirical relation","Mode ≈ 3·Median − 2·Mean"],
+    ["Coefficient of variation","(σ/x̄)×100"],
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Limits & Continuity",
+  title:"Differentiable ⇒ continuous, never the other way",
+  body:"Every differentiable function is continuous, but a continuous function need not be differentiable — <b>|x| at x = 0</b> is the standard counter-example (a sharp corner). So to disprove differentiability, look for corners, cusps and vertical tangents; to disprove continuity, look for jumps and holes." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Sequences & Series",
+  title:"Pick terms symmetrically about the middle",
+  body:"For three terms in AP take <b>a−d, a, a+d</b>; for four take a−3d, a−d, a+d, a+3d. In GP take <b>a/r, a, ar</b>. The symmetry makes the sum collapse to a single unknown, turning a two-equation problem into a one-line one." },
 
 /* ==================================================================
    BIOLOGY — MNEMONICS
@@ -1055,5 +1394,133 @@ const TRICKS = [
     ["Human chromosome number","46 (23 pairs); gametes have 23"],
     ["Bones in an adult human","206"],
   ] },
+
+/* ------------------- BIOLOGY — chapters added later ------------------- */
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Photosynthesis",
+  title:"Photosystem II acts before Photosystem I",
+  body:"The numbering runs <i>backwards</i> relative to the electron path: <b>PS II (P680) comes first</b>, splits water and releases O₂, then passes electrons down to <b>PS I (P700)</b>, which reduces NADP⁺. Remember “<b>II before I</b>, 680 before 700” — and that the oxygen we breathe comes from <b>water</b>, not CO₂." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Photosynthesis",
+  title:"C4 plants — Kranz, PEP and no photorespiration",
+  body:"C4 plants (maize, sugarcane, sorghum) have <b>Kranz anatomy</b> (bundle-sheath cells), fix CO₂ first with <b>PEP carboxylase</b> into a 4-carbon acid (OAA), and show <b>no photorespiration</b> because CO₂ is concentrated around RuBisCO. They therefore tolerate heat and drought better than C3 plants — the comparison NEET asks every year." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"formula", topic:"Photosynthesis",
+  title:"Photosynthesis quick reference",
+  rows:[
+    ["Light reaction site","thylakoid membrane (grana)"],
+    ["Dark reaction site","stroma (Calvin cycle)"],
+    ["Source of released O₂","photolysis of water"],
+    ["C3 first stable product","3-PGA (3 carbon)"],
+    ["C4 first stable product","oxaloacetic acid (4 carbon)"],
+    ["Primary CO₂ acceptor — C3 / C4","RuBP / PEP"],
+    ["ATP & NADPH per CO₂ (Calvin)","3 ATP + 2 NADPH"],
+  ] },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Respiration in Plants",
+  title:"Where each stage of respiration happens",
+  body:"<b>Glycolysis</b> — cytoplasm (and it is the only stage common to aerobic and anaerobic respiration). <b>Krebs cycle</b> — mitochondrial matrix. <b>Electron transport chain</b> — inner mitochondrial membrane. Hook: “<b>cytoplasm, matrix, membrane</b>”, moving steadily inward as more ATP is produced." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Respiration in Plants",
+  title:"Respiratory quotient tells you the substrate",
+  body:"RQ = CO₂ released / O₂ consumed. <b>Carbohydrates = 1</b>, <b>fats ≈ 0.7</b>, <b>proteins ≈ 0.9</b>, and organic acids &gt; 1. Fats need extra oxygen because they are more reduced, which is why their RQ falls below one." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Plant Growth & Development",
+  title:"Growth promoters versus inhibitors — three against two",
+  body:"The five plant hormones split cleanly: <b>three promoters</b> (auxin, gibberellin, cytokinin) against <b>two inhibitors</b> (abscisic acid, ethylene). Two exam-friendly oddities sit in the second group — ABA is the “<b>stress hormone</b>” and the antagonist of gibberellin, and ethylene is the only <b>gaseous</b> hormone." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"formula", topic:"Plant Growth & Development",
+  title:"Plant hormones at a glance",
+  rows:[
+    ["Auxin (IAA)","apical dominance, rooting, phototropism"],
+    ["Gibberellin (GA₃)","stem elongation, bolting, seed germination"],
+    ["Cytokinin","cell division, delays senescence (Richmond-Lang effect)"],
+    ["Abscisic acid","stress hormone — closes stomata, seed dormancy"],
+    ["Ethylene","fruit ripening, abscission (the only gaseous hormone)"],
+  ] },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Breathing & Respiration",
+  title:"Every lung capacity is a sum of volumes",
+  body:"There are only four <i>volumes</i> (TV, IRV, ERV, RV) — every <i>capacity</i> is just some of them added together. <b>Vital capacity = TV + IRV + ERV</b>; <b>Total lung capacity = VC + RV</b>. The one fact that makes it stick: <b>residual volume can never be breathed out</b>, which is precisely why VC is always smaller than TLC." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Breathing & Respiration",
+  title:"How each gas actually travels",
+  body:"<b>O₂</b> — about 97% carried by haemoglobin as oxyhaemoglobin, only 3% dissolved. <b>CO₂</b> — about 70% as bicarbonate, 20-25% as carbamino-haemoglobin, 7% dissolved. So oxygen rides the protein and carbon dioxide rides the plasma as HCO₃⁻; the <b>Bohr effect</b> (more CO₂, lower pH) makes haemoglobin release O₂ where tissues need it." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"formula", topic:"Breathing & Respiration",
+  title:"Respiratory volumes and transport",
+  rows:[
+    ["Tidal volume (TV)","~500 mL"],
+    ["Inspiratory reserve (IRV)","2500-3000 mL"],
+    ["Expiratory reserve (ERV)","1000-1100 mL"],
+    ["Residual volume (RV)","1100-1200 mL"],
+    ["Vital capacity","TV + IRV + ERV"],
+    ["Total lung capacity","VC + RV (~5-6 L)"],
+    ["O₂ transport","~97% as oxyhaemoglobin"],
+    ["CO₂ transport","~70% as bicarbonate"],
+  ] },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Locomotion & Movement",
+  title:"Sliding filament — the A band never changes",
+  body:"During contraction the <b>I band and H zone shorten</b> while the <b>A band stays the same width</b>, because the filaments slide past each other rather than shortening themselves. Hook: “<b>A</b> for <b>A</b>lways the same.” The sarcomere shortens as the Z lines are pulled together." },
+
+{ exam:["NEET"], subject:"Biology", cls:"9-10", type:"mnemonic", topic:"Locomotion & Movement",
+  title:"206 bones — 80 axial and 126 appendicular",
+  body:"<b>Axial (80)</b>: skull 22, ear ossicles 6, hyoid 1, vertebrae 26, ribs 24, sternum 1. <b>Appendicular (126)</b>: the limbs and their girdles. Check: 80 + 126 = 206. Also note the three muscle types — <b>skeletal</b> (striated, voluntary), <b>cardiac</b> (striated, involuntary) and <b>smooth</b> (unstriated, involuntary)." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Biotechnology",
+  title:"The three tools of genetic engineering",
+  body:"<b>Restriction enzymes</b> are the molecular <i>scissors</i> (they cut palindromic sequences into sticky ends), <b>DNA ligase</b> is the <i>glue</i>, and a <b>vector</b> (plasmid, phage) is the <i>vehicle</i> that carries the gene into the host. Scissors, glue, vehicle — that is the whole recombinant DNA toolkit." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Biotechnology",
+  title:"Reading an enzyme name like EcoRI",
+  body:"<b>E</b> = genus <i>Escherichia</i>, <b>co</b> = species <i>coli</i>, <b>R</b> = strain RY13, <b>I</b> = the first enzyme isolated from it (Roman numeral). Every restriction enzyme is named this way, so the name itself tells you the source organism — a favourite one-mark question." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"formula", topic:"Biotechnology",
+  title:"Biotechnology tools and products",
+  rows:[
+    ["Restriction endonuclease","cuts DNA at palindromic sites → sticky ends"],
+    ["DNA ligase","joins DNA fragments"],
+    ["Vectors","plasmid (pBR322), bacteriophage, Ti plasmid, BAC/YAC"],
+    ["Gel electrophoresis","separates DNA by size; smaller travels farther"],
+    ["PCR","denaturation → annealing → extension (Taq polymerase)"],
+    ["Bt cotton","cry genes from Bacillus thuringiensis"],
+    ["RNA interference","silences a gene using dsRNA (used against nematodes)"],
+    ["Human insulin (Humulin)","A and B chains made in E. coli, then joined"],
+  ] },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"formula", topic:"Microbes in Human Welfare",
+  title:"Which microbe makes what",
+  rows:[
+    ["Curd","Lactobacillus (lactic acid bacteria)"],
+    ["Bread, beer, wine","Saccharomyces cerevisiae (brewer's yeast)"],
+    ["Swiss cheese holes","Propionibacterium sharmanii (CO₂)"],
+    ["Roquefort cheese","Penicillium roqueforti"],
+    ["Penicillin","Penicillium notatum / chrysogenum"],
+    ["Statins (cholesterol)","Monascus purpureus"],
+    ["Cyclosporin A (immunosuppressant)","Trichoderma polysporum"],
+    ["Biogas","methanogens, e.g. Methanobacterium"],
+    ["Biofertiliser","Rhizobium, Azotobacter, mycorrhiza, Anabaena"],
+  ] },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Ecosystem & Biodiversity",
+  title:"Which ecological pyramid can be inverted",
+  body:"The pyramid of <b>energy is always upright</b> — energy is lost at every transfer, so it cannot invert. The pyramid of <b>number</b> can invert (one large tree supporting many insects) and so can the pyramid of <b>biomass</b> (in a sea, the small standing crop of phytoplankton supports a larger mass of zooplankton). Only energy is guaranteed." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Morphology of Plants",
+  title:"Placentation — “MAP-BF”",
+  body:"<b>M</b>arginal (pea), <b>A</b>xile (china rose, tomato, lemon), <b>P</b>arietal (mustard, Argemone), <b>B</b>asal (sunflower, marigold), <b>F</b>ree central (Dianthus, Primrose). Axile means a central axis in a multi-chambered ovary; parietal means ovules on the wall of a one-chambered ovary." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Morphology of Plants",
+  title:"Aestivation — four ways petals sit in a bud",
+  body:"<b>Valvate</b> (edges just touching — Calotropis), <b>twisted</b> (one edge overlaps the next — china rose, cotton), <b>imbricate</b> (overlapping irregularly — Cassia, gulmohar), <b>vexillary</b> (the large standard petal covering the rest — pea, bean). Vexillary is the giveaway for the pea family." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Human Excretion",
+  title:"Ammonotelic, ureotelic, uricotelic — how much water can you spare?",
+  body:"<b>Ammonotelic</b> — bony fish and aquatic amphibians excrete ammonia (most toxic, needs the most water, but water is free). <b>Ureotelic</b> — mammals and adult amphibians excrete urea. <b>Uricotelic</b> — birds, reptiles and insects excrete uric acid (least toxic, almost no water lost, and lightest for flight)." },
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Human Health & Disease",
+  title:"Active vs passive, innate vs acquired immunity",
+  body:"<b>Active</b> immunity — your own body makes the antibodies (infection or vaccination); slow to develop but long lasting. <b>Passive</b> — ready-made antibodies are given (mother's milk, antivenom); instant but temporary. Separately, <b>innate</b> immunity is non-specific and present from birth, while <b>acquired</b> is specific and has memory." },
 
 ];
