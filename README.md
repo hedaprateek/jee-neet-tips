@@ -23,6 +23,22 @@ pills above the results, and the whole filter state is mirrored into the URL,
 making any view bookmarkable and shareable. On narrow screens the sidebar becomes
 a drawer.
 
+## Building a revision sheet
+
+Tick the checkbox on any card (or hit **Select all** to take the whole filtered
+view) and a bar appears with two options:
+
+- **Print / Save PDF** — renders a compact two-column A4 sheet: black on white,
+  grouped by subject and chapter, roughly 30 tips to a page, with an empty tick
+  box beside each one so you can check it off as you memorise it. The browser's
+  print dialog saves it as a PDF.
+- **Download .txt** — the same sheet as plain text, wrapped to 76 columns, for
+  reading on a phone or pasting into notes.
+
+The selection persists across filtering and page reloads, so a sheet can be built
+across several subjects in one sitting. Ctrl+P produces the same compact sheet
+rather than a printout of the whole interface.
+
 ## Structure
 
 Static site, no build step:

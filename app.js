@@ -12,7 +12,14 @@
     topic: new Set(),
     q: '',
     grouped: true,
+    // Tips ticked for the printable revision sheet. Survives filtering, so a
+    // sheet can be built across several subjects in one sitting.
+    selected: new Set(),
   };
+
+  // Stable identity for a tip: titles are unique within a subject (enforced by
+  // the data check), so this survives edits elsewhere in data.js.
+  const keyOf = (item) => `${item.subject}::${item.title}`;
 
   const DIMENSIONS = ['exam', 'subject', 'cls', 'type', 'topic'];
 
@@ -41,6 +48,7 @@
    'topicSearch', 'chapterHint', 'viewGrouped', 'viewList', 'themeToggle',
    'drawerOpen', 'drawerClose', 'drawerScrim', 'drawerBadge', 'sidebar', 'toTop',
    'statTotal', 'statMnemonics', 'statShortcuts', 'statFormulas', 'statTopics',
+   'selectAll', 'selectBar', 'selCount', 'selNoun', 'selClear', 'btnDownload', 'btnPrint', 'printSheet',
   ].forEach((id) => { el[id] = document.getElementById(id); });
 
   // Chapter groups the user has explicitly collapsed/expanded.
@@ -219,7 +227,12 @@
           .map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>`
       : `<div class="body">${item.body}</div>`;
 
-    return `<article class="card">
+    const key = keyOf(item);
+    const picked = state.selected.has(key);
+
+    return `<article class="card${picked ? ' is-picked' : ''}">
+      <button class="card-pick" data-key="${escapeAttr(key)}" aria-pressed="${picked}"
+              title="Select for the print sheet" aria-label="Select “${escapeAttr(item.title)}” for the print sheet"></button>
       <div class="card-meta">
         <span class="tag-type tag-type-${item.type}"><span class="dot"></span>${TYPE_TAG[item.type]}</span>
         <span class="meta-sep">•</span>
@@ -230,6 +243,8 @@
       ${body}
     </article>`;
   }
+
+  const escapeAttr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 
   function renderResults() {
     const found = TRICKS.filter((item) => itemMatches(item, null));
@@ -277,6 +292,197 @@
     el.grid.innerHTML = html;
   }
 
+  /* ------------------------------------------------- selection & printing */
+  const visibleTips = () => TRICKS.filter((item) => itemMatches(item, null));
+  const selectedTips = () => TRICKS.filter((item) => state.selected.has(keyOf(item)));
+
+  function saveSelection() {
+    try { localStorage.setItem('jnt-selected', JSON.stringify([...state.selected])); }
+    catch (e) { /* storage blocked */ }
+  }
+
+  function loadSelection() {
+    try {
+      const raw = JSON.parse(localStorage.getItem('jnt-selected') || '[]');
+      const valid = new Set(TRICKS.map(keyOf));
+      raw.forEach((k) => { if (valid.has(k)) state.selected.add(k); });
+    } catch (e) { /* ignore */ }
+  }
+
+  /* `pickEl` is the button that was clicked. Updating just that card beats
+     re-rendering all 183 of them, and keeps the rest of the grid untouched. */
+  function toggleSelection(key, pickEl) {
+    state.selected.has(key) ? state.selected.delete(key) : state.selected.add(key);
+    saveSelection();
+    const on = state.selected.has(key);
+    if (pickEl) {
+      pickEl.setAttribute('aria-pressed', String(on));
+      const card = pickEl.closest('.card');
+      if (card) card.classList.toggle('is-picked', on);
+    } else {
+      renderResults();
+    }
+    renderSelectBar();
+  }
+
+  function allVisibleSelected() {
+    const vis = visibleTips();
+    return vis.length > 0 && vis.every((t) => state.selected.has(keyOf(t)));
+  }
+
+  function toggleSelectAll() {
+    const vis = visibleTips();
+    if (allVisibleSelected()) vis.forEach((t) => state.selected.delete(keyOf(t)));
+    else vis.forEach((t) => state.selected.add(keyOf(t)));
+    saveSelection();
+    renderResults();
+    renderSelectBar();
+  }
+
+  function clearSelection() {
+    state.selected.clear();
+    saveSelection();
+    renderResults();
+    renderSelectBar();
+  }
+
+  function renderSelectBar() {
+    const n = state.selected.size;
+    el.selCount.textContent = n;
+    el.selNoun.textContent = n === 1 ? 'tip' : 'tips';
+    el.selectBar.hidden = n === 0;
+    document.body.classList.toggle('has-selection', n > 0);
+    el.selectAll.textContent = allVisibleSelected() ? 'Deselect all' : 'Select all';
+  }
+
+  /* Strip the small amount of markup used in tip bodies down to plain text. */
+  function toPlainText(html) {
+    return String(html)
+      .replace(/<[^>]+>/g, '')
+      .replace(/&nbsp;/g, ' ').replace(/&gt;/g, '>').replace(/&lt;/g, '<')
+      .replace(/&amp;/g, '&').replace(/&quot;/g, '"')
+      .replace(/[ \t]+/g, ' ')
+      .trim();
+  }
+
+  /* Group tips subject → chapter, preserving the site's subject order. */
+  function groupForSheet(items) {
+    const bySubject = new Map();
+    items.forEach((item) => {
+      if (!bySubject.has(item.subject)) bySubject.set(item.subject, new Map());
+      const chapters = bySubject.get(item.subject);
+      if (!chapters.has(item.topic)) chapters.set(item.topic, []);
+      chapters.get(item.topic).push(item);
+    });
+    return ALL.subject
+      .filter((s) => bySubject.has(s))
+      .map((s) => ({
+        subject: s,
+        chapters: [...bySubject.get(s).entries()].sort((a, b) => a[0].localeCompare(b[0])),
+      }));
+  }
+
+  function sheetTips() {
+    const sel = selectedTips();
+    return sel.length ? sel : visibleTips();
+  }
+
+  function buildPrintSheet() {
+    const items = sheetTips();
+    const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+
+    let html = `<div class="ps-head">
+      <h1>JEE / NEET Revision Sheet</h1>
+      <p>${items.length} tip${items.length === 1 ? '' : 's'} · ${today} · hedaprateek.github.io/jee-neet-tips</p>
+    </div>`;
+
+    groupForSheet(items).forEach(({ subject, chapters }) => {
+      html += `<h2 class="ps-subject">${subject}</h2>`;
+      chapters.forEach(([chapter, tips]) => {
+        html += `<h3 class="ps-chapter">${chapter}</h3>`;
+        tips.forEach((t) => {
+          const body = t.type === 'formula' && t.rows
+            ? `<table class="ps-rows">${t.rows
+                .map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>`
+            : `<p class="ps-body">${t.body}</p>`;
+          html += `<div class="ps-tip">
+            <div class="ps-title"><span class="ps-tick"></span>${t.title}</div>
+            ${body}
+          </div>`;
+        });
+      });
+    });
+
+    el.printSheet.innerHTML = html;
+  }
+
+  /* Wrap to `width` columns, indenting continuation lines, so the file reads
+     well in Notepad or on a phone without horizontal scrolling. */
+  function wrap(text, width, indent, firstIndent) {
+    const out = [];
+    let line = firstIndent === undefined ? indent : firstIndent;
+    let empty = true;
+    toPlainText(text).split(' ').forEach((w) => {
+      if (!empty && (line + ' ' + w).length > width) { out.push(line); line = indent + w; }
+      else { line += (empty ? '' : ' ') + w; empty = false; }
+    });
+    if (!empty) out.push(line);
+    return out;
+  }
+
+  function buildSheetText() {
+    const items = sheetTips();
+    const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    const lines = [
+      'JEE / NEET REVISION SHEET',
+      `${items.length} tip${items.length === 1 ? '' : 's'}  |  ${today}`,
+      'hedaprateek.github.io/jee-neet-tips',
+      '',
+    ];
+
+    groupForSheet(items).forEach(({ subject, chapters }) => {
+      lines.push('='.repeat(58), subject.toUpperCase(), '='.repeat(58), '');
+      chapters.forEach(([chapter, tips]) => {
+        lines.push(`--- ${chapter} ---`, '');
+        tips.forEach((t) => {
+          // Titles can be long (a mnemonic sentence), so wrap them too.
+          wrap(`[${TYPE_TAG[t.type].toUpperCase()}] ${t.title}`, 76, '    ', '')
+            .forEach((l) => lines.push(l));
+          if (t.type === 'formula' && t.rows) {
+            const labels = t.rows.map((r) => toPlainText(r[0]));
+            const pad = Math.min(Math.max(...labels.map((l) => l.length)), 34);
+            t.rows.forEach((r, i) => {
+              const value = toPlainText(r[1]);
+              const head = `   ${labels[i].padEnd(pad)}  =  `;
+              // Keep the label and value on one line when it fits; wrap long
+              // values under a hanging indent rather than overrunning.
+              if ((head + value).length <= 78) lines.push(head + value);
+              else wrap(value, 78, ' '.repeat(pad + 8), head).forEach((l) => lines.push(l));
+            });
+          } else {
+            wrap(t.body, 76, '   ').forEach((l) => lines.push(l));
+          }
+          lines.push('');
+        });
+      });
+    });
+
+    return lines.join('\n');
+  }
+
+  function downloadText() {
+    const items = sheetTips();
+    const blob = new Blob([buildSheetText()], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `jee-neet-revision-${items.length}-tips.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
   /* --------------------------------------------------------------- render */
   function render() {
     renderList(el.examFilters, 'exam', ALL.exam, (v) => v.toLowerCase());
@@ -286,6 +492,7 @@
     renderChapters();
     renderPills();
     renderResults();
+    renderSelectBar();
     syncHash();
   }
 
@@ -351,6 +558,18 @@
   el.viewGrouped.addEventListener('click', () => setView(true));
   el.viewList.addEventListener('click', () => setView(false));
 
+  /* Selection — delegated, since cards are rendered as markup */
+  el.grid.addEventListener('click', (e) => {
+    const pick = e.target.closest && e.target.closest('.card-pick');
+    if (pick) toggleSelection(pick.dataset.key, pick);
+  });
+  el.selectAll.addEventListener('click', toggleSelectAll);
+  el.selClear.addEventListener('click', clearSelection);
+  el.btnDownload.addEventListener('click', downloadText);
+  el.btnPrint.addEventListener('click', () => { buildPrintSheet(); window.print(); });
+  // Ctrl+P should produce the same compact sheet, not the whole app UI.
+  window.addEventListener('beforeprint', buildPrintSheet);
+
   /* Drawer (sidebar on small screens) */
   function setDrawer(open) {
     document.body.classList.toggle('drawer-open', open);
@@ -402,5 +621,10 @@
   el.searchInput.placeholder = `Search ${TRICKS.length} tips — “Krebs”, “Markovnikov”, “LIATE”…`;
 
   readHash();
+  loadSelection();
   render();
+
+  // Test hook: lets the headless suite drive selection and inspect the sheet
+  // builders without a real DOM. Harmless in the browser.
+  window.__jnt = { state, keyOf, buildSheetText, sheetTips, toggleSelection, toggleSelectAll, clearSelection };
 })();

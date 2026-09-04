@@ -87,7 +87,7 @@
   <main class="content">
     <section class="intro" id="intro">
       <h1>Every trick that actually saves you time in the exam hall</h1>
-      <p>Memory aids, fast calculation shortcuts and formula recall tables for JEE and NEET — Class 9 to 12 Physics, Chemistry, Maths and Biology. Filter by exam, subject, level, type or chapter; the view you build is saved in the URL.</p>
+      <p>Memory aids, fast calculation shortcuts and formula recall tables for JEE and NEET — Class 9 to 12 Physics, Chemistry, Maths and Biology. Filter by exam, subject, level, type or chapter, then <b>tick the tips you want</b> and print them as a compact revision sheet you can carry.</p>
       <div class="stat-row">
         <div class="stat-card"><b id="statTotal">0</b><span>tips</span></div>
         <div class="stat-card"><b id="statMnemonics">0</b><span>mnemonics</span></div>
@@ -102,9 +102,12 @@
         <span class="result-count" id="resultCount"></span>
         <div class="active-pills" id="activePills"></div>
       </div>
-      <div class="segmented" role="group" aria-label="View mode">
-        <button class="seg" id="viewGrouped" aria-pressed="true">Grouped</button>
-        <button class="seg" id="viewList" aria-pressed="false">List</button>
+      <div class="toolbar-right">
+        <button class="btn-select-all" id="selectAll">Select all</button>
+        <div class="segmented" role="group" aria-label="View mode">
+          <button class="seg" id="viewGrouped" aria-pressed="true">Grouped</button>
+          <button class="seg" id="viewList" aria-pressed="false">List</button>
+        </div>
       </div>
     </div>
 
@@ -121,6 +124,20 @@
 </div>
 
 <button class="to-top" id="toTop" hidden aria-label="Back to top">↑</button>
+
+<!-- Appears once tips are ticked: build a revision sheet, print it or save it -->
+<div class="select-bar" id="selectBar" hidden>
+  <div class="select-bar-inner">
+    <span class="sel-count"><b id="selCount">0</b> <span id="selNoun">tips</span> selected</span>
+    <button class="btn-ghost" id="selClear">Clear</button>
+    <span class="sel-spacer"></span>
+    <button class="btn-ghost" id="btnDownload">Download .txt</button>
+    <button class="btn-print" id="btnPrint">Print / Save PDF</button>
+  </div>
+</div>
+
+<!-- Populated just before printing; hidden on screen, the only thing shown on paper -->
+<div class="print-sheet" id="printSheet" aria-hidden="true"></div>
 
 <script src="data.js"></script>
 <script src="app.js"></script>
