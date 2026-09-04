@@ -32,8 +32,8 @@
 
   const DIMENSIONS = ['exam', 'subject', 'cls', 'type', 'topic'];
 
-  const TYPE_LABEL = { mnemonic: 'Mnemonics', shortcut: 'Shortcuts', formula: 'Formula tables' };
-  const TYPE_TAG = { mnemonic: 'Mnemonic', shortcut: 'Shortcut', formula: 'Formula table' };
+  const TYPE_LABEL = { mnemonic: 'Mnemonics', shortcut: 'Shortcuts', formula: 'Formula tables', proof: 'Proofs' };
+  const TYPE_TAG = { mnemonic: 'Mnemonic', shortcut: 'Shortcut', formula: 'Formula table', proof: 'Proof' };
   const CLS_LABEL = { '9-10': 'Class 9-10', '11-12': 'Class 11-12' };
 
   /* Topic names are not globally unique — Physics and Chemistry both have a
@@ -47,7 +47,7 @@
     exam: ['JEE', 'NEET'],
     subject: ['Physics', 'Chemistry', 'Maths', 'Biology'],
     cls: ['9-10', '11-12'],
-    type: ['mnemonic', 'shortcut', 'formula'],
+    type: ['mnemonic', 'shortcut', 'formula', 'proof'],
     topic: uniq(TRICKS.map(topicKey)).sort(),
   };
 
@@ -56,7 +56,7 @@
    'examFilters', 'subjectFilters', 'classFilters', 'typeFilters', 'topicFilters',
    'topicSearch', 'chapterHint', 'viewGrouped', 'viewList', 'themeToggle',
    'drawerOpen', 'drawerClose', 'drawerScrim', 'drawerBadge', 'sidebar', 'toTop',
-   'statTotal', 'statMnemonics', 'statShortcuts', 'statFormulas', 'statTopics',
+   'statTotal', 'statMnemonics', 'statShortcuts', 'statFormulas', 'statProofs', 'statTopics',
    'selectAll', 'selectBar', 'selCount', 'selNoun', 'selClear', 'btnDownload', 'btnPrint', 'printSheet',
   ].forEach((id) => { el[id] = document.getElementById(id); });
 
@@ -75,8 +75,9 @@
   const haystackCache = new WeakMap();
   function haystack(item) {
     if (!haystackCache.has(item)) {
-      haystackCache.set(item, [item.title, item.topic, item.subject, item.type, item.body || '']
+      haystackCache.set(item, [item.title, item.topic, item.subject, item.type, item.body || '', item.claim || '']
         .concat(item.exam)
+        .concat(item.steps || [])
         .concat((item.rows || []).flat())
         .join(' ')
         .replace(/<[^>]+>/g, ' ')
@@ -234,6 +235,9 @@
     const body = item.type === 'formula' && item.rows
       ? `<table class="rows-table">${item.rows
           .map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table>`
+      : item.type === 'proof' && item.steps
+      ? (item.claim ? `<div class="proof-claim">${item.claim}</div>` : '') +
+        `<ol class="proof-steps">${item.steps.map((s) => `<li>${s}</li>`).join('')}</ol>`
       : `<div class="body">${item.body}</div>`;
 
     const key = keyOf(item);
@@ -413,11 +417,16 @@
       // Tips stay ordered by chapter, so related ones remain adjacent.
       chapters.forEach(([, tips]) => {
         tips.forEach((t) => {
-          html += t.type === 'formula' && t.rows
-            ? `<div class="ps-tip"><span class="ps-tick"></span><b class="ps-title">${t.title}</b>` +
-              `<table class="ps-rows">${t.rows
-                .map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table></div>`
-            : `<div class="ps-tip"><span class="ps-tick"></span><b class="ps-title">${t.title}</b> ${t.body}</div>`;
+          const head = `<div class="ps-tip"><span class="ps-tick"></span><b class="ps-title">${t.title}</b>`;
+          if (t.type === 'formula' && t.rows) {
+            html += head + `<table class="ps-rows">${t.rows
+              .map((r) => `<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table></div>`;
+          } else if (t.type === 'proof' && t.steps) {
+            html += head + (t.claim ? ` <i>${t.claim}</i>` : '') +
+              `<ol class="ps-steps">${t.steps.map((s) => `<li>${s}</li>`).join('')}</ol></div>`;
+          } else {
+            html += head + ` ${t.body}</div>`;
+          }
         });
       });
     });
@@ -466,6 +475,12 @@
               // values under a hanging indent rather than overrunning.
               if ((head + value).length <= 78) lines.push(head + value);
               else wrap(value, 78, ' '.repeat(pad + 10), head).forEach((l) => lines.push(l));
+            });
+          } else if (t.type === 'proof' && t.steps) {
+            if (t.claim) wrap(t.claim, 76, '     ').forEach((l) => lines.push(l));
+            t.steps.forEach((s, i) => {
+              const n = `${i + 1}.`.padEnd(3);
+              wrap(s, 76, '        ', `     ${n} `).forEach((l) => lines.push(l));
             });
           } else {
             wrap(t.body, 76, '     ').forEach((l) => lines.push(l));
@@ -626,6 +641,7 @@
   el.statMnemonics.textContent = count('mnemonic');
   el.statShortcuts.textContent = count('shortcut');
   el.statFormulas.textContent = count('formula');
+  el.statProofs.textContent = count('proof');
   el.statTopics.textContent = ALL.topic.length;
   el.searchInput.placeholder = `Search ${TRICKS.length} tips — “Krebs”, “Markovnikov”, “LIATE”…`;
 

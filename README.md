@@ -9,6 +9,10 @@ Live site: https://hedaprateek.github.io/jee-neet-tips/
 - **Mnemonics** — memory aids for sequences, orders, and lists that are otherwise pure rote (reactivity series, taxonomic ranks, cranial nerves, etc.)
 - **Shortcuts** — faster ways to solve a class of problem without the full textbook method (Vedic maths, symmetry tricks, reaction-mechanism filters)
 - **Formula tables** — quick-reference tables grouped by chapter, for last-minute revision
+- **Proofs** — step-by-step derivations of the identities and theorems you are asked to
+  prove or need to reconstruct (the equations of motion, the quadratic formula, first
+  principles derivatives, the Nernst equation, Hardy-Weinberg, and so on), each with the
+  claim stated up front and the result on the final line
 
 Every entry is tagged by exam (JEE / NEET), subject, and class level (9–10 or 11–12), and the site supports full-text search across all of it.
 
@@ -66,7 +70,16 @@ greenhouse gas, which is simply wrong).
 
 ## Contributing a trick
 
-Add an entry to the `TRICKS` array in `data.js` following the existing shape (`mnemonic`/`shortcut` entries use a `body` string; `formula` entries use a `rows` array of `[label, formula]` pairs), then open a PR.
+Add an entry to the `TRICKS` array in `data.js` following the existing shape:
+
+- `mnemonic` / `shortcut` — a `body` string
+- `formula` — a `rows` array of `[label, formula]` pairs
+- `proof` — a `claim` string plus a `steps` array of one line each; the **last step must
+  state the result** (bolded), since both the card styling and the print sheet treat it
+  as the conclusion
+
+`subject` + `title` is the entry's identity (it keys the print-sheet selection), so titles
+must be unique within a subject. Then open a PR.
 
 ## Running locally
 

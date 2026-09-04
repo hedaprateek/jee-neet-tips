@@ -509,6 +509,159 @@ const TRICKS = [
   title:"In a fluid, the heavier ball really does fall faster",
   body:"In vacuum every body falls at the same rate, but terminal velocity goes as <b>r²(ρ − σ)</b>, so a denser or larger sphere settles faster in a liquid. This is why the vacuum result and the fluid result feel contradictory — they are different regimes, and questions deliberately blur them." },
 
+/* ======================= PHYSICS — PROOFS ======================= */
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Kinematics",
+  title:"The three equations of motion, by calculus",
+  claim:"For constant acceleration a: v = u + at, s = ut + ½at², v² = u² + 2as.",
+  steps:[
+    "By definition a = dv/dt. Separate and integrate from u to v as t goes 0 to t: ∫dv = a∫dt.",
+    "This gives v − u = at, that is <b>v = u + at</b>.",
+    "Now use v = ds/dt and substitute: ds/dt = u + at, so ∫ds = ∫(u + at)dt.",
+    "Integrating from 0 to t gives <b>s = ut + ½at²</b>.",
+    "For the third, write a = dv/dt = (dv/ds)(ds/dt) = v·dv/ds, so v dv = a ds.",
+    "Integrate: ∫v dv from u to v equals a∫ds from 0 to s, giving (v² − u²)/2 = as.",
+    "Therefore <b>v² = u² + 2as</b> — the equation with no time in it."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Kinematics",
+  title:"Projectile range, and why 45° is optimal",
+  claim:"R = u²sin2θ / g, maximised at θ = 45°.",
+  steps:[
+    "Resolve the launch velocity: horizontal u cosθ (constant), vertical u sinθ (decelerating at g).",
+    "Vertically the projectile returns to its starting height, so 0 = u sinθ·T − ½gT².",
+    "Solving for the non-zero root gives time of flight T = 2u sinθ / g.",
+    "Horizontally there is no acceleration, so R = (u cosθ)·T.",
+    "Substitute T: R = 2u² sinθ cosθ / g = <b>u² sin2θ / g</b>.",
+    "R is largest when sin2θ = 1, that is 2θ = 90°, so <b>θ = 45°</b>. Since sin2θ = sin(180° − 2θ), complementary angles such as 30° and 60° give the same range."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Work, Energy & Power",
+  title:"The work-energy theorem",
+  claim:"Net work done equals the change in kinetic energy.",
+  steps:[
+    "Work done by a net force along a path is W = ∫F ds.",
+    "Substitute Newton's second law, F = ma = m(dv/dt).",
+    "Rewrite using the chain rule: m(dv/dt)ds = m·v·dv, since ds/dt = v.",
+    "So W = ∫m v dv, integrated from the initial speed u to the final speed v.",
+    "Evaluating gives W = ½mv² − ½mu².",
+    "Therefore <b>W_net = ΔKE</b> — which is why energy methods bypass time entirely."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Gravitation",
+  title:"Escape velocity",
+  claim:"v_e = √(2GM/R), independent of the projectile's mass.",
+  steps:[
+    "To just escape, the body must reach infinity with zero kinetic energy left.",
+    "Gravitational potential energy at the surface is U = −GMm/R, and at infinity it is zero.",
+    "By conservation of energy: ½mv_e² + (−GMm/R) = 0 + 0.",
+    "So ½mv_e² = GMm/R — and the projectile's mass m cancels from both sides.",
+    "Therefore <b>v_e = √(2GM/R)</b>, about 11.2 km/s for Earth.",
+    "Since orbital velocity is √(GM/R), it follows that <b>v_e = √2 · v_orbital</b>."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Gravitation",
+  title:"Kepler's third law from a circular orbit",
+  claim:"T² ∝ r³.",
+  steps:[
+    "For a circular orbit, gravity supplies the centripetal force: GMm/r² = mv²/r.",
+    "Cancel m and one r: v² = GM/r.",
+    "The orbital period satisfies v = 2πr/T, so v² = 4π²r²/T².",
+    "Equate the two expressions: 4π²r²/T² = GM/r.",
+    "Rearrange: T² = (4π²/GM)·r³.",
+    "Since 4π²/GM is the same for every satellite of that body, <b>T² ∝ r³</b>."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"SHM & Waves",
+  title:"Time period of a simple pendulum",
+  claim:"T = 2π√(L/g), valid only for small oscillations.",
+  steps:[
+    "Displace the bob by a small angle θ. The restoring force along the arc is F = −mg sinθ.",
+    "For small θ in radians, sin θ ≈ θ — this approximation is the whole reason the result needs small amplitude.",
+    "The arc displacement is x = Lθ, so θ = x/L and F ≈ −mg x/L.",
+    "This has the form F = −kx with k = mg/L, so the motion is simple harmonic.",
+    "For SHM, T = 2π√(m/k) = 2π√(mL/mg).",
+    "Therefore <b>T = 2π√(L/g)</b> — independent of the mass of the bob and of the amplitude."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Electrostatics",
+  title:"Energy stored in a capacitor",
+  claim:"U = ½CV² — and where the one-half comes from.",
+  steps:[
+    "Charging is not instantaneous: to move a further charge dq when the plates already hold q, the work is dW = V dq = (q/C)dq.",
+    "Integrate as the charge builds from 0 to its final value Q: W = ∫₀^Q (q/C)dq.",
+    "This gives W = Q²/2C.",
+    "Substituting Q = CV yields <b>U = ½CV² = ½QV = Q²/2C</b>. The ½ appears because the voltage <i>grows</i> from 0 to V during charging — the average is V/2, not V. This is also why half the battery's energy is always lost as heat when charging a capacitor."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Current Electricity",
+  title:"Resistors in series and in parallel",
+  claim:"R_s = R₁ + R₂ and 1/R_p = 1/R₁ + 1/R₂.",
+  steps:[
+    "<b>Series:</b> the same current I passes through both, and the potential drops add: V = V₁ + V₂.",
+    "So IR_s = IR₁ + IR₂, and cancelling I gives <b>R_s = R₁ + R₂</b>.",
+    "<b>Parallel:</b> the same voltage V is across both, and the currents add: I = I₁ + I₂.",
+    "So V/R_p = V/R₁ + V/R₂, and cancelling V gives <b>1/R_p = 1/R₁ + 1/R₂</b>. The two derivations differ only in which quantity is shared — current in series, voltage in parallel."
+  ] },
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"proof", topic:"Current Electricity",
+  title:"The Wheatstone bridge balance condition",
+  claim:"The bridge is balanced when P/Q = R/S.",
+  steps:[
+    "Balance means no current flows through the galvanometer, so B and D are at the same potential.",
+    "With no current in the middle branch, the same current I₁ flows through P and Q, and I₂ through R and S.",
+    "Equal potentials at B and D require the drop across P to equal the drop across R: I₁P = I₂R.",
+    "Likewise the drops across Q and S are equal: I₁Q = I₂S.",
+    "Divide the first equation by the second: P/Q = R/S.",
+    "Therefore at balance <b>P/Q = R/S</b>, and the galvanometer branch may be removed entirely."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Magnetism & EMI",
+  title:"Motional EMF: ε = BLv",
+  claim:"Derived twice — from the Lorentz force and from Faraday's law.",
+  steps:[
+    "<b>Force route:</b> a free charge q in the rod moves with velocity v through field B, feeling a force qvB along the rod.",
+    "Charges pile up at the ends until the electric force qE balances it: E = vB.",
+    "The EMF is the field times the length: ε = EL = <b>BLv</b>.",
+    "<b>Flux route:</b> in time dt the rod sweeps out area dA = Lv dt, so the flux change is dΦ = B·Lv dt.",
+    "Faraday's law gives ε = dΦ/dt = <b>BLv</b> — the two routes agree, which is the point of the exercise."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Wave Optics",
+  title:"Fringe width in Young's double slit experiment",
+  claim:"β = λD/d.",
+  steps:[
+    "For a point P at distance y from the centre of the screen, the path difference is approximately Δ = yd/D (valid when D ≫ d).",
+    "Bright fringes need Δ = nλ, so yₙ = nλD/d.",
+    "The next bright fringe is at y_(n+1) = (n+1)λD/d.",
+    "Fringe width is the gap between consecutive bright fringes: β = y_(n+1) − yₙ.",
+    "Therefore <b>β = λD/d</b>, the same spacing for dark fringes — which is why the pattern is evenly spaced."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Modern Physics",
+  title:"Bohr's radius for the hydrogen atom",
+  claim:"rₙ = n²h²ε₀/πme², giving 0.529 Å for n = 1.",
+  steps:[
+    "The electrostatic attraction supplies the centripetal force: ke²/r² = mv²/r, so mv² = ke²/r.",
+    "Bohr's quantisation postulate fixes the angular momentum: mvr = nh/2π.",
+    "Square the second equation: m²v²r² = n²h²/4π².",
+    "Substitute mv² = ke²/r into it: m(ke²/r)r² = n²h²/4π², that is mke²r = n²h²/4π².",
+    "Solve for r: <b>rₙ = n²h²/(4π²mke²)</b>, which is proportional to n².",
+    "Putting in the constants gives r₁ = <b>0.529 Å</b>, and the same substitution back into the energy expression gives Eₙ = −13.6/n² eV."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"proof", topic:"Kinetic Theory & Gases",
+  title:"Kinetic theory: P = ⅓ρv²_rms",
+  claim:"Pressure of an ideal gas from molecular collisions.",
+  steps:[
+    "Consider one molecule of mass m in a cube of side L, moving along x with speed vₓ.",
+    "Each collision with a wall reverses its momentum, a change of 2mvₓ.",
+    "It returns to the same wall every 2L/vₓ seconds, so the average force it exerts is 2mvₓ ÷ (2L/vₓ) = mvₓ²/L.",
+    "Pressure from N molecules is the total force over area L²: P = Nm⟨vₓ²⟩/L³.",
+    "Motion is isotropic, so ⟨vₓ²⟩ = ⟨v²⟩/3.",
+    "With density ρ = Nm/L³, this gives <b>P = ⅓ρv²_rms</b> — and comparing with PV = nRT yields v_rms = √(3RT/M)."
+  ] },
+
 /* ==================================================================
    CHEMISTRY — MNEMONICS
    ================================================================== */
@@ -983,6 +1136,111 @@ const TRICKS = [
   title:"Strong field or weak field decides everything else",
   body:"Place the ligand on the spectrochemical series — <b>CN⁻ &gt; NO₂⁻ &gt; en &gt; NH₃ &gt; H₂O &gt; OH⁻ &gt; F⁻ &gt; Cl⁻ &gt; Br⁻ &gt; I⁻</b>. Strong field ligands pair electrons up, giving <b>low spin, inner orbital, often diamagnetic</b> complexes; weak field ones leave them unpaired, giving high spin and paramagnetism. One lookup answers hybridisation, magnetism and colour together." },
 
+/* ====================== CHEMISTRY — PROOFS ====================== */
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"proof", topic:"Chemical Kinetics",
+  title:"The first-order integrated rate law",
+  claim:"k = (2.303/t)·log([A]₀/[A]).",
+  steps:[
+    "A first-order reaction obeys −d[A]/dt = k[A].",
+    "Separate the variables: d[A]/[A] = −k dt.",
+    "Integrate from [A]₀ at t = 0 to [A] at time t: ln[A] − ln[A]₀ = −kt.",
+    "Rearrange: ln([A]₀/[A]) = kt.",
+    "Converting to base-10 logarithms gives <b>k = (2.303/t)·log([A]₀/[A])</b>. Because it is logarithmic, a plot of log[A] against t is a straight line of slope −k/2.303."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"proof", topic:"Chemical Kinetics",
+  title:"Why a first-order half-life is independent of concentration",
+  claim:"t₁/₂ = 0.693/k, no matter how much you start with.",
+  steps:[
+    "Start from the integrated law kt = ln([A]₀/[A]).",
+    "At the half-life, by definition [A] = [A]₀/2.",
+    "Substitute: k·t₁/₂ = ln([A]₀ / ([A]₀/2)) = ln 2.",
+    "The initial concentration cancels completely — this is the key step.",
+    "Since ln 2 ≈ 0.693, <b>t₁/₂ = 0.693/k</b>, independent of [A]₀ — which is exactly why radioactive decay (also first order) has a fixed half-life."
+  ] },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"proof", topic:"Electrochemistry",
+  title:"The Nernst equation",
+  claim:"E = E° − (0.059/n)·log Q at 298 K.",
+  steps:[
+    "Thermodynamics relates free energy to the reaction quotient: ΔG = ΔG° + RT ln Q.",
+    "For an electrochemical cell, ΔG = −nFE and ΔG° = −nFE°.",
+    "Substitute both: −nFE = −nFE° + RT ln Q.",
+    "Divide throughout by −nF: E = E° − (RT/nF) ln Q.",
+    "Convert to base 10 and insert R = 8.314, T = 298 K, F = 96500: RT(2.303)/F ≈ 0.059.",
+    "Therefore <b>E = E° − (0.059/n)·log Q</b>, and at equilibrium E = 0, which gives E° = (0.059/n)·log K."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"proof", topic:"Equilibrium",
+  title:"Kp = Kc(RT)^Δn",
+  claim:"Relating the two equilibrium constants for a gaseous reaction.",
+  steps:[
+    "For an ideal gas, PV = nRT, so the partial pressure is p = (n/V)RT = concentration × RT.",
+    "Write Kp as the ratio of product to reactant partial pressures, each raised to its coefficient.",
+    "Replace every partial pressure by (concentration × RT).",
+    "The concentration terms reassemble into Kc, leaving RT raised to (moles of gaseous products − moles of gaseous reactants).",
+    "That exponent is Δn, so <b>Kp = Kc(RT)^Δn</b>. When Δn = 0 the two are equal — which is why Kp = Kc for reactions like H₂ + I₂ ⇌ 2HI."
+  ] },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"proof", topic:"Equilibrium",
+  title:"The Henderson-Hasselbalch equation",
+  claim:"pH = pKa + log([salt]/[acid]).",
+  steps:[
+    "For a weak acid, HA ⇌ H⁺ + A⁻, with Ka = [H⁺][A⁻]/[HA].",
+    "Rearrange for the hydrogen ion concentration: [H⁺] = Ka·[HA]/[A⁻].",
+    "Take the negative logarithm of both sides.",
+    "−log[H⁺] = −log Ka − log([HA]/[A⁻]).",
+    "By definition the left side is pH and −log Ka is pKa, and flipping the ratio changes the sign.",
+    "Therefore <b>pH = pKa + log([A⁻]/[HA])</b> — and when salt and acid are equimolar the log term is zero, so pH = pKa."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"proof", topic:"Solid State",
+  title:"Packing efficiency of a face-centred cubic cell is 74%",
+  claim:"The densest possible packing of identical spheres.",
+  steps:[
+    "An fcc cell contains 8 corners × 1/8 + 6 faces × 1/2 = <b>4</b> atoms.",
+    "In fcc the spheres touch along the face diagonal, whose length is √2·a and equals 4r.",
+    "So 4r = √2·a, giving r = a/(2√2).",
+    "Volume of the four spheres = 4 × (4/3)πr³ = (16/3)πr³.",
+    "Since (2√2)³ = 16√2, we get r³ = a³/(16√2), so the sphere volume is (16/3)π · a³/(16√2) = πa³/(3√2).",
+    "Divide by the cell volume a³: efficiency = π/(3√2) ≈ 0.7405, that is <b>74%</b>. The same method gives 68% for bcc (spheres touch along the body diagonal, 4r = √3·a) and 52.4% for simple cubic (4r = 2a along the edge)."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"proof", topic:"Solid State",
+  title:"Density of a unit cell",
+  claim:"ρ = Z·M / (a³·N_A).",
+  steps:[
+    "Density is mass divided by volume, applied to a single unit cell.",
+    "A cell contains Z atoms (Z = 1 for simple cubic, 2 for bcc, 4 for fcc).",
+    "The mass of one atom is M/N_A, where M is the molar mass.",
+    "So the mass of the cell is Z·M/N_A.",
+    "The volume of a cubic cell of edge a is a³.",
+    "Therefore <b>ρ = Z·M / (a³·N_A)</b> — the standard route from an X-ray edge length to a density."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"proof", topic:"Solutions & Colligative Properties",
+  title:"Relative lowering of vapour pressure equals the solute mole fraction",
+  claim:"(P° − P)/P° = x_solute — Raoult's law for a non-volatile solute.",
+  steps:[
+    "By Raoult's law the vapour pressure of the solution is P = x_solvent · P°.",
+    "Subtract from P°: P° − P = P° − x_solvent·P° = P°(1 − x_solvent).",
+    "For a two-component solution, x_solvent + x_solute = 1, so 1 − x_solvent = x_solute.",
+    "Hence P° − P = P°·x_solute.",
+    "Dividing by P° gives <b>(P° − P)/P° = x_solute</b>. It depends only on <i>how many</i> solute particles there are, never on their identity — which is what makes it colligative."
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Chemistry", cls:"11-12", type:"proof", topic:"Thermodynamics",
+  title:"ΔG° = −RT ln K",
+  claim:"Linking free energy to the equilibrium constant.",
+  steps:[
+    "For a reaction at any composition, ΔG = ΔG° + RT ln Q.",
+    "At equilibrium the reaction has no further tendency to proceed, so ΔG = 0.",
+    "Also at equilibrium the reaction quotient equals the equilibrium constant, Q = K.",
+    "Substituting both: 0 = ΔG° + RT ln K.",
+    "Therefore <b>ΔG° = −RT ln K</b>. Read off the consequence: K > 1 makes ΔG° negative (products favoured), and K < 1 makes it positive."
+  ] },
+
 /* ==================================================================
    MATHS — MNEMONICS
    ================================================================== */
@@ -1366,6 +1624,169 @@ const TRICKS = [
   title:"Induction is dominoes: one falls, and each knocks the next",
   body:"Two steps only — show it is true for <b>n = 1</b> (push the first domino), then assume it for <b>n = k</b> and prove it for <b>n = k + 1</b> (each knocks the next). The proof is worthless without both. In the inductive step you must actually <i>use</i> the assumption; if you never invoke P(k), you have not done induction." },
 
+/* ======================= MATHS — PROOFS =======================
+   type:"proof" entries carry `claim` (what is being shown) and `steps`
+   (the derivation, one line each; the final step is the result).
+   ============================================================== */
+
+{ exam:["JEE"], subject:"Maths", cls:"9-10", type:"proof", topic:"Trigonometry",
+  title:"sin²θ + cos²θ = 1",
+  claim:"The fundamental Pythagorean identity, from the theorem of the same name.",
+  steps:[
+    "Take a right triangle with hypotenuse h, side opposite θ of length p, and adjacent side b.",
+    "Pythagoras gives p² + b² = h².",
+    "Divide every term by h²: (p/h)² + (b/h)² = 1.",
+    "By definition p/h = sinθ and b/h = cosθ.",
+    "Therefore <b>sin²θ + cos²θ = 1</b>. Dividing this by cos²θ gives 1 + tan²θ = sec²θ, and by sin²θ gives 1 + cot²θ = cosec²θ."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"9-10", type:"proof", topic:"Quadratic Equations",
+  title:"The quadratic formula, by completing the square",
+  claim:"For ax² + bx + c = 0 with a ≠ 0, x = [−b ± √(b²−4ac)] / 2a.",
+  steps:[
+    "Start from ax² + bx + c = 0 and divide by a: x² + (b/a)x + c/a = 0.",
+    "Move the constant across: x² + (b/a)x = −c/a.",
+    "Add (b/2a)² to both sides to complete the square on the left.",
+    "The left side becomes (x + b/2a)²; the right becomes b²/4a² − c/a = (b² − 4ac)/4a².",
+    "Take the square root of both sides: x + b/2a = ±√(b² − 4ac) / 2a.",
+    "Hence <b>x = [−b ± √(b² − 4ac)] / 2a</b>, and the sign of b² − 4ac decides the nature of the roots."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Sequences & Series",
+  title:"Sum of an AP — Gauss's pairing trick",
+  claim:"Sₙ = n/2 [2a + (n−1)d].",
+  steps:[
+    "Write the sum forwards: Sₙ = a + (a+d) + … + (l−d) + l, where l = a + (n−1)d.",
+    "Write the same sum backwards: Sₙ = l + (l−d) + … + (a+d) + a.",
+    "Add the two lines term by term. Every pair sums to the same value, a + l.",
+    "There are n such pairs, so 2Sₙ = n(a + l).",
+    "Therefore Sₙ = n(a + l)/2, and substituting l = a + (n−1)d gives <b>Sₙ = n/2[2a + (n−1)d]</b>."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Sequences & Series",
+  title:"Sum of a GP",
+  claim:"Sₙ = a(rⁿ − 1)/(r − 1) for r ≠ 1.",
+  steps:[
+    "Let Sₙ = a + ar + ar² + … + arⁿ⁻¹.",
+    "Multiply throughout by r: rSₙ = ar + ar² + … + arⁿ.",
+    "Subtract the first line from the second — every middle term cancels.",
+    "This leaves rSₙ − Sₙ = arⁿ − a, that is Sₙ(r − 1) = a(rⁿ − 1).",
+    "Hence <b>Sₙ = a(rⁿ − 1)/(r − 1)</b>. If |r| < 1, then rⁿ → 0 as n → ∞, giving the infinite sum <b>S = a/(1 − r)</b>."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Differentiation",
+  title:"d/dx(xⁿ) = nxⁿ⁻¹ from first principles",
+  claim:"The power rule, derived from the definition of the derivative.",
+  steps:[
+    "By definition, f′(x) = lim(h→0) [(x+h)ⁿ − xⁿ] / h.",
+    "Expand (x+h)ⁿ binomially: xⁿ + nxⁿ⁻¹h + [n(n−1)/2]xⁿ⁻²h² + … + hⁿ.",
+    "The xⁿ terms cancel in the numerator, leaving nxⁿ⁻¹h + (terms in h² and higher).",
+    "Divide by h: nxⁿ⁻¹ + (terms still containing h).",
+    "Let h → 0, so every remaining term with an h vanishes.",
+    "Therefore <b>d/dx(xⁿ) = nxⁿ⁻¹</b>."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Differentiation",
+  title:"d/dx(sin x) = cos x from first principles",
+  claim:"Uses the sum-to-product identity and the standard limit sinθ/θ → 1.",
+  steps:[
+    "f′(x) = lim(h→0) [sin(x+h) − sin x] / h.",
+    "Apply sin C − sin D = 2 cos((C+D)/2) · sin((C−D)/2).",
+    "The numerator becomes 2 cos(x + h/2) · sin(h/2).",
+    "So f′(x) = lim(h→0) cos(x + h/2) · [sin(h/2) / (h/2)].",
+    "As h → 0, the bracket tends to 1 (standard limit) and cos(x + h/2) tends to cos x.",
+    "Therefore <b>d/dx(sin x) = cos x</b>."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Limits & Continuity",
+  title:"lim(x→0) sin x / x = 1, by the sandwich theorem",
+  claim:"The limit every other trigonometric derivative rests on.",
+  steps:[
+    "For 0 < x < π/2, compare areas in a unit circle: triangle OAB, sector OAB, triangle OAC.",
+    "These give the inequality sin x < x < tan x.",
+    "Divide throughout by sin x (positive here): 1 < x/sin x < 1/cos x.",
+    "Take reciprocals, which reverses the inequalities: cos x < sin x / x < 1.",
+    "As x → 0, cos x → 1, so sin x / x is squeezed between two quantities both tending to 1.",
+    "Therefore <b>lim(x→0) sin x / x = 1</b>. Note this requires x in <i>radians</i> — in degrees the limit is π/180."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Integration",
+  title:"Integration by parts, from the product rule",
+  claim:"∫u dv = uv − ∫v du.",
+  steps:[
+    "Start from the product rule: d(uv)/dx = u(dv/dx) + v(du/dx).",
+    "Integrate both sides with respect to x: uv = ∫u(dv/dx)dx + ∫v(du/dx)dx.",
+    "Rearrange to isolate the first integral on the right.",
+    "This gives ∫u(dv/dx)dx = uv − ∫v(du/dx)dx.",
+    "In differential form, <b>∫u dv = uv − ∫v du</b> — which is why LIATE only tells you which factor to call u."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Integration",
+  title:"The king property: ∫₀ᵃ f(x)dx = ∫₀ᵃ f(a−x)dx",
+  claim:"A substitution that cracks a whole family of definite integrals.",
+  steps:[
+    "Let I = ∫₀ᵃ f(x)dx and substitute x = a − t, so dx = −dt.",
+    "When x = 0, t = a; when x = a, t = 0 — the limits swap.",
+    "I = ∫ₐ⁰ f(a−t)(−dt) = ∫₀ᵃ f(a−t)dt.",
+    "Since the variable of integration is a dummy, rename t back to x.",
+    "Therefore <b>∫₀ᵃ f(x)dx = ∫₀ᵃ f(a−x)dx</b>. Adding the two forms gives 2I, which is how integrals like ∫₀^(π/2) sinx/(sinx+cosx) collapse to π/4."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Quadratic Equations",
+  title:"Why α + β = −b/a and αβ = c/a",
+  claim:"The sum and product of roots, by comparing coefficients.",
+  steps:[
+    "If α and β are the roots, the equation can be written a(x − α)(x − β) = 0.",
+    "Expand: a[x² − (α + β)x + αβ] = 0, that is ax² − a(α+β)x + aαβ = 0.",
+    "Compare coefficients with ax² + bx + c = 0.",
+    "Matching the x term: −a(α + β) = b, so α + β = −b/a.",
+    "Matching the constant: aαβ = c, so <b>αβ = c/a</b> and <b>α + β = −b/a</b>."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Sequences & Series",
+  title:"AM ≥ GM for two positive numbers",
+  claim:"(a + b)/2 ≥ √(ab), with equality only when a = b.",
+  steps:[
+    "For any real numbers, a square is never negative: (√a − √b)² ≥ 0.",
+    "Expand the square: a − 2√(ab) + b ≥ 0.",
+    "Rearrange: a + b ≥ 2√(ab).",
+    "Divide by 2: <b>(a + b)/2 ≥ √(ab)</b>. Equality holds exactly when (√a − √b)² = 0, that is when a = b — which is what tells you <i>where</i> a minimum occurs."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Complex Numbers",
+  title:"The n-th roots of unity sum to zero",
+  claim:"1 + ω + ω² + … + ωⁿ⁻¹ = 0 for ω ≠ 1.",
+  steps:[
+    "The n-th roots of unity are the solutions of zⁿ = 1, that is 1, ω, ω², …, ωⁿ⁻¹ where ω = e^(2πi/n).",
+    "Their sum is a geometric progression with first term 1 and common ratio ω.",
+    "Using the GP sum: S = (ωⁿ − 1)/(ω − 1).",
+    "But ω is an n-th root of unity, so ωⁿ = 1 and the numerator is zero.",
+    "Since ω ≠ 1 the denominator is non-zero, so <b>the sum is 0</b>. For cube roots this is the familiar 1 + ω + ω² = 0."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Permutations & Combinations",
+  title:"Pascal's identity: nCr + nC(r−1) = (n+1)Cr",
+  claim:"Proved by a counting argument rather than algebra.",
+  steps:[
+    "Count the ways to choose r objects from n+1 objects — by definition, (n+1)Cr.",
+    "Now single out one particular object, call it X, and split the selections into two cases.",
+    "Case 1 — the selection excludes X: then all r come from the other n objects, in nCr ways.",
+    "Case 2 — the selection includes X: the remaining r−1 come from the other n, in nC(r−1) ways.",
+    "The cases are exhaustive and mutually exclusive, so they add.",
+    "Therefore <b>nCr + nC(r−1) = (n+1)Cr</b> — which is exactly how each row of Pascal's triangle builds the next."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Trigonometry",
+  title:"The sine rule",
+  claim:"a/sinA = b/sinB = c/sinC = 2R.",
+  steps:[
+    "In triangle ABC, drop a perpendicular of length h from A onto BC.",
+    "From the right triangle on the left, h = c·sinB; from the one on the right, h = b·sinC.",
+    "Equating them: c·sinB = b·sinC, so b/sinB = c/sinC.",
+    "Repeating with a perpendicular from B gives a/sinA = c/sinC.",
+    "Hence <b>a/sinA = b/sinB = c/sinC</b>, and a circumcircle argument shows the common value is <b>2R</b>."
+  ] },
+
 /* ==================================================================
    BIOLOGY — MNEMONICS
    ================================================================== */
@@ -1731,6 +2152,21 @@ const TRICKS = [
 { exam:["NEET"], subject:"Biology", cls:"11-12", type:"mnemonic", topic:"Human Excretion",
   title:"Ammonotelic, ureotelic, uricotelic — how much water can you spare?",
   body:"<b>Ammonotelic</b> — bony fish and aquatic amphibians excrete ammonia (most toxic, needs the most water, but water is free). <b>Ureotelic</b> — mammals and adult amphibians excrete urea. <b>Uricotelic</b> — birds, reptiles and insects excrete uric acid (least toxic, almost no water lost, and lightest for flight)." },
+
+/* ======================= BIOLOGY — PROOFS ======================= */
+
+{ exam:["NEET"], subject:"Biology", cls:"11-12", type:"proof", topic:"Evolution",
+  title:"Deriving the Hardy-Weinberg equation",
+  claim:"p² + 2pq + q² = 1, from nothing more than random mating.",
+  steps:[
+    "Let a gene have two alleles, A with frequency p and a with frequency q. Since these are the only alleles, p + q = 1.",
+    "Under random mating, gametes pair independently, so genotype frequencies are the products of allele frequencies.",
+    "An AA individual needs an A from each parent: frequency p × p = p².",
+    "An aa individual needs an a from each: frequency q × q = q².",
+    "An Aa individual can arise two ways (A from father and a from mother, or the reverse): frequency 2pq.",
+    "These three genotypes are the only possibilities, so they must sum to 1.",
+    "Therefore <b>p² + 2pq + q² = 1</b>, which is simply the expansion of (p + q)² = 1² — and any observed deviation means one of the five conditions has been broken, i.e. evolution is occurring."
+  ] },
 
 /* --------- BIOLOGY — unorthodox hooks, chapter by chapter (11-12) --------- */
 

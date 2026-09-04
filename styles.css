@@ -18,6 +18,7 @@
   --mnemonic:#c2650a;
   --shortcut:#2563eb;
   --formula:#7c3aed;
+  --proof:#0d9488;
   --shadow-sm:0 1px 2px rgba(18,20,40,.05);
   --shadow:0 1px 3px rgba(18,20,40,.06), 0 8px 20px rgba(18,20,40,.05);
   --topbar-h:60px;
@@ -31,7 +32,7 @@
   --text:#eceff8; --text-muted:#9aa0b6; --text-faint:#737990;
   --brand:#818cf8; --brand-soft:#232441;
   --jee:#60a5fa; --neet:#2dd4bf;
-  --mnemonic:#fbbf24; --shortcut:#60a5fa; --formula:#c4b5fd;
+  --mnemonic:#fbbf24; --shortcut:#60a5fa; --formula:#c4b5fd; --proof:#2dd4bf;
   --shadow-sm:0 1px 2px rgba(0,0,0,.35);
   --shadow:0 1px 3px rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.32);
   color-scheme:dark;
@@ -43,7 +44,7 @@
     --text:#eceff8; --text-muted:#9aa0b6; --text-faint:#737990;
     --brand:#818cf8; --brand-soft:#232441;
     --jee:#60a5fa; --neet:#2dd4bf;
-    --mnemonic:#fbbf24; --shortcut:#60a5fa; --formula:#c4b5fd;
+    --mnemonic:#fbbf24; --shortcut:#60a5fa; --formula:#c4b5fd; --proof:#2dd4bf;
     --shadow-sm:0 1px 2px rgba(0,0,0,.35);
     --shadow:0 1px 3px rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.32);
     color-scheme:dark;
@@ -197,6 +198,7 @@ button{font-family:inherit}
 .swatch-mnemonic{background:var(--mnemonic)}
 .swatch-shortcut{background:var(--shortcut)}
 .swatch-formula{background:var(--formula)}
+.swatch-proof{background:var(--proof)}
 .swatch-jee{background:var(--jee)}
 .swatch-neet{background:var(--neet)}
 
@@ -336,6 +338,7 @@ button{font-family:inherit}
 .tag-type-mnemonic{color:var(--mnemonic)} .tag-type-mnemonic .dot{background:var(--mnemonic)}
 .tag-type-shortcut{color:var(--shortcut)} .tag-type-shortcut .dot{background:var(--shortcut)}
 .tag-type-formula{color:var(--formula)} .tag-type-formula .dot{background:var(--formula)}
+.tag-type-proof{color:var(--proof)} .tag-type-proof .dot{background:var(--proof)}
 .meta-sep{color:var(--border-strong)}
 .meta-dim{color:var(--text-faint); font-weight:500;}
 .tag-exam{border-radius:5px; padding:1px 6px; font-size:.66rem; letter-spacing:.03em;}
@@ -346,6 +349,25 @@ button{font-family:inherit}
 .card .body{font-size:.865rem; color:var(--text-muted); line-height:1.6;}
 .card .body b{color:var(--text); font-weight:700;}
 .card .body i{color:var(--text); font-style:italic;}
+
+/* Proofs — a claim line, then numbered steps with the result set apart */
+.proof-claim{
+  font-size:.83rem; color:var(--text-muted); font-style:italic;
+  padding:7px 10px; border-left:2px solid var(--proof);
+  background:color-mix(in srgb, var(--proof) 7%, transparent);
+  border-radius:0 6px 6px 0;
+}
+.proof-steps{
+  margin:2px 0 0; padding-left:20px;
+  font-size:.855rem; color:var(--text-muted); line-height:1.55;
+}
+.proof-steps li{margin-bottom:5px; padding-left:2px;}
+.proof-steps li::marker{color:var(--proof); font-weight:700; font-size:.78rem;}
+.proof-steps li:last-child{
+  margin-bottom:0; color:var(--text); font-weight:600;
+}
+.proof-steps b{color:var(--text); font-weight:700;}
+.proof-steps i{font-style:italic;}
 
 .rows-table{width:100%; border-collapse:collapse; font-size:.83rem; margin-top:1px;}
 .rows-table tr{border-top:1px solid var(--border)}
@@ -492,6 +514,11 @@ body.has-selection .to-top{bottom:76px}
     display:inline-block; width:6pt; height:6pt; margin-right:3pt;
     border:.6pt solid #888; border-radius:1pt; vertical-align:baseline;
   }
+
+  /* Proof steps stay numbered on paper, tight enough to keep the density */
+  .ps-steps{margin:1pt 0 0; padding-left:12pt; font-size:7.8pt; line-height:1.32;}
+  .ps-steps li{margin-bottom:1pt;}
+  .ps-steps li:last-child{font-weight:700;}
 
   .ps-rows{width:100%; border-collapse:collapse; font-size:7.4pt; margin-top:1pt;}
   .ps-rows td{padding:.8pt 0; vertical-align:top;}
