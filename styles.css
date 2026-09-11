@@ -396,11 +396,9 @@ button{font-family:inherit}
   color:var(--text-faint); font-size:.8rem; text-align:center;
 }
 .site-footer .footer-note{margin-top:8px; font-size:.74rem; opacity:.8; max-width:620px; margin-left:auto; margin-right:auto;}
-/* Studio credit — kept quiet and set apart from the site's own footer text */
-.site-footer .footer-credit{
-  margin-top:16px; padding-top:14px; border-top:1px solid var(--border);
-  font-size:.72rem; letter-spacing:.03em; color:var(--text-faint); font-weight:600;
-}
+/* The studio credit styles itself (see the .stunity-credit block in index.html);
+   this only stops the site footer's centred text rules fighting its layout. */
+.site-footer .stunity-credit{text-align:left;}
 .site-footer a{color:var(--brand); font-weight:600; text-decoration:none;}
 .site-footer a:hover{text-decoration:underline}
 
@@ -474,6 +472,8 @@ body.has-selection .to-top{bottom:76px}
 .print-sheet{display:none}
 
 @media print{
+  /* The studio credit component sets its own @page margin-bottom for the
+     running footer, so only size and the other three margins are set here. */
   @page{size:A4; margin:9mm 8mm}
 
   .topbar,.sidebar,.drawer-scrim,.toolbar,.intro,.site-footer,
@@ -485,10 +485,30 @@ body.has-selection .to-top{bottom:76px}
 
   .print-sheet{
     display:block !important;
-    column-count:2; column-gap:6mm;
     font-family:'Inter',system-ui,sans-serif;
     font-size:8pt; line-height:1.34; color:#000;
   }
+
+  /* The studio credit ships with a position:fixed print rule. On a long
+     multi-column sheet Chrome repeats a fixed element on only a couple of
+     pages, and when it does repeat it paints over the last line of copy. So
+     the credit is instead cloned into this table's footer group, which the
+     browser repeats on every page and reserves space for. The original
+     #stunityCredit is therefore hidden in print to avoid a doubled footer;
+     it is untouched on screen. */
+  #stunityCredit{display:none !important}
+  .ps-wrap{width:100%; border-collapse:collapse;}
+  .ps-wrap > tbody > tr > td, .ps-wrap > tfoot > tr > td{padding:0;}
+  .ps-wrap tfoot{display:table-footer-group;}
+  .ps-runfoot{
+    margin:0; padding:2.5mm 0 0; max-width:none;
+    border-top:.2mm solid #c9c9c9; font-size:7.5pt; color:#5b5b5b;
+  }
+  /* The columns live inside the table cell, below the header line */
+  .ps-cols{column-count:2; column-gap:6mm;}
+  /* No trailing whitespace after the last tip or around the sheet */
+  .ps-cols > *:last-child{margin-bottom:0 !important}
+  .print-sheet,.ps-wrap{margin:0}
 
   /* One compact line, not a title block */
   .ps-head{
@@ -525,10 +545,6 @@ body.has-selection .to-top{bottom:76px}
   .ps-rows td:first-child{width:43%; padding-right:4pt; color:#333;}
   .ps-rows td:last-child{font-family:'JetBrains Mono',Consolas,monospace; font-size:7.1pt;}
 
-  .ps-foot{
-    column-span:all; margin-top:5pt; padding-top:2.5pt;
-    border-top:.5pt solid #999; font-size:6.8pt; color:#666; text-align:right;
-  }
 }
 
 @media (max-width:680px){

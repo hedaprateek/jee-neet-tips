@@ -81,6 +81,19 @@ Add an entry to the `TRICKS` array in `data.js` following the existing shape:
 `subject` + `title` is the entry's identity (it keys the print-sheet selection), so titles
 must be unique within a subject. Then open a PR.
 
+## The studio credit
+
+The `.stunity-credit` component in `index.html` carries the studio credit in all
+three outputs:
+
+- **Screen** — a quiet line in the site footer, set apart from the site's own text.
+- **Print** — cloned into the revision sheet's table footer group (`.ps-wrap tfoot`),
+  which Chrome repeats on *every* page and reserves space for. The component's own
+  `position:fixed` print variant is disabled here: measured on this sheet it appeared
+  on only 2 of 18 pages, and forcing it inside the page box painted over the last
+  line of copy.
+- **Download** — the last line of the `.txt` sheet, from `CONFIG.credit` in `app.js`.
+
 ## Running locally
 
 Any static file server works, e.g.:

@@ -408,9 +408,16 @@
     const items = sheetTips();
     const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
 
-    let html = `<div class="ps-head">
+    // The sheet is wrapped in a table whose <tfoot> carries the studio credit:
+    // a table footer group is the one mechanism Chrome both repeats on every
+    // printed page and reserves vertical space for, so the credit never lands
+    // on the copy. (A position:fixed footer does one or the other, not both.)
+    let html = `<table class="ps-wrap"><tfoot><tr><td>
+      <div class="stunity-credit ps-runfoot"><span class="sc-dot"></span><span>${CONFIG.credit.replace(/by (.+)$/, 'by <b>$1</b>')}</span></div>
+    </td></tr></tfoot><tbody><tr><td>
+    <div class="ps-head">
       <b>${CONFIG.sheetTitle}</b> · ${items.length} tip${items.length === 1 ? '' : 's'} · ${today} · ${CONFIG.siteUrl}
-    </div>`;
+    </div><div class="ps-cols">`;
 
     groupForSheet(items).forEach(({ subject, chapters }) => {
       html += `<h2 class="ps-subject">${subject}</h2>`;
@@ -431,7 +438,7 @@
       });
     });
 
-    html += `<div class="ps-foot">${CONFIG.credit}</div>`;
+    html += `</div></td></tr></tbody></table>`;
     el.printSheet.innerHTML = html;
   }
 
