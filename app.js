@@ -421,8 +421,10 @@
 
     groupForSheet(items).forEach(({ subject, chapters }) => {
       html += `<h2 class="ps-subject">${subject}</h2>`;
-      // Tips stay ordered by chapter, so related ones remain adjacent.
-      chapters.forEach(([, tips]) => {
+      chapters.forEach(([chapter, tips]) => {
+        // Chapter headings make the printed sheet navigable; they cost a line
+        // each but a sheet you cannot find your place in is not worth carrying.
+        html += `<h3 class="ps-chapter">${chapter}</h3>`;
         tips.forEach((t) => {
           const head = `<div class="ps-tip"><span class="ps-tick"></span><b class="ps-title">${t.title}</b>`;
           if (t.type === 'formula' && t.rows) {

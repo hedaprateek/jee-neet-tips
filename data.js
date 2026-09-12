@@ -2253,4 +2253,297 @@ const TRICKS = [
   title:"Active vs passive, innate vs acquired immunity",
   body:"<b>Active</b> immunity — your own body makes the antibodies (infection or vaccination); slow to develop but long lasting. <b>Passive</b> — ready-made antibodies are given (mother's milk, antivenom); instant but temporary. Separately, <b>innate</b> immunity is non-specific and present from birth, while <b>acquired</b> is specific and has memory." },
 
+/* ==================================================================
+   JEE ADVANCED — MATHS
+   Depth beyond the Class 11-12 treatment: higher-degree polynomials,
+   classical inequalities, and the results Advanced leans on.
+   ================================================================== */
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"formula", topic:"Theory of Equations",
+  title:"Vieta's relations for cubics and quartics",
+  rows:[
+    ["Cubic ax³+bx²+cx+d — Σα","−b/a"],
+    ["Cubic — Σαβ","c/a"],
+    ["Cubic — αβγ","−d/a"],
+    ["Quartic ax⁴+bx³+cx²+dx+e — Σα","−b/a"],
+    ["Quartic — Σαβ","c/a"],
+    ["Quartic — Σαβγ","−d/a"],
+    ["Quartic — αβγδ","e/a"],
+    ["General degree n — eₖ","(−1)ᵏ·aₖ/a₀"],
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Theory of Equations",
+  title:"Vieta at any degree — the signs just alternate",
+  body:"Take the coefficients of a₀xⁿ + a₁xⁿ⁻¹ + … + aₙ = 0. The sum of the roots one at a time is <b>−a₁/a₀</b>, two at a time <b>+a₂/a₀</b>, three at a time <b>−a₃/a₀</b>, and so on: the k-th symmetric sum is <b>(−1)ᵏaₖ/a₀</b>. Only the sign alternates — the index marches down the coefficient list. So the product of all n roots is (−1)ⁿaₙ/a₀." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Theory of Equations",
+  title:"Why Vieta's relations hold",
+  claim:"For a₀xⁿ + a₁xⁿ⁻¹ + … + aₙ = 0 with roots α₁…αₙ, the k-th elementary symmetric sum is (−1)ᵏaₖ/a₀.",
+  steps:[
+    "A degree-n polynomial with those roots factorises as a₀(x − α₁)(x − α₂)…(x − αₙ).",
+    "Expanding the product, the coefficient of xⁿ⁻ᵏ comes from choosing the constant −αᵢ from exactly k brackets and x from the rest.",
+    "Each such choice contributes (−1)ᵏ times a product of k distinct roots, so summing over all choices gives (−1)ᵏ·eₖ, where eₖ is the k-th elementary symmetric sum.",
+    "So the coefficient of xⁿ⁻ᵏ in the expansion is a₀·(−1)ᵏ·eₖ.",
+    "Comparing with the given coefficient aₖ of xⁿ⁻ᵏ: a₀(−1)ᵏeₖ = aₖ.",
+    "Therefore <b>eₖ = (−1)ᵏaₖ/a₀</b> — which for k = n gives the product of the roots as (−1)ⁿaₙ/a₀."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Theory of Equations",
+  title:"Descartes' rule of signs bounds the real roots before you solve",
+  body:"Count the sign changes in the coefficient list of f(x): the number of <b>positive</b> real roots equals that count, or is less by an <i>even</i> number. Do the same for <b>f(−x)</b> to bound the negative roots. So x⁵ + 3x − 1 has one sign change → exactly one positive root, and f(−x) = −x⁵ − 3x − 1 has none → no negative roots. Combined with the degree, this often pins the root pattern with no algebra at all." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Theory of Equations",
+  title:"Rational root theorem — only finitely many candidates",
+  body:"Any rational root p/q in lowest terms of a polynomial with integer coefficients must have <b>p dividing the constant term</b> and <b>q dividing the leading coefficient</b>. For a <i>monic</i> polynomial q = ±1, so every rational root is an integer factor of the constant term. Test those few candidates with the factor theorem and a cubic usually collapses to a linear factor times a quadratic." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Theory of Equations",
+  title:"Awkward roots arrive in pairs",
+  body:"With <b>real</b> coefficients, complex roots come in conjugate pairs — a + ib forces a − ib. With <b>rational</b> coefficients, surd roots pair too — 2 + √3 forces 2 − √3. Two consequences worth carrying: an <b>odd-degree</b> real polynomial must have at least one real root (the complex ones pair off), and if you are told 1 + i is a root of a real quartic, you already know two of the four." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Theory of Equations",
+  title:"Every odd-degree real polynomial has a real root",
+  claim:"If f has real coefficients and odd degree, then f(x) = 0 for some real x.",
+  steps:[
+    "Write f(x) = a₀xⁿ + … with n odd and a₀ ≠ 0; assume a₀ > 0 (otherwise use −f, which has the same roots).",
+    "For large positive x the leading term dominates, and since n is odd, xⁿ → +∞, so f(x) → +∞.",
+    "For large negative x, xⁿ → −∞ because n is odd, so f(x) → −∞.",
+    "Hence there exist points where f is negative and points where f is positive.",
+    "A polynomial is continuous everywhere, so the intermediate value theorem applies on the interval joining those two points.",
+    "Therefore <b>f takes the value 0 somewhere in between</b> — an odd-degree real polynomial always has at least one real root, which is why a real cubic can never have exactly two real roots."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Theory of Equations",
+  title:"Repeated roots are the roots f shares with f′",
+  body:"α is a repeated root of f exactly when <b>f(α) = 0 and f′(α) = 0</b>. So the repeated factors are precisely gcd(f, f′) — if that gcd is a constant, all roots are distinct. For a cubic this is the fastest way to test for a double root without computing the discriminant, and it generalises to any degree." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Theory of Equations",
+  title:"Kill the second term: the depressed cubic",
+  body:"Substituting <b>x = y − b/3a</b> into ax³ + bx² + cx + d turns it into y³ + py + q with <i>no y² term</i> — because the substitution shifts the roots so their sum becomes zero. The same trick works at any degree: shifting by −a₁/(na₀) always removes the second-highest term, which is the first move in Cardano's method and in most 'form the equation whose roots are …' problems." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Theory of Equations",
+  title:"Transforming an equation without finding its roots",
+  body:"To get the equation whose roots are: <b>k times</b> the originals — replace x by x/k; <b>reciprocals</b> — reverse the coefficient list (replace x by 1/x and clear); <b>each less by h</b> — replace x by x + h; <b>negatives</b> — replace x by −x. Each is a substitution on the polynomial, so you never solve anything. Reversing the coefficients also explains why a <i>reciprocal</i> equation has a palindromic coefficient list." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Theory of Equations",
+  title:"Symmetric sums: convert to e₁, e₂, e₃ and stop",
+  body:"Any symmetric expression in the roots can be written using the Vieta sums. The ones worth memorising: <b>Σα² = e₁² − 2e₂</b>; <b>Σα³ = e₁³ − 3e₁e₂ + 3e₃</b>; <b>Σ1/α = e₂/e₃</b> (for a cubic); <b>Σα²β² = e₂² − 2e₁e₃</b>. Newton's identities generate the rest: p₁ = e₁, p₂ = e₁p₁ − 2e₂, p₃ = e₁p₂ − e₂p₁ + 3e₃, where pₖ = Σαᵏ." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"formula", topic:"Theory of Equations",
+  title:"Common roots, and the nature of a cubic's roots",
+  rows:[
+    ["Both roots common (two quadratics)","a₁/a₂ = b₁/b₂ = c₁/c₂"],
+    ["Exactly one common root","(c₁a₂ − c₂a₁)² = (b₁c₂ − b₂c₁)(a₁b₂ − a₂b₁)"],
+    ["That common root","x = (b₁c₂ − b₂c₁)/(c₁a₂ − c₂a₁)"],
+    ["Cubic discriminant Δ","18abcd − 4b³d + b²c² − 4ac³ − 27a²d²"],
+    ["Δ > 0","three distinct real roots"],
+    ["Δ = 0","a repeated root"],
+    ["Δ < 0","one real root and two conjugate complex"],
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Theory of Equations",
+  title:"Rolle's theorem locates a polynomial's turning points between its roots",
+  body:"Between any two real roots of f there is a root of <b>f′</b>. Run it backwards to count roots: if f′ has no real roots, f is monotonic and so has <i>exactly one</i> real root. For a cubic, comparing the sign of f at its two stationary points settles the count immediately — both the same sign means one real root, opposite signs mean three, and a zero means a repeated root." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Inequalities",
+  title:"The Cauchy-Schwarz inequality",
+  claim:"(Σaᵢbᵢ)² ≤ (Σaᵢ²)(Σbᵢ²), with equality only when the sequences are proportional.",
+  steps:[
+    "Consider the quadratic in t: Q(t) = Σ(aᵢt + bᵢ)², which is a sum of squares and therefore Q(t) ≥ 0 for every real t.",
+    "Expanding: Q(t) = (Σaᵢ²)t² + 2(Σaᵢbᵢ)t + (Σbᵢ²).",
+    "A real quadratic that is never negative cannot cross the axis, so its discriminant is ≤ 0.",
+    "That is 4(Σaᵢbᵢ)² − 4(Σaᵢ²)(Σbᵢ²) ≤ 0.",
+    "Therefore <b>(Σaᵢbᵢ)² ≤ (Σaᵢ²)(Σbᵢ²)</b>, and equality needs Q(t) = 0 for some t, i.e. bᵢ = −taᵢ for all i — the sequences are proportional."
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Inequalities",
+  title:"Which inequality to reach for",
+  body:"<b>AM ≥ GM</b> when a <i>product</i> is fixed and you want a sum minimised (or vice versa) — equality when all terms are equal. <b>Cauchy-Schwarz</b> when you meet a sum of products, or need to split a sum: the “1-trick”, Σaᵢ = Σ(1·aᵢ) ≤ √n·√(Σaᵢ²), bounds a sum by a sum of squares. <b>Triangle inequality</b> |a| − |b| ≤ |a ± b| ≤ |a| + |b| for modulus problems. Most JEE inequality questions fall to AM-GM alone." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"formula", topic:"Inequalities",
+  title:"Classical inequalities",
+  rows:[
+    ["AM ≥ GM ≥ HM (n terms)","(Σaᵢ)/n ≥ (Πaᵢ)^(1/n) ≥ n/(Σ1/aᵢ)"],
+    ["Equality condition","a₁ = a₂ = … = aₙ"],
+    ["Cauchy-Schwarz","(Σaᵢbᵢ)² ≤ (Σaᵢ²)(Σbᵢ²)"],
+    ["Weighted AM-GM","Σwᵢaᵢ ≥ Πaᵢ^wᵢ when Σwᵢ = 1"],
+    ["Triangle inequality","|a| − |b| ≤ |a ± b| ≤ |a| + |b|"],
+    ["Minimum of x + k/x (x, k > 0)","2√k, at x = √k"],
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Permutations & Combinations",
+  title:"Stars and bars counts non-negative solutions",
+  body:"The number of non-negative integer solutions of x₁ + x₂ + … + xᵣ = n is <b>C(n + r − 1, r − 1)</b> — place n identical stars and r − 1 dividers. For <i>positive</i> solutions, first give everyone 1 and solve for the remaining n − r, giving <b>C(n − 1, r − 1)</b>. This is the same count as distributing n identical objects into r distinct boxes." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Permutations & Combinations",
+  title:"Derangements — nobody in their own place",
+  body:"Dₙ = n!(1 − 1/1! + 1/2! − … + (−1)ⁿ/n!), and the small values are worth memorising outright: <b>D₁ = 0, D₂ = 1, D₃ = 2, D₄ = 9, D₅ = 44</b>. The recurrence Dₙ = (n−1)(Dₙ₋₁ + Dₙ₋₂) rebuilds any of them. Use it for “no letter goes into its own envelope”, and note Dₙ/n! → 1/e." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Integration",
+  title:"Walli's formula for ∫₀^(π/2) sinⁿx dx",
+  body:"Use double factorials: for <b>even</b> n the answer is [(n−1)(n−3)…1 / n(n−2)…2] × <b>π/2</b>; for <b>odd</b> n it is [(n−1)(n−3)…2 / n(n−2)…3], with <i>no</i> π/2. The integral of cosⁿx over the same limits is identical. So ∫₀^(π/2)sin⁶x dx = (5·3·1)/(6·4·2) × π/2 = 5π/32 — a one-line answer to an otherwise repeated integration by parts." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"formula", topic:"Limits & Continuity",
+  title:"Series expansions worth knowing by heart",
+  rows:[
+    ["eˣ","1 + x + x²/2! + x³/3! + …"],
+    ["ln(1+x), |x|<1","x − x²/2 + x³/3 − …"],
+    ["sin x","x − x³/3! + x⁵/5! − …"],
+    ["cos x","1 − x²/2! + x⁴/4! − …"],
+    ["tan x","x + x³/3 + 2x⁵/15 + …"],
+    ["(1+x)ⁿ","1 + nx + n(n−1)x²/2! + …"],
+    ["Use","expand to the first two surviving terms to kill a 0/0 limit"],
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Matrices & Determinants",
+  title:"Cayley-Hamilton turns high powers of a matrix into low ones",
+  body:"Every square matrix satisfies its own characteristic equation. For a 2×2 matrix A: <b>A² − (trace A)·A + (det A)·I = 0</b>. Rearranged, A² is a combination of A and I — so A³, A⁴ and even A⁻¹ reduce to aA + bI. That converts “find A¹⁰⁰” from a computation into an algebra exercise." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Sets, Relations & Functions",
+  title:"Cauchy's functional equations have standard answers",
+  body:"Assuming continuity, each form has one family of solutions: <b>f(x+y) = f(x)+f(y)</b> → f(x) = cx; <b>f(x+y) = f(x)f(y)</b> → f(x) = aˣ; <b>f(xy) = f(x)+f(y)</b> → f(x) = c·ln x; <b>f(xy) = f(x)f(y)</b> → f(x) = x^c. Recognising which of the four you are looking at answers the question; otherwise substitute x = y = 0 and x = y = 1 to pin the constants." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"shortcut", topic:"Vectors & 3D Geometry",
+  title:"Shortest distance between skew lines",
+  body:"For lines r = a₁ + λb₁ and r = a₂ + μb₂, the shortest distance is <b>|(a₂ − a₁)·(b₁ × b₂)| / |b₁ × b₂|</b> — project the gap between the lines onto their common perpendicular. If that scalar triple product is <b>zero</b> the lines are coplanar (they intersect or are parallel), which is also the standard test for four points being coplanar." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"mnemonic", topic:"Complex Numbers",
+  title:"Reading a locus straight off the equation",
+  body:"<b>|z − z₁| = r</b> is a circle; <b>|z − z₁| = |z − z₂|</b> is the perpendicular bisector; <b>|z − z₁| + |z − z₂| = k</b> is an ellipse (k > |z₁−z₂|); <b>| |z − z₁| − |z − z₂| | = k</b> is a hyperbola; and <b>arg((z−z₁)/(z−z₂)) = α</b> is an arc of a circle through z₁ and z₂ — a right angle when α = π/2, giving the circle on z₁z₂ as diameter." },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"formula", topic:"Conic Sections",
+  title:"Standard results Advanced expects",
+  rows:[
+    ["Tangent at a point (T = 0)","xx₁/a² + yy₁/b² = 1 (ellipse)"],
+    ["Chord of contact from an external point","T = 0 with (x₁,y₁) the external point"],
+    ["Director circle — ellipse","x² + y² = a² + b²"],
+    ["Director circle — hyperbola","x² + y² = a² − b²"],
+    ["Parabola y²=4ax — parametric point","(at², 2at)"],
+    ["Focal chord condition (parabola)","t₁t₂ = −1"],
+    ["Tangent to y²=4ax in slope form","y = mx + a/m"],
+  ] },
+
+{ exam:["JEE"], subject:"Maths", cls:"11-12", type:"proof", topic:"Sequences & Series",
+  title:"AM ≥ GM for n terms, by Cauchy's forward-backward induction",
+  claim:"(a₁+…+aₙ)/n ≥ (a₁…aₙ)^(1/n) for positive aᵢ, with equality only when all are equal.",
+  steps:[
+    "Base case n = 2 is (√a₁ − √a₂)² ≥ 0 rearranged, which we already know.",
+    "Forward step — if the result holds for n, it holds for 2n: split the 2n numbers into two halves, apply the n-case to each, then apply the 2-case to the two resulting means.",
+    "That establishes the inequality for every power of two.",
+    "Backward step — if it holds for n, it holds for n − 1: given a₁…aₙ₋₁, set the n-th number equal to their arithmetic mean A and apply the n-case.",
+    "Simplifying that gives A ≥ (a₁…aₙ₋₁)^(1/(n−1)), the (n−1)-case.",
+    "Powers of two reach arbitrarily high and the backward step descends to every integer between, so <b>AM ≥ GM holds for all n</b>, with equality precisely when every term is equal."
+  ] },
+
+/* ==================================================================
+   JEE ADVANCED — PHYSICS
+   ================================================================== */
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Rotational Motion",
+  title:"Rolling down an incline: only the shape matters",
+  body:"For any body rolling without slipping, <b>a = g sinθ / (1 + I/mR²)</b>. Mass and radius cancel out entirely — only the <i>shape factor</i> I/mR² survives. So the race order is fixed: solid sphere (2/5) beats disc (1/2) beats hollow sphere (2/3) beats ring (1). A <b>ring is always last and a solid sphere always first</b>, whatever they weigh." },
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"formula", topic:"Rotational Motion",
+  title:"Rolling, and the two axis theorems",
+  rows:[
+    ["Rolling condition","v = ωR"],
+    ["Total KE while rolling","½mv²(1 + I/mR²)"],
+    ["Acceleration on an incline","g sinθ / (1 + I/mR²)"],
+    ["Shape factor I/mR²","sphere 2/5, disc 1/2, hollow sphere 2/3, ring 1"],
+    ["Parallel axis theorem","I = I_cm + Md²"],
+    ["Perpendicular axis theorem (lamina only)","I_z = I_x + I_y"],
+    ["Minimum friction to roll","μ ≥ tanθ / (1 + mR²/I)"],
+  ] },
+
+{ exam:["JEE","NEET"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Laws of Motion",
+  title:"Vertical circle: √(gR) at the top, √(5gR) at the bottom",
+  body:"For a body on a <i>string or track</i>, gravity supplies the centripetal force at the top when tension just vanishes, giving <b>v_top = √(gR)</b>. Energy conservation then fixes the bottom speed at <b>v_bottom = √(5gR)</b>. For a <i>rod</i>, which can push as well as pull, the top speed can fall to zero instead — the string-versus-rod distinction is the whole question." },
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Electrostatics",
+  title:"Shell theorem: inside a uniform shell the field is exactly zero",
+  body:"For a uniformly charged <b>shell</b>: E = 0 everywhere inside, and outside it acts as a point charge at the centre. The <i>potential</i> inside is not zero — it is constant at kQ/R. For a uniformly charged <b>solid sphere</b> the inside field grows linearly, E = kQr/R³. Gravity obeys the identical pattern, which is why g falls linearly inside the Earth." },
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Current Electricity",
+  title:"Resistor cubes fall to symmetry, not to Kirchhoff",
+  body:"In a cube of 12 equal resistors R, nodes at the same potential can be merged. The three standard answers: across a <b>body diagonal 5R/6</b>, across a <b>face diagonal 3R/4</b>, along an <b>edge 7R/12</b>. Spotting equipotential nodes turns a twelve-equation system into an arithmetic exercise — the same move that collapses a balanced Wheatstone bridge." },
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"SHM & Waves",
+  title:"Two masses on one spring oscillate with the reduced mass",
+  body:"Two blocks joined by a spring and released oscillate about their (stationary) centre of mass with <b>ω = √(k/μ)</b>, where the reduced mass <b>μ = m₁m₂/(m₁+m₂)</b>. Since μ is always smaller than either mass, the pair oscillates <i>faster</i> than either block would alone against a wall." },
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Collisions & Momentum",
+  title:"Work in the centre-of-mass frame",
+  body:"In the COM frame the total momentum is <b>zero</b> by definition, so in a perfectly elastic collision each body simply <i>reverses</i> its velocity there. Transform in, flip the signs, transform back — this replaces solving the momentum and energy equations simultaneously. The KE that can be lost in any collision is exactly the KE measured in this frame." },
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"formula", topic:"Thermodynamics",
+  title:"Polytropic processes and heat capacities",
+  rows:[
+    ["Polytropic process","PVⁿ = constant"],
+    ["Molar heat capacity","C = Cv + R/(1 − n)"],
+    ["n = 0","isobaric, C = Cp"],
+    ["n = 1","isothermal, C → ∞"],
+    ["n = γ","adiabatic, C = 0"],
+    ["n → ∞","isochoric, C = Cv"],
+    ["Work done","W = (P₁V₁ − P₂V₂)/(n − 1)"],
+  ] },
+
+{ exam:["JEE"], subject:"Physics", cls:"11-12", type:"shortcut", topic:"Kinematics",
+  title:"Minimum separation is where the relative velocity turns perpendicular",
+  body:"For two bodies moving with constant velocities, work in the frame of one: the other travels in a straight line, and the closest approach is simply the <b>perpendicular distance from the origin to that line</b>. So minimum separation = d·sinθ, where θ is the angle between the initial separation and the relative velocity — no differentiation required." },
+
+/* ==================================================================
+   JEE ADVANCED — CHEMISTRY
+   ================================================================== */
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Coordination Compounds",
+  title:"Spin-only magnetic moment counts unpaired electrons",
+  body:"μ = <b>√(n(n+2))</b> Bohr magnetons, where n is the number of unpaired electrons. The values are worth knowing outright: n = 1 → 1.73, 2 → 2.83, 3 → 3.87, 4 → 4.90, 5 → 5.92 BM. Questions run both ways — given μ = 3.87, you immediately know n = 3, which then fixes the oxidation state or whether the ligand field is strong." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"formula", topic:"Coordination Compounds",
+  title:"Crystal field theory",
+  rows:[
+    ["Octahedral splitting","t₂g (lower, ×3) and e_g (upper, ×2)"],
+    ["CFSE (octahedral)","(−0.4·n_t2g + 0.6·n_eg)Δ₀"],
+    ["Tetrahedral splitting","Δt = (4/9)Δ₀ — always high spin"],
+    ["Strong field ligand","large Δ₀ → pairing, low spin, inner orbital"],
+    ["Weak field ligand","small Δ₀ → high spin, outer orbital"],
+    ["Spin-only moment","μ = √(n(n+2)) BM"],
+    ["Colourless ions","d⁰ (Sc³⁺, Ti⁴⁺) and d¹⁰ (Zn²⁺, Cu⁺)"],
+  ] },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Named Reactions",
+  title:"The rearrangements that shorten or keep the chain",
+  body:"<b>Hofmann bromamide</b> — amide → amine with <b>one carbon less</b>. <b>Curtius</b> — acyl azide → amine, also one carbon less. <b>Beckmann</b> — an <i>oxime</i> rearranges to an <b>amide</b> (same carbon count; the group <i>anti</i> to OH migrates). <b>Schmidt</b> — acid → amine, one less. Hook: “the nitrogen ones eat a carbon, Beckmann only rearranges.”" },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Named Reactions",
+  title:"Wolff-Kishner is basic, Clemmensen is acidic",
+  body:"Both reduce <b>C=O all the way to CH₂</b>, and you choose by what the rest of the molecule tolerates. <b>Wolff-Kishner</b> uses NH₂NH₂/KOH — <i>basic</i>, so use it when the compound is acid-sensitive. <b>Clemmensen</b> uses Zn-Hg/HCl — <i>acidic</i>, so use it when the compound is base-sensitive. Hook: “<b>K</b>ishner has the <b>K</b>OH.”" },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Named Reactions",
+  title:"Ozonolysis: the workup decides the product",
+  body:"Cleave the C=C with O₃, then look at step two. <b>Reductive</b> workup (Zn/H₂O or Me₂S) stops at <b>aldehydes and ketones</b>. <b>Oxidative</b> workup (H₂O₂) pushes any aldehyde on to a <b>carboxylic acid</b>; ketones are unaffected either way. Reading the products backwards locates the original double bond — the standard structure-determination question." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Reaction Mechanisms",
+  title:"Hyperconjugation: just count the α-hydrogens",
+  body:"More α-H means more hyperconjugative structures and greater stability. That single count explains carbocation order (3° has 9, 2° has 6, 1° has 3), and alkene stability — the more substituted alkene wins, which <i>is</i> Saytzeff's rule. Ranking stability questions usually reduce to counting hydrogens on the neighbouring carbons." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Stereochemistry",
+  title:"Assigning R and S without building a model",
+  body:"Rank the four groups by <b>atomic number</b> at the first point of difference (explore outwards only when tied; a double bond counts as two copies of that atom). Point the <b>lowest</b> priority away and read 1→2→3: clockwise is <b>R</b>, anticlockwise <b>S</b>. Shortcut: if the lowest priority points <i>towards</i> you, read the rotation and then <b>reverse</b> it." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"mnemonic", topic:"Chemical Bonding",
+  title:"Fajans' rules — when an ionic bond turns covalent",
+  body:"Covalent character rises with a <b>small cation</b>, a <b>large anion</b>, and a <b>high charge</b> on either — plus a cation with a <i>pseudo</i> noble-gas configuration (d¹⁰, like Cu⁺ or Ag⁺) polarises far more than a true noble-gas one. That is why AlCl₃ is covalent while NaCl is ionic, and why LiI is the most covalent lithium halide." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Chemical Kinetics",
+  title:"Pseudo first order — hide the excess reactant in k",
+  body:"When one reactant is in large excess its concentration barely changes, so it folds into the rate constant and a second-order reaction <i>behaves</i> as first order. Ester hydrolysis in water and the inversion of cane sugar are the standard examples. Practically: if a question says “in excess” or “in aqueous solution”, expect first-order kinetics." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Electrochemistry",
+  title:"A concentration cell has E° = 0",
+  body:"Both electrodes are the same metal, so the standard EMF cancels and the entire voltage comes from the concentration difference: <b>E = (0.059/n)·log(C₂/C₁)</b>, with current flowing so as to equalise the two. It follows that E → 0 as the concentrations converge, and the cell is dead when they are equal." },
+
+{ exam:["JEE"], subject:"Chemistry", cls:"11-12", type:"shortcut", topic:"Electrochemistry",
+  title:"Predicting the products of aqueous electrolysis",
+  body:"Water competes with the ions, so compare discharge potentials rather than assuming the salt decomposes. In aqueous NaCl you get <b>H₂ at the cathode</b> (not Na, whose reduction potential is far too negative) and <b>Cl₂ at the anode</b> (overvoltage beats O₂ when the brine is concentrated). With very dilute solutions oxygen wins instead — concentration changes the answer." },
+
 ];

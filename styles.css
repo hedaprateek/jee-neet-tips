@@ -517,11 +517,26 @@ body.has-selection .to-top{bottom:76px}
   }
   .ps-head b{font-size:8.4pt; color:#000;}
 
+  /* Subject bands span both columns so each subject reads as one clear
+     section rather than two half-columns of unrelated material. */
   .ps-subject{
-    font-size:8.6pt; margin:4.5pt 0 2pt; padding-bottom:1pt;
-    border-bottom:.7pt solid #000; break-after:avoid; break-inside:avoid;
+    column-span:all;
+    font-size:9pt; font-weight:800; text-transform:uppercase; letter-spacing:.1em;
+    margin:7pt 0 3pt; padding:1.5pt 2mm;
+    background:#ececec; border-top:1pt solid #000; border-bottom:.5pt solid #999;
+    break-after:avoid; break-inside:avoid;
+    -webkit-print-color-adjust:exact; print-color-adjust:exact;
   }
   .ps-subject:first-of-type{margin-top:0}
+
+  /* Chapter headings sit inside the column flow, one line each */
+  .ps-chapter{
+    font-size:6.9pt; font-weight:700; text-transform:uppercase; letter-spacing:.09em;
+    color:#444; margin:3.5pt 0 1.5pt; padding-bottom:.8pt;
+    border-bottom:.3pt dotted #b0b0b0;
+    break-after:avoid; break-inside:avoid;
+  }
+  .ps-chapter:first-child{margin-top:0}
 
   /* Title runs inline with the text — saves a line on every tip */
   .ps-tip{break-inside:avoid; margin:0 0 3.4pt;}
