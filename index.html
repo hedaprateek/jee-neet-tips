@@ -42,8 +42,8 @@
 .sc-wrap:hover .sc-link,.sc-wrap:focus-within .sc-link{
   border-bottom-color:currentColor}
 
-.sc-card{position:absolute;bottom:calc(100% + 12px);left:50%;
-  transform:translateX(-50%) translateY(6px);
+.sc-card{position:absolute;bottom:calc(100% + 12px);left:0;
+  transform:translateY(6px);
   width:max-content;max-width:min(272px,86vw);
   display:grid;gap:7px;padding:14px 16px;
   text-align:left;text-transform:none;letter-spacing:normal;line-height:1.45;
@@ -54,9 +54,9 @@
   transition:opacity .2s ease,transform .2s ease,visibility .2s}
 .sc-wrap:hover .sc-card,.sc-wrap:focus-within .sc-card{
   opacity:1;visibility:visible;pointer-events:auto;
-  transform:translateX(-50%) translateY(0)}
-.sc-card::after{content:"";position:absolute;top:100%;left:50%;
-  margin-left:-6px;border:6px solid transparent;
+  transform:translateY(0)}
+.sc-card::after{content:"";position:absolute;top:100%;left:22px;
+  border:6px solid transparent;
   border-top-color:var(--sc-card-bg,#fdfdfb)}
 .sc-card b{font-size:12px;letter-spacing:.14em;text-transform:uppercase;
   font-weight:600}
@@ -71,14 +71,11 @@
 .sc-link:focus-visible,.sc-acts a:focus-visible{
   outline:1px solid currentColor;outline-offset:3px;border-radius:2px}
 
-/* Touch has no hover, so the card simply sits open there rather than
-   hiding behind a gesture nobody can perform. */
+/* On touch the card is opened by tap (see the script), so it keeps the same
+   shape it has on a pointer device. Only the tap targets grow. */
 @media (hover:none){
-  .sc-card{position:static;transform:none;opacity:1;visibility:visible;
-    pointer-events:auto;margin-top:10px;box-shadow:none;max-width:none;
-    width:auto;background:transparent;color:inherit;border-color:rgba(128,128,128,.3)}
-  .sc-card::after{display:none}
-  .sc-link::after{animation:none}
+  .sc-acts a{padding:7px 12px}
+  .sc-card{gap:9px;padding:15px 17px}
 }
 @media (prefers-reduced-motion:reduce){
   .sc-link::after{animation:none}
@@ -93,7 +90,7 @@
 .sc-card{z-index:9999}
 /* When the script flips the card below the credit (no room above), the
    little pointer has to move to the top edge with it. */
-.sc-wrap.sc-below .sc-card::after{top:auto;bottom:100%;
+.sc-card.sc-below::after{top:auto;bottom:100%;
   border-top-color:transparent;border-bottom-color:var(--sc-card-bg,#fdfdfb)}
 @media print{
   /* This site reserves the footer strip with a table footer group instead of a
@@ -227,7 +224,7 @@
         every entry here is rewritten in our own words and fact-checked against the NCERT syllabus.</p>
       <!-- Screen instance of the studio credit (the print-only instance lives at the end of body,
            and carries the id — this one must not duplicate it) -->
-      <div class="stunity-credit"><span class="sc-dot"></span><span><span class="sc-wrap"><a class="sc-link" href="https://stunity-tech.hedaprateek.workers.dev" target="_blank" rel="noopener">Stunity Tech</a><span class="sc-card" role="note"><b>Stunity Tech</b><i>Small tools, built one at a time.</i><span class="sc-acts"><a href="https://stunity-tech.hedaprateek.workers.dev" target="_blank" rel="noopener">Site &#8599;</a></span></span></span> — by <b>Prateek</b></span></div>
+      <div class="stunity-credit"><span class="sc-dot"></span><span><span class="sc-wrap"><a class="sc-link" href="https://stunity-tech.hedaprateek.workers.dev" target="_blank" rel="noopener">Stunity Tech</a><span class="sc-card" role="note"><b>Stunity Tech</b><i>Small tools, built one at a time.</i><span class="sc-acts"><a href="https://stunity-tech.hedaprateek.workers.dev" target="_blank" rel="noopener">Site &#8599;</a><a href="mailto:prateekheda@yahoo.com">Email</a><a href="https://wa.me/919021306979" target="_blank" rel="noopener">WhatsApp</a></span></span></span> — by <b>Prateek</b></span></div>
     </footer>
   </main>
 </div>
@@ -251,53 +248,99 @@
 <script src="data.js"></script>
 <script src="app.js"></script>
 
-<div class="stunity-credit" id="stunityCredit" data-print-only><span class="sc-dot"></span><span><span class="sc-wrap"><a class="sc-link" href="https://stunity-tech.hedaprateek.workers.dev" target="_blank" rel="noopener">Stunity Tech</a><span class="sc-card" role="note"><b>Stunity Tech</b><i>Small tools, built one at a time.</i><span class="sc-acts"><a href="https://stunity-tech.hedaprateek.workers.dev" target="_blank" rel="noopener">Site &#8599;</a></span></span></span> — by <b>Prateek</b></span></div>
+<div class="stunity-credit" id="stunityCredit" data-print-only><span class="sc-dot"></span><span><span class="sc-wrap"><a class="sc-link" href="https://stunity-tech.hedaprateek.workers.dev" target="_blank" rel="noopener">Stunity Tech</a><span class="sc-card" role="note"><b>Stunity Tech</b><i>Small tools, built one at a time.</i><span class="sc-acts"><a href="https://stunity-tech.hedaprateek.workers.dev" target="_blank" rel="noopener">Site &#8599;</a><a href="mailto:prateekheda@yahoo.com">Email</a><a href="https://wa.me/919021306979" target="_blank" rel="noopener">WhatsApp</a></span></span></span> — by <b>Prateek</b></span></div>
 <script>
-/* The card is anchored to the viewport rather than its parent, so an
-   overflow:hidden ancestor cannot clip it and it never runs off an edge.
-   Without this script the CSS still positions it absolutely, which is
-   correct everywhere except inside a clipping ancestor. */
+/* Card portal + positioner.
+   The card is moved to <body> while open: position:fixed alone is not enough
+   because a transformed ancestor (heirloom zooms with one) becomes the
+   containing block for fixed descendants. Moving the node escapes transforms,
+   overflow:hidden and stacking contexts together. Since it then leaves
+   .sc-wrap, the CSS :hover rule cannot reach it and visibility is set inline.
+   Pointer devices open on hover; touch devices open on tap. */
 (function(){
-  if (window.matchMedia && matchMedia("(hover:none)").matches) return;
-  var M = 10, GAP = 12;
-  function place(w){
-    var c = w.querySelector(".sc-card"); if (!c) return;
-    c.style.position = "fixed"; c.style.left = "0px"; c.style.top = "0px";
-    c.style.transform = "none"; c.style.maxWidth = (innerWidth - M * 2) + "px";
-    /* The stylesheet also sets bottom/right. Leaving them in place while we
-       set top/left would pin BOTH edges, and the box gets stretched to the
-       gap between them -- which computes negative here and collapses the
-       card to its padding. Release them before measuring. */
-    c.style.bottom = "auto"; c.style.right = "auto";
+  var M = 10, GAP = 12, T = null;
+  var fine = !window.matchMedia ||
+             matchMedia("(hover:hover) and (pointer:fine)").matches;
+  var list = document.querySelectorAll(".sc-wrap");
+  if (!list.length) return;
+
+  function isOpen(w){ return !!w.__scCard && w.__scCard.parentElement === document.body; }
+
+  function show(w){
+    var c = w.__scCard; if (!c) return;
+    clearTimeout(T);
+    if (c.parentElement !== document.body) document.body.appendChild(c);
+    c.style.position = "fixed"; c.style.bottom = "auto"; c.style.right = "auto";
+    c.style.transform = "none"; c.style.opacity = "1";
+    c.style.visibility = "visible"; c.style.pointerEvents = "auto";
+    c.style.maxWidth = (innerWidth - M * 2) + "px";
+    c.style.left = "0px"; c.style.top = "0px";
     var t = w.getBoundingClientRect(), r = c.getBoundingClientRect();
     var x = t.left + t.width / 2 - r.width / 2;
     x = Math.max(M, Math.min(x, innerWidth - r.width - M));
     var y = t.top - r.height - GAP, below = false;
     if (y < M) { y = t.bottom + GAP; below = true; }
-    w.classList.toggle("sc-below", below);
+    c.classList.toggle("sc-below", below);
     c.style.left = Math.round(x) + "px";
     c.style.top  = Math.round(y) + "px";
+    w.__trigger && w.__trigger.setAttribute("aria-expanded", "true");
   }
-  function clear(w){
-    var c = w.querySelector(".sc-card");
-    if (c) c.removeAttribute("style");
-    w.classList.remove("sc-below");
+
+  function hide(w){
+    var c = w.__scCard; if (!c) return;
+    c.removeAttribute("style"); c.classList.remove("sc-below");
+    if (c.parentElement === document.body) w.appendChild(c);
+    w.__trigger && w.__trigger.setAttribute("aria-expanded", "false");
   }
-  var list = document.querySelectorAll(".sc-wrap");
+  function hideAll(except){
+    for (var i = 0; i < list.length; i++) if (list[i] !== except) hide(list[i]);
+  }
+  function arm(w){ clearTimeout(T); T = setTimeout(function(){ hide(w); }, 120); }
+
   for (var i = 0; i < list.length; i++) (function(w){
-    w.addEventListener("pointerenter", function(){ place(w); });
-    w.addEventListener("focusin",      function(){ place(w); });
-    w.addEventListener("pointerleave", function(){ clear(w); });
+    var c = w.querySelector(".sc-card");
+    var a = w.querySelector(".sc-link");
+    w.__scCard = c; w.__trigger = a;
+    if (a) { a.setAttribute("aria-expanded", "false"); }
+    if (!c) return;
+
+    if (fine) {
+      w.addEventListener("pointerenter", function(){ show(w); });
+      w.addEventListener("pointerleave", function(){ arm(w); });
+      c.addEventListener("pointerenter", function(){ clearTimeout(T); });
+      c.addEventListener("pointerleave", function(){ arm(w); });
+    } else if (a) {
+      /* First tap reveals the card rather than leaving for the site; a second
+         tap on the name goes there. Taps on the card actions always work. */
+      a.addEventListener("click", function(e){
+        if (!isOpen(w)) { e.preventDefault(); hideAll(w); show(w); }
+      });
+      document.addEventListener("click", function(e){
+        if (isOpen(w) && !w.contains(e.target) && !c.contains(e.target)) hide(w);
+      }, true);
+    }
+
+    w.addEventListener("focusin", function(){ show(w); });
     w.addEventListener("focusout", function(){
-      setTimeout(function(){ if (!w.contains(document.activeElement)) clear(w); }, 0);
+      setTimeout(function(){
+        if (!w.contains(document.activeElement) && !c.contains(document.activeElement)) hide(w);
+      }, 0);
+    });
+    c.addEventListener("focusin",  function(){ clearTimeout(T); });
+    c.addEventListener("focusout", function(){
+      setTimeout(function(){
+        if (!w.contains(document.activeElement) && !c.contains(document.activeElement)) hide(w);
+      }, 0);
     });
   })(list[i]);
+
+  addEventListener("keydown", function(e){ if (e.key === "Escape") hideAll(null); });
   addEventListener("scroll", function(){
-    for (var i = 0; i < list.length; i++) {
-      var w = list[i];
-      if (w.matches(":hover") || w.contains(document.activeElement)) place(w);
-    }
+    for (var i = 0; i < list.length; i++) if (isOpen(list[i])) show(list[i]);
   }, {passive:true});
+  addEventListener("resize", function(){
+    for (var i = 0; i < list.length; i++) if (isOpen(list[i])) show(list[i]);
+  });
 })();
 </script>
 </body>
